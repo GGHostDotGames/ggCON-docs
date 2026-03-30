@@ -44,13 +44,17 @@ Start (or restart) your SCUM server. ggCON will activate automatically.
 
 ## Access the web panel
 
-For GG Host servers, the panel is available over HTTPS using your TCAdmin Service ID as the Panel ID:
+The easiest way to open the panel is from the **ggCON Web Panel** shortcut in the left sidebar of your GG Host game panel — it logs you in automatically.
+
+![ggCON Web Panel shortcut](assets/images/install-panel-shortcut.png)
+
+You can also access it directly at:
 
 ```
 https://ggcon.gghost.games/s/<serviceId>/panel
 ```
 
-Enter your ggCON password to log in. All settings — IP restrictions, command filtering, logging, Discord webhooks, and more — can be configured from the panel's **Settings** tab.
+All settings — IP restrictions, command filtering, logging, Discord webhooks, and more — can be configured from the panel's **Settings** tab.
 
 See [Web Panel](web-panel.md) for full documentation.
 
