@@ -46,7 +46,7 @@ Start (or restart) your SCUM server. ggCON will activate automatically.
 
 The easiest way to open the panel is from the **ggCON Web Panel** shortcut in the left sidebar of your GG Host game panel — it logs you in automatically.
 
-![ggCON Web Panel shortcut](assets/images/install-panel-shortcut.png)
+![ggCON Web Panel shortcut](assets/images/install-panel-shortcut.jpg)
 
 You can also access it directly at:
 
