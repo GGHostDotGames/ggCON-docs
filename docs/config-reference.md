@@ -293,15 +293,6 @@ Leave empty to disable Discord audit logging.
 
 ---
 
-### LogWatcherEnabled
-**Type:** bool &nbsp;|&nbsp; **Default:** `false`
-
-Set to `true` to enable the LogWatcher service. When enabled, ggCON monitors SCUM log files and exposes them via `GET /logs`.
-
-See [Log Watcher](log-watcher.md) for full documentation.
-
----
-
 ### LogWatcherSources
 **Type:** semicolon-separated list &nbsp;|&nbsp; **Default:** *(empty — auto-discover)*
 

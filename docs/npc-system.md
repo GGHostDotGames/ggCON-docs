@@ -8,7 +8,7 @@ ggCON's AI NPC system allows you to create characters that interact with players
 ## Requirements
 
 - The **AI NPCs** plugin (coming soon — see [Plugins](plugins.md))
-- **LogWatcherEnabled** enabled in the panel's **Settings** tab (NPCs monitor chat via the log watcher)
+- The LogWatcher service (starts automatically — NPCs monitor chat via the log watcher)
 - An [Anthropic API key](https://console.anthropic.com/) for Claude
 
 ## Quick Start
