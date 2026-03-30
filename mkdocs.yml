@@ -1,0 +1,56 @@
+site_name: ggCON
+site_description: Remote administration mod for SCUM dedicated servers
+site_url: https://ggcon.gghost.games/docs
+repo_url: https://github.com/GGHostDotGames/ggCON-docs
+repo_name: GGHostDotGames/ggCON-docs
+
+theme:
+  name: material
+  logo: assets/images/logo.png
+  favicon: assets/images/favicon.png
+  palette:
+    scheme: slate
+    primary: black
+    accent: orange
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - content.code.copy
+
+extra:
+  generator: false  # hides "Made with Material for MkDocs" footer line
+
+copyright: Made by <a href="https://www.gghost.games" target="_blank">GG Host</a>
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Features:
+    - Web Panel: web-panel.md
+    - Plugins: plugins.md
+    - Slash Commands: slash-commands.md
+    - NPC System: npc-system.md
+    - Auto-Update: auto-update.md
+  - Integration:
+    - HTTP API: http-api.md
+    - RCON: rcon.md
+    - Commands: commands.md
+    - Log Watcher: log-watcher.md
+  - Reference:
+    - Config Reference: config-reference.md
+    - Contributing: contributing.md
+    - Disclaimer: disclaimer.md
+
+markdown_extensions:
+  - attr_list
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - toc:
+      permalink: true
