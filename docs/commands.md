@@ -29,7 +29,7 @@ This applies to any command that accepts an optional player argument. When in do
 **The player being used will see the command output in their in-game chat.** Any `#ListPlayers` result, economy query, or automated command output will appear on that player's screen. Enable [`SuppressCommandOutput`](config-reference.md#suppresscommandoutput) to prevent this — it is recommended for most setups.
 
 !!! tip "Restrict the executor"
-    Use `RestrictToAdmins` and `PreferredSteamIDs` in `ggCON.ini` to control which player's account commands run under. See [Executor selection](config-reference.md#executor-selection).
+    Use `RestrictToAdmins` and `PreferredSteamIDs` in the panel's **Settings** tab to control which player's account commands run under. See [Executor selection](config-reference.md#executor-selection).
 
 ---
 
@@ -327,7 +327,7 @@ The target player must be online. Use [GET /items.json](http-api.md#get-itemsjso
 
 ### #ReloadConfig
 
-Reloads `ggCON.ini` and re-applies all settings without restarting the server.
+Reloads all configuration files (`ggCON.ini`, `ggcon_settings.json`, `ggcon_password`) and re-applies settings without restarting the server.
 
 ```
 #ReloadConfig

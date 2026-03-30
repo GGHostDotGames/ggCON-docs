@@ -2,16 +2,17 @@
 
 ggCON uses two layers of configuration:
 
-1. **`ggCON.ini`** — static settings that require a server restart to take effect (network binding, ports, RCON, SSL proxy, NPC system)
-2. **Panel Settings** — runtime settings managed through the web panel's Settings tab, saved to `ggcon_settings.json` and applied immediately without restart
+1. **`ggCON.ini`** — static settings that require a server restart to take effect (network binding, ports, RCON, NPC system)
+2. **`ggcon_settings.json`** — runtime settings managed through the web panel's Settings tab, applied immediately without restart
+3. **`ggcon_password`** — the authentication password (plain text, one line)
 
-Both files live in:
+All three files live in:
 
 ```
 <GameRoot>/Saved/Config/WindowsServer/
 ```
 
-Settings from `ggCON.ini` are loaded first, then `ggcon_settings.json` is applied on top. The panel Settings tab is the recommended way to manage runtime settings — changes take effect immediately and persist across restarts.
+The panel **Settings** tab is the recommended way to manage runtime settings — changes take effect immediately and persist across restarts.
 
 ---
 
@@ -107,7 +108,7 @@ Seconds of inactivity before an idle RCON connection is dropped. Prevents automa
 ### NpcEnabled
 **Type:** bool &nbsp;|&nbsp; **Default:** `false`
 
-Set to `true` to enable the AI NPC system. Requires a valid `NpcApiKey` and a `npcs.json` configuration file in the same directory as `ggCON.ini`.
+Set to `true` to enable the AI NPC system. Requires a valid `NpcApiKey` and a `npcs.json` configuration file in the config directory.
 
 See [NPC System](npc-system.md) for full documentation.
 
@@ -127,7 +128,7 @@ NpcApiKey = sk-ant-...
 ### AllowedCommandsFile
 **Type:** string (file path) &nbsp;|&nbsp; **Default:** *(empty)*
 
-Path to the allowed commands file. Leave empty to use `ggCON_allowed_commands.txt` in the same directory as `ggCON.ini`.
+Path to the allowed commands file. Leave empty to use `ggCON_allowed_commands.txt` in the config directory.
 
 ```ini
 AllowedCommandsFile =   ; uses <config-dir>/ggCON_allowed_commands.txt
@@ -151,19 +152,22 @@ Seconds to wait after mod load before scanning for log files. This gives the SCU
 
 ---
 
-## Panel-managed settings
+## Password
 
-These settings are managed through the web panel's **Settings** tab. Changes apply immediately without a restart and are persisted to `ggcon_settings.json`.
+The password is stored in a dedicated file — `ggcon_password` — in the same config directory. It contains a single line of plain text.
 
-They can also be set in `ggCON.ini` as initial defaults, but once changed through the panel, the panel value takes precedence.
-
-### Password
-**Type:** string &nbsp;|&nbsp; **Default:** *(empty)*
-
-The password clients must supply via the `X-Password` header. Setting a password automatically enables password authentication.
+The password is required via the `X-Password` header for HTTP API and RCON authentication.
 
 !!! warning
     Passwords are transmitted in plaintext HTTP headers. Use the SSL panel proxy or a reverse proxy with TLS if the API is exposed beyond localhost.
+
+You can change the password from the panel's **Settings** tab or by editing the `ggcon_password` file directly and running `#ReloadConfig`.
+
+---
+
+## Panel-managed settings
+
+These settings are managed through the web panel's **Settings** tab. Changes apply immediately without a restart and are persisted to `ggcon_settings.json`.
 
 ---
 
@@ -309,7 +313,7 @@ Explicit list of log sources to watch. Leave empty to automatically discover all
 
 ## Plugin configuration
 
-Plugins can have their own configuration sections in `ggCON.ini` using the `[Plugin:<id>]` format, where `<id>` is the plugin's unique identifier.
+Plugins can have their own configuration sections in `ggCON.ini` using the `[Plugin:<id>]` section header, where `<id>` is the plugin's unique identifier. Plugin configuration is INI-only and requires a restart.
 
 ```ini
 [Plugin:loot-drops]

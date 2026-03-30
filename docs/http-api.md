@@ -61,7 +61,7 @@ Returns all available HTTP routes and RCON commands. **No authentication require
   "ok": true,
   "rcon": [
     { "command": "#Help", "description": "Show this help" },
-    { "command": "#ReloadConfig", "description": "Reload ggCON.ini without restarting the server" }
+    { "command": "#ReloadConfig", "description": "Reload all configuration without restarting the server" }
   ],
   "http": [
     { "method": "GET", "path": "/health", "auth": false, "description": "Mod health check" },

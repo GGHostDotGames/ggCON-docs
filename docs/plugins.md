@@ -116,7 +116,7 @@ See [HTTP API](http-api.md#plugin-endpoints) for full endpoint documentation.
 
 ## Plugin Configuration
 
-Plugins can read configuration from your `ggCON.ini` file using section headers in the format `[Plugin:<id>]`:
+Plugins can read configuration from `ggCON.ini` using section headers in the format `[Plugin:<id>]` (requires a server restart):
 
 ```ini
 [Plugin:log-analyzer]

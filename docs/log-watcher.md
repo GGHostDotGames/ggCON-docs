@@ -104,16 +104,11 @@ When auto-discovery is enabled (default), the watcher finds all log file types p
 
 ## Configuration
 
-Add these keys under the `[ggCON]` section in your `ggCON.ini`:
+Enable the LogWatcher from the panel's **Settings** tab by toggling **LogWatcherEnabled**. You can also configure **LogWatcherSources** there to filter which log sources are monitored (leave empty to auto-discover all available sources).
+
+The following settings are INI-only and must be set in `ggCON.ini` under the `[ggCON]` section:
 
 ```ini
-; Enable the LogWatcher service
-LogWatcherEnabled = true
-
-; (Optional) Explicit list of sources to watch.
-; Omit or leave empty to auto-discover all available sources.
-; LogWatcherSources = SCUM;chat;login;admin;economy;kill;famepoints
-
 ; (Optional) Number of historical lines to load per file on startup.
 ; Default: 100
 ; LogWatcherBacklog = 100

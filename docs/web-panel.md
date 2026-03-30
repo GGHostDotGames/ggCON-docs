@@ -15,7 +15,7 @@ https://ggcon.gghost.games/s/<panelId>/panel
 !!! tip "Bookmarkable login"
     You can include your password in the URL for one-click access: `https://ggcon.gghost.games/s/<panelId>/panel?pw=yourpassword`. The password is stripped from the browser's address bar after login.
 
-You will be prompted to enter your ggCON password (the same `Password` value from your `ggCON.ini`).
+You will be prompted to enter your ggCON password (the value stored in your `ggcon_password` file).
 
 ![Login Screen](assets/images/panel/login-screen.jpg)
 
