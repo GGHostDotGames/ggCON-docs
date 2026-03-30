@@ -4,13 +4,13 @@ ggCON includes a built-in web panel for managing your SCUM server from any brows
 
 ## Accessing the Panel
 
-The panel is available over HTTPS via the GG Host SSL proxy:
+For GG Host servers, the quickest way is the **ggCON Web Panel** shortcut in the left sidebar of your game panel — it logs you in automatically.
+
+You can also access the panel directly over HTTPS:
 
 ```
 https://ggcon.gghost.games/s/<panelId>/panel
 ```
-
-No additional setup is required beyond setting `PanelId` in your config. See [Config Reference](config-reference.md#panelid) for details.
 
 !!! tip "Bookmarkable login"
     You can include your password in the URL for one-click access: `https://ggcon.gghost.games/s/<panelId>/panel?pw=yourpassword`. The password is stripped from the browser's address bar after login.
