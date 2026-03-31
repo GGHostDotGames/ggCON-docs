@@ -124,7 +124,6 @@ Real-time chat viewer showing all in-game chat messages. Requires `LogWatcherEna
 | Chat | Standard in-game chat message. Choose a color from the color picker (Yellow, White, Cyan, Green, Red) |
 | Warning | Center-screen notification. Choose a custom color from the color picker and set display duration in seconds |
 | Kill Feed | Bottom-center notification with prefix, name, and suffix fields. Toggle the sound on or off |
-| HUD | Bottom-left overlay notification. Does not appear in chat — ideal for non-intrusive alerts |
 
 ![Chat Tab](assets/images/panel/panel-chat.jpg)
 
