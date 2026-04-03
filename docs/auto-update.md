@@ -31,11 +31,3 @@ You can also check for updates from the **Settings** panel:
 2. Select **Updates**
 3. View the current version and check for updates
 
-## API Endpoints
-
-| Endpoint | Description |
-|---|---|
-| `GET /core/update-check` | Check for available updates |
-| `POST /core/stage-update` | Download and stage the latest version |
-
-See [HTTP API](http-api.md#update-endpoints) for full endpoint documentation.

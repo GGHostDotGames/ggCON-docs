@@ -24,11 +24,56 @@ You will be prompted to enter your ggCON password (the value stored in your `ggc
 
 ---
 
+## Navigation
+
+The panel uses a collapsible sidebar for navigation. All core tabs have SVG icons. Plugin tabs appear under a "Plugins" divider with a puzzle-piece icon.
+
+- **Collapse toggle** — click the arrow at the bottom of the sidebar to switch between full labels and icon-only mode. Your preference is saved across sessions.
+- **Tab order** — Status (default landing page) → Map → Players → Squads → Vehicles → Flags → Chat → Logs → Console → Settings. Plugin tabs can be reordered by dragging.
+- **Update indicator** — the Settings button shows a colored dot when an update is available: green for minor updates, orange for major updates, blue when an update is staged.
+
+---
+
+## Real-time updates
+
+The panel receives live data via Server-Sent Events (SSE). Player positions, chat messages, logs, server status, weather, squads, vehicles, and flags all update in real-time with no manual refresh needed. If SSE is unavailable (e.g., older ggCON versions), the panel falls back to polling automatically.
+
+When the server goes offline, the panel detects it within seconds and shows a branded "Server is offline" splash screen. It reconnects and refreshes all data automatically when the server comes back.
+
+---
+
+## Time display toggle
+
+A toggle in the header bar lets you switch all timestamps between your local time and the server's time. Both sides show their UTC offset so you can always see the difference. The toggle affects all timestamps across the panel: chat, logs, player last login/logout, FPS chart labels, and plugin timestamps. Your preference is saved to localStorage.
+
+---
+
 ## Tabs
+
+### Status
+
+The default landing page. Shows server information and live controls:
+
+- SCUM version and ggCON version with build timestamp
+- Online player count
+- Live FPS (current, average, minimum)
+- Time of day, weather conditions
+- Temperature, wind, humidity, fog, cloud coverage
+
+**Server controls:**
+
+- **Time slider** — drag to set the time of day (0–23 hours) with day/night icons
+- **Weather slider** — drag to set weather intensity (0–1) with sun/storm icons
+
+![Status Tab](assets/images/panel/panel-status.jpg)
+
+---
 
 ### Players
 
-Lists all online players with sortable columns:
+Lists all online players with sortable columns. Use the **"Online / All Players"** toggle to switch between online-only and a full search of every player who has ever connected (including offline players).
+
+The "All Players" mode queries the server database and supports search by name or Steam ID. Offline player cards show last login/logout, economy data, and a "Show on Map" button for their last known position.
 
 | Column | Description |
 |---|---|
@@ -111,7 +156,7 @@ Interactive admin command console. Type any SCUM admin command and see the respo
 
 ### Chat
 
-Real-time chat viewer showing all in-game chat messages. Requires `LogWatcherEnabled = true` in your config.
+Real-time chat viewer showing all in-game chat messages.
 
 - **Channel colors** — messages are tagged with colored pills matching in-game colors: white (Local), blue (Global), green (Squad), gold (Admin), gray (System)
 - **Clickable player names** — click a player's name to open their detail popup
@@ -167,7 +212,8 @@ Live map showing player and vehicle positions on the SCUM island. The map uses a
 
 **Map controls:**
 
-- **Layers dropdown** — floating panel with toggle switches for each layer (Players, Names, Vehicles, Flags, Grid) with green dot indicators for active layers
+- **Drones** — drone players are shown as purple markers; toggle visibility in the Layers panel under Player Names
+- **Layers dropdown** — floating panel with toggle switches for each layer (Players, Names, Drones, Vehicles, Flags, Grid) with green dot indicators for active layers
 - **Marker size slider** — adjust the size of player and vehicle markers
 - **Mouse coordinates** — world coordinates shown as you move the cursor
 
@@ -237,7 +283,7 @@ Full squad list with member details and management actions.
 
 ### Logs
 
-Real-time log viewer for SCUM server log files. Requires `LogWatcherEnabled = true`.
+Real-time log viewer for SCUM server log files.
 
 - **Source filters** — pill-style buttons to toggle log sources (chat, kill, admin, economy, login, etc.) with color coding
 - **Text filter** — type to filter log lines by content
@@ -247,47 +293,21 @@ Real-time log viewer for SCUM server log files. Requires `LogWatcherEnabled = tr
 
 ![Logs Tab](assets/images/panel/panel-logs.jpg)
 
-### Status
-
-Server information and live controls:
-
-- SCUM version and ggCON version
-- Online player count
-- Time of day, weather conditions
-- Temperature, wind, humidity, fog, cloud coverage
-
-**Server controls:**
-
-- **Time slider** — drag to set the time of day (0–23 hours) with day/night icons
-- **Weather slider** — drag to set weather intensity (0–1) with sun/storm icons
-
-![Status Tab](assets/images/panel/panel-status.jpg)
-
 ### Plugin Tabs
 
-Loaded plugins that provide a panel tab appear as additional navigation buttons. Click a plugin tab to view its custom UI. See [Plugins](plugins.md) for details.
+Loaded plugins that provide a panel tab appear in the sidebar under the "Plugins" divider. Plugin tabs have a subtly different style to distinguish them from core tabs. You can drag plugin tabs to reorder them — your preferred order is saved across sessions. See [Plugins](plugins.md) for details on available plugins.
 
 ---
 
 ## Settings
 
-Click the **gear icon** in the navigation bar to open the Settings panel.
+Click the **Settings** button in the sidebar to access settings, plugin management, and updates.
 
-### Plugins
-
-Manage installed and available plugins. See [Plugins](plugins.md#marketplace) for details.
+- **Settings** — manage authentication, allowed IPs, Discord webhooks, executor selection, and other runtime settings. Changes take effect immediately.
+- **Plugins** — install, update, and uninstall plugins from the marketplace. See [Plugins](plugins.md#marketplace) for details.
+- **Updates** — check for ggCON updates and stage them for installation on the next server restart. See [Auto-Update](auto-update.md) for details.
 
 ![Settings — Plugin Manager](assets/images/panel/panel-settings.jpg)
-
-### Updates
-
-Check for ggCON updates and stage them for installation on the next server restart. See [Auto-Update](auto-update.md) for details.
-
----
-
-## Update Banner
-
-When a new version of ggCON is available, a green banner appears at the top of the panel shortly after login. Click **Stage Update** to download the new version — it will be applied automatically on the next server restart.
 
 ---
 

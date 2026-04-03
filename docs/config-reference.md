@@ -2,9 +2,9 @@
 
 ggCON uses two layers of configuration:
 
-1. **`ggCON.ini`** — static settings that require a server restart to take effect (network binding, ports, RCON, NPC system)
+1. **`ggCON.ini`** — static settings managed by GG Host (network binding, ports, RCON). These are pre-configured for your server and not directly visible to customers.
 2. **`ggcon_settings.json`** — runtime settings managed through the web panel's Settings tab, applied immediately without restart
-3. **`ggcon_password`** — the authentication password (plain text, one line)
+3. **`ggcon_password`** — the authentication password, set during installation and changeable from the panel
 
 All three files live in:
 
@@ -12,20 +12,20 @@ All three files live in:
 <GameRoot>/Saved/Config/WindowsServer/
 ```
 
-The panel **Settings** tab is the recommended way to manage runtime settings — changes take effect immediately and persist across restarts.
+!!! info "You don't need to edit the INI file"
+    The `ggCON.ini` file is managed by GG Host and pre-configured when ggCON is installed. All customer-facing settings are available in the web panel's **Settings** tab. The INI-only settings documented below are for reference only.
+
+| File | What goes here | How to change |
+|---|---|---|
+| `ggCON.ini` | Network binding, ports, RCON | Managed by GG Host |
+| `ggcon_settings.json` | Everything else (admin IDs, logging, webhooks, etc.) | Panel Settings tab |
+| `ggcon_password` | Authentication password | Panel Settings tab |
 
 ---
 
-## INI-only settings
+## INI-only settings (managed by GG Host)
 
-These settings can only be changed in `ggCON.ini` and require a server restart. All keys must be under the `[ggCON]` section header. Lines starting with `;` are comments.
-
-### Enabled
-**Type:** bool &nbsp;|&nbsp; **Default:** `true`
-
-Set to `false` to disable the mod entirely without uninstalling it.
-
----
+These settings are pre-configured by GG Host during installation. They require a server restart to take effect and are not exposed in the web panel. All keys are under the `[ggCON]` section header.
 
 ### BindAddress
 **Type:** string &nbsp;|&nbsp; **Default:** `127.0.0.1`
@@ -63,13 +63,6 @@ PanelId = 1234567
 
 ---
 
-### PanelProxyUrl
-**Type:** string &nbsp;|&nbsp; **Default:** *(built-in default)*
-
-Override the URL of the panel proxy service. Only change this if instructed by GG Host support.
-
----
-
 ### RconEnabled
 **Type:** bool &nbsp;|&nbsp; **Default:** `false`
 
@@ -102,53 +95,6 @@ Maximum number of simultaneous RCON connections. Additional connections are reje
 **Type:** integer (seconds) &nbsp;|&nbsp; **Default:** `30`
 
 Seconds of inactivity before an idle RCON connection is dropped. Prevents automation tools from exhausting connection slots by leaving sessions open.
-
----
-
-### NpcEnabled
-**Type:** bool &nbsp;|&nbsp; **Default:** `false`
-
-Set to `true` to enable the AI NPC system. Requires a valid `NpcApiKey` and a `npcs.json` configuration file in the config directory.
-
-See [NPC System](npc-system.md) for full documentation.
-
----
-
-### NpcApiKey
-**Type:** string &nbsp;|&nbsp; **Default:** *(empty)*
-
-Anthropic API key used for AI NPC conversations. Required when `NpcEnabled = true`.
-
-```ini
-NpcApiKey = sk-ant-...
-```
-
----
-
-### AllowedCommandsFile
-**Type:** string (file path) &nbsp;|&nbsp; **Default:** *(empty)*
-
-Path to the allowed commands file. Leave empty to use `ggCON_allowed_commands.txt` in the config directory.
-
-```ini
-AllowedCommandsFile =   ; uses <config-dir>/ggCON_allowed_commands.txt
-```
-
-See the included `ExampleFiles/ggCON_allowed_commands.txt` for the file format.
-
----
-
-### LogWatcherBacklog
-**Type:** integer &nbsp;|&nbsp; **Default:** `100`
-
-Number of historical lines to load from each log file when the watcher starts. Set to `0` to only capture lines written after startup.
-
----
-
-### LogWatcherStartupDelay
-**Type:** integer (seconds) &nbsp;|&nbsp; **Default:** `30`
-
-Seconds to wait after mod load before scanning for log files. This gives the SCUM server time to create its log files during startup.
 
 ---
 
@@ -229,7 +175,7 @@ When `RestrictToAdmins = false`, falls back to any online player if none of the 
 ### LimitAdminCommands
 **Type:** bool &nbsp;|&nbsp; **Default:** `false`
 
-If `true`, only commands listed in the allowed commands file will be executed. Any command not in the list is rejected before reaching the game.
+If `true`, only commands listed in the allowed commands file will be executed. Any command not in the list is rejected before reaching the game. See `AllowedCommandsFile` below to configure a custom path.
 
 If the allowed commands file is missing or empty, **all commands are blocked** (fail-safe behaviour).
 
@@ -299,6 +245,33 @@ Leave empty to disable Discord audit logging.
 Explicit list of log sources to watch. Leave empty to automatically discover all log file prefixes in `SaveFiles/Logs/`.
 
 `SCUM` refers to the main `SCUM.log` file. All other names correspond to prefixes of files in `SaveFiles/Logs/` (e.g. `chat` watches `chat_20260316183008.log`).
+
+---
+
+### LogWatcherBacklog
+**Type:** integer &nbsp;|&nbsp; **Default:** `100`
+
+Number of historical lines to load from each log file when the watcher starts. Set to `0` to only capture lines written after startup.
+
+!!! note
+    Changes to this setting require a server restart to take effect.
+
+---
+
+### LogWatcherStartupDelay
+**Type:** integer (seconds) &nbsp;|&nbsp; **Default:** `30`
+
+Seconds to wait after mod load before scanning for log files. This gives the SCUM server time to create its log files during startup.
+
+!!! note
+    Changes to this setting require a server restart to take effect.
+
+---
+
+### AllowedCommandsFile
+**Type:** string (file path) &nbsp;|&nbsp; **Default:** *(empty)*
+
+Path to the allowed commands file used when `LimitAdminCommands` is enabled. One command per line (case-insensitive). Leave empty to use `ggCON_allowed_commands.txt` in the config directory.
 
 ---
 

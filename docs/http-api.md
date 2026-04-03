@@ -52,7 +52,7 @@ Returns the mod's running status. **No authentication required.**
 
 ## GET /help
 
-Returns all available HTTP routes and RCON commands. **No authentication required.**
+Returns all available HTTP routes and RCON commands. Auth required.
 
 **Response**
 
@@ -65,7 +65,7 @@ Returns all available HTTP routes and RCON commands. **No authentication require
   ],
   "http": [
     { "method": "GET", "path": "/health", "auth": false, "description": "Mod health check" },
-    { "method": "GET", "path": "/help",   "auth": false, "description": "This help document" },
+    { "method": "GET", "path": "/help",   "auth": true,  "description": "This help document" },
     { "method": "GET", "path": "/players.json", "auth": true, "description": "List all online players" }
   ]
 }
@@ -188,6 +188,56 @@ HTTP `404`:
 
 ---
 
+## GET /players/all.json
+
+Returns all players who have ever connected, including offline players. Auth required.
+
+Player data is loaded from the SCUM database at startup and enriched with live data for players who are currently online.
+
+**Query parameters**
+
+| Parameter | Required | Description |
+|---|---|---|
+| `search` | No | Search string — matches against character name or Steam ID (case-insensitive, min 2 characters) |
+| `page` | No | Page number (default: 1). Each page returns up to 50 results |
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "count": 2,
+  "total": 847,
+  "page": 1,
+  "players": [
+    {
+      "characterName": "John Smith",
+      "userId": "76561198000000001",
+      "online": true,
+      "fame": 1500,
+      "accountBalance": 2500,
+      "goldBalance": 10,
+      "lastLogin": "2026-04-01T14:22:08Z",
+      "lastLogout": null,
+      "location": { "x": 12345.6, "y": 67890.1, "z": 200.0 }
+    }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `count` | number | Number of players in this response |
+| `total` | number | Total matching players across all pages |
+| `page` | number | Current page number |
+| `players[].online` | boolean | Whether the player is currently connected |
+| `players[].lastLogin` | string \| null | ISO 8601 timestamp of last login |
+| `players[].lastLogout` | string \| null | ISO 8601 timestamp of last logout |
+
+Online players include the full set of fields from `/players.json`. Offline players include database fields only (name, Steam ID, fame, balance, gold, last login/logout, last known location).
+
+---
+
 ## GET /server.json
 
 Returns server state. Auth required.
@@ -198,10 +248,15 @@ Returns server state. Auth required.
 {
   "ok": true,
   "online": true,
-  "modVersion": "0.11.0",
+  "modVersion": "0.12.0",
+  "modBuild": "2026-04-03 14:30:00",
   "scumVersion": "1.2.2.1.108938+0",
   "onlinePlayers": 12,
-  "timeOfDay": 14.5
+  "timeOfDay": 14.5,
+  "timezoneOffsetMin": -300,
+  "fps": 30.4,
+  "avgFps": 30.3,
+  "minFps": 28.1
 }
 ```
 
@@ -209,9 +264,14 @@ Returns server state. Auth required.
 |---|---|---|
 | `online` | boolean | Whether the server world is currently active |
 | `modVersion` | string | ggCON version |
+| `modBuild` | string \| null | Build timestamp (`YYYY-MM-DD HH:MM:SS`) |
 | `scumVersion` | string \| null | SCUM server version |
 | `onlinePlayers` | number | Number of players currently online |
 | `timeOfDay` | number \| null | Time of day in hours (0–24) |
+| `timezoneOffsetMin` | number \| null | Server timezone offset from UTC in minutes (e.g., `-300` for UTC-5) |
+| `fps` | number \| null | Current server FPS |
+| `avgFps` | number \| null | Average FPS over the sampling window |
+| `minFps` | number \| null | Minimum FPS over the sampling window |
 
 ---
 
@@ -525,10 +585,12 @@ This is the same catalog used by the panel's Give Item feature.
   "items": [
     {
       "i": "Backpack_Tactical_01",
-      "ico": "ICO_Backpack_Tactical_01"
+      "ico": "ICO_Backpack_Tactical_01",
+      "c": "Equipment"
     },
     {
-      "i": "Knife_Hunting"
+      "i": "Knife_Hunting",
+      "c": "Weapons"
     }
   ]
 }
@@ -541,6 +603,7 @@ This is the same catalog used by the panel's Give Item feature.
 | `n` | number | Total number of items |
 | `items[].i` | string | Item class name (use with `POST /spawn`) |
 | `items[].ico` | string \| absent | Icon asset name (present when an icon mapping exists) |
+| `items[].c` | string \| absent | Item category (e.g., `"Weapons"`, `"Ammunition"`, `"Food"`, `"Equipment"`) |
 
 ---
 
@@ -579,7 +642,7 @@ Spawns item(s) for a player. Auth required.
 
 ## GET /logs
 
-Returns real-time log lines from SCUM server log files. Auth required. Requires `LogWatcherEnabled = true`.
+Returns real-time log lines from SCUM server log files. Auth required.
 
 See [Log Watcher](log-watcher.md) for full documentation, configuration, and usage examples.
 
@@ -986,162 +1049,4 @@ Returns historical FPS data. Auth required.
 
 ---
 
-## Plugin endpoints
-
-### GET /plugins.json
-
-Returns all loaded plugins. Auth required.
-
-**Response**
-
-```json
-{
-  "ok": true,
-  "plugins": [
-    {
-      "id": "log-analyzer",
-      "name": "Log Analyzer",
-      "version": "1.0.0",
-      "hasTab": true
-    }
-  ]
-}
-```
-
----
-
-### GET /plugins/{id}/panel
-
-Returns the HTML content for a plugin's panel tab. Auth required.
-
-The response is `text/html` content that is injected into the plugin's tab container in the web panel.
-
----
-
-### GET /plugins/available
-
-Returns the list of available plugins from the remote manifest, with install status. Auth required.
-
-**Response**
-
-```json
-{
-  "ok": true,
-  "plugins": [
-    {
-      "id": "log-analyzer",
-      "name": "Log Analyzer",
-      "version": "1.0.0",
-      "description": "Server performance analytics",
-      "installed": true,
-      "installedVersion": "1.0.0",
-      "updateAvailable": false
-    }
-  ]
-}
-```
-
----
-
-### POST /plugins/install
-
-Installs a plugin from the remote manifest. Auth required.
-
-**Request body**
-
-```json
-{ "id": "log-analyzer" }
-```
-
----
-
-### POST /plugins/uninstall
-
-Uninstalls a plugin. Auth required.
-
-**Request body**
-
-```json
-{ "id": "log-analyzer" }
-```
-
----
-
-### POST /plugins/update
-
-Updates an installed plugin to the latest version. Auth required.
-
-**Request body**
-
-```json
-{ "id": "log-analyzer" }
-```
-
----
-
-## Settings endpoints
-
-### GET /settings.json
-
-Returns the current runtime settings. Auth required.
-
----
-
-### POST /settings
-
-Updates runtime settings. Auth required. Changes are persisted and take effect immediately.
-
----
-
-## Update endpoints
-
-### GET /core/update-check
-
-Checks for available ggCON updates. Auth required.
-
-**Response**
-
-```json
-{
-  "ok": true,
-  "currentVersion": "0.9.9",
-  "latestVersion": "0.9.10",
-  "updateAvailable": true,
-  "forceDeploy": false
-}
-```
-
-| Field | Type | Description |
-|---|---|---|
-| `currentVersion` | string | Currently running version |
-| `latestVersion` | string | Latest available version |
-| `updateAvailable` | boolean | Whether a newer version exists |
-| `forceDeploy` | boolean | Whether the update is marked as critical (auto-staged) |
-
----
-
-### POST /core/stage-update
-
-Downloads the latest version and stages it for installation on the next server restart. Auth required.
-
-The new DLL is saved alongside the current one. A pre-start script swaps it in before the server loads, so only a single restart is needed.
-
-**Response**
-
-```json
-{
-  "ok": true,
-  "message": "Update staged successfully. Restart the server to apply."
-}
-```
-
----
-
-## GET /panel
-
-Serves the ggCON web panel. **Authentication is enforced** (IP allowlist + password).
-
-See [Web Panel](web-panel.md) for full documentation.
-
----
 

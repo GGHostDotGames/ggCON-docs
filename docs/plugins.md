@@ -53,6 +53,53 @@ Server performance analytics — replaces the standalone ServerLogAnalyzer deskt
 
 ---
 
+### Kill Feed
+
+Real-time kill event feed for PvP, NPC, trap, and suicide kills.
+
+- **Kill list** — scrollable feed showing killer, victim, weapon, distance, and kill type (PvP, NPC, Trap, Suicide)
+- **Weapon icons** — dynamic icon lookup from the item catalog with a manual fallback table for common weapons
+- **Detail strip** — expanded view of the selected kill event with full player info
+- **Interactive map** — shows killer and victim positions with markers
+- **LIVE / PAUSED mode** — auto-follow new events in LIVE mode, or freeze the list to inspect past events
+- **Session clear** — kill history resets automatically when the server restarts
+
+**Requires:** ggCON v0.11.6+
+
+---
+
+### Trap Feed
+
+Real-time trap event feed showing crafting, arming, disarming, and triggering of traps.
+
+- **Event list** — scrollable feed of trap events with player name, trap type, and action (Crafted, Armed, Disarmed, Triggered)
+- **Trap icons** — trap-specific icons for each trap type
+- **Detail strip** — expanded view of the selected event
+- **Interactive map** — shows trap locations with markers
+- **LIVE / PAUSED mode** — auto-follow new events or freeze the list
+
+**Requires:** ggCON v0.11.6+
+
+---
+
+### Quarter Master
+
+In-game item shop with a web storefront and dual currency support.
+
+- **Admin panel** — create and manage item packages with categories, prices, stock limits, and discounts from the Quarter Master tab in the web panel
+- **Player storefront** — players visit `shop.gghost.games`, log in with their Steam ID and PIN, browse packages, and purchase items
+- **Dual currency** — packages can be priced in both in-game rations and money; players pay with whatever the admin sets
+- **Stash system** — purchases go to a persistent stash; players claim items from the storefront when in-game; supports purchasing while offline
+- **Discounts** — admins can set percentage discounts with optional expiry dates on packages
+- **Stock limits** — optional per-package stock limits; storefront shows remaining stock or "Sold Out" badge
+- **Delivery safety** — items that fail to spawn (e.g., player logs out mid-delivery) return to the stash for re-claiming
+- **Server directory** — the `shop.gghost.games` landing page lists all registered servers with their shop name and status
+- **Slash command** — players type `/shop` in-game to get their storefront URL
+
+**Requires:** ggCON v0.11.8+
+
+---
+
 ## Coming Soon
 
 ### AI NPCs
@@ -66,16 +113,6 @@ AI-powered NPC characters that interact with players in chat using Claude. Repla
 - Configurable model, token limits, and response cooldowns
 
 See [NPC System](npc-system.md) for details on the current built-in version.
-
-### Bot Shop
-
-In-game item shop with a web panel storefront and dual currency support.
-
-- **Web panel storefront** — admin creates and manages item packages from the panel
-- **Dual currency** — accepts in-game gold or bot coins
-- **In-game chat commands** — players browse and purchase with `/shop` in chat
-- **Spawn-near-player delivery** — purchased items are spawned directly near the player
-- **Offline delivery** — purchases for offline players are queued and delivered on next login
 
 ---
 
@@ -98,19 +135,6 @@ The marketplace shows all available plugins with their current status:
 
 Plugin changes take effect on the next server restart.
 
-### Managing Plugins via API
-
-You can also manage plugins through the HTTP API:
-
-| Endpoint | Description |
-|---|---|
-| `GET /plugins.json` | List all loaded plugins |
-| `GET /plugins/available` | List available plugins with install status |
-| `POST /plugins/install` | Install a plugin by ID |
-| `POST /plugins/uninstall` | Uninstall a plugin by ID |
-| `POST /plugins/update` | Update a plugin by ID |
-
-See [HTTP API](http-api.md#plugin-endpoints) for full endpoint documentation.
 
 ---
 
