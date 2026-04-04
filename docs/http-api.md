@@ -42,7 +42,8 @@ Returns the mod's running status. **No authentication required.**
 {
   "ok": true,
   "mod": "ggCON",
-  "version": "0.11.0",
+  "version": "0.12.2",
+  "build": "2026-04-04 10:15:00",
   "service": "http",
   "running": true
 }
@@ -248,7 +249,7 @@ Returns server state. Auth required.
 {
   "ok": true,
   "online": true,
-  "modVersion": "0.12.0",
+  "modVersion": "0.12.2",
   "modBuild": "2026-04-03 14:30:00",
   "scumVersion": "1.2.2.1.108938+0",
   "onlinePlayers": 12,
@@ -607,6 +608,148 @@ This is the same catalog used by the panel's Give Item feature.
 
 ---
 
+## GET /vehicle-types.json
+
+Returns the catalog of all vehicle types available for spawning. Auth required.
+
+**Response**
+
+```json
+{
+  "v": 1,
+  "source": "engine",
+  "n": 19,
+  "type": "Vehicle",
+  "items": [
+    { "i": "BPC_Barba", "ico": "ICO_BPC_Barba" },
+    { "i": "BPC_Rager", "ico": "ICO_BPC_Rager" },
+    { "i": "BPC_Laika", "ico": "ICO_BPC_Laika" }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `v` | number | Catalog format version |
+| `source` | string | Data source (`"engine"` = queried from the running game) |
+| `n` | number | Total number of vehicle types |
+| `items[].i` | string | Vehicle class name (use with `POST /spawn-vehicle`) |
+| `items[].ico` | string \| absent | Icon asset name |
+
+---
+
+## GET /zombies.json
+
+Returns the catalog of all zombie variants available for spawning. Auth required.
+
+**Response**
+
+```json
+{
+  "v": 1,
+  "source": "engine",
+  "n": 30,
+  "type": "Zombie",
+  "items": [
+    { "i": "BP_Zombie_Military_Normal_Male" },
+    { "i": "BP_Zombie_Civilian_Normal_Female" }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `items[].i` | string | Zombie variant name (use with `POST /spawn-entity`, verb `SpawnZombie`) |
+
+---
+
+## GET /animals.json
+
+Returns the catalog of all animal types available for spawning. Auth required.
+
+**Response**
+
+```json
+{
+  "v": 1,
+  "source": "engine",
+  "n": 14,
+  "type": "Animal",
+  "items": [
+    { "i": "BP_Bear" },
+    { "i": "BP_Boar" },
+    { "i": "BP_Deer" }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `items[].i` | string | Animal type name (use with `POST /spawn-entity`, verb `SpawnAnimal`) |
+
+---
+
+## GET /armed-npcs.json
+
+Returns the catalog of all armed NPC types available for spawning. Auth required.
+
+**Response**
+
+```json
+{
+  "v": 1,
+  "source": "engine",
+  "n": 20,
+  "type": "ArmedNPC",
+  "items": [
+    { "i": "BP_ArmedNPC_Soldier_01" },
+    { "i": "BP_ArmedNPC_Hunter_01" }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `items[].i` | string | Armed NPC type name (use with `POST /spawn-entity`, verb `SpawnArmedNPC`) |
+
+---
+
+## GET /commands.json
+
+Returns the admin command reference, built from the game engine at startup. Auth required.
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "source": "reflected",
+  "total": 214,
+  "commands": [
+    {
+      "verb": "Teleport",
+      "description": "Teleport player to coordinates",
+      "args": [
+        { "name": "SteamId", "type": "string", "required": true },
+        { "name": "X", "type": "float", "required": true },
+        { "name": "Y", "type": "float", "required": true },
+        { "name": "Z", "type": "float", "required": true }
+      ]
+    }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `source` | string | `"reflected"` = built from the running game engine |
+| `total` | number | Total number of admin commands |
+| `commands[].verb` | string | Command name (used after `#` in commands) |
+| `commands[].description` | string | Human-readable description |
+| `commands[].args` | array | Argument definitions with name, type, and required flag |
+
+---
+
 ## POST /spawn
 
 Spawns item(s) for a player. Auth required.
@@ -635,6 +778,70 @@ Spawns item(s) for a player. Auth required.
   "accepted": true,
   "dispatched": true,
   "command": "#GiveItem 76561198000000001 Backpack_Tactical_01 1"
+}
+```
+
+---
+
+## POST /spawn-vehicle
+
+Spawns a vehicle near a specific player. Auth required.
+
+**Request body**
+
+```json
+{
+  "steamId": "76561198000000001",
+  "vehicle": "BPC_Rager"
+}
+```
+
+| Field | Required | Description |
+|---|---|---|
+| `steamId` | Yes | Target player's Steam ID (player must be online) |
+| `vehicle` | Yes | Vehicle class name (from `GET /vehicle-types.json`) |
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "accepted": true,
+  "dispatched": true,
+  "command": "#GiveVehicle 76561198000000001 BPC_Rager"
+}
+```
+
+---
+
+## POST /spawn-entity
+
+Spawns a zombie, animal, armed NPC, Brenner, or Razor near a specific player. Auth required.
+
+**Request body**
+
+```json
+{
+  "steamId": "76561198000000001",
+  "verb": "SpawnZombie",
+  "entity": "BP_Zombie_Military_Normal_Male"
+}
+```
+
+| Field | Required | Description |
+|---|---|---|
+| `steamId` | Yes | Target player's Steam ID (player must be online) |
+| `verb` | Yes | Spawn type: `SpawnZombie`, `SpawnAnimal`, `SpawnArmedNPC`, `SpawnBrenner`, or `SpawnRazor` |
+| `entity` | No | Entity variant name (from the corresponding catalog endpoint). Not needed for `SpawnBrenner` and `SpawnRazor` |
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "accepted": true,
+  "dispatched": true,
+  "command": "#SpawnEntity 76561198000000001 SpawnZombie BP_Zombie_Military_Normal_Male"
 }
 ```
 
@@ -1045,8 +1252,30 @@ Returns live server FPS statistics. Auth required.
 
 ## GET /fps/history.json
 
-Returns historical FPS data. Auth required.
+Returns historical FPS data at minute resolution, up to 7 days. Auth required.
 
----
+Used by the panel's FPS chart on the Status tab.
 
+**Response**
+
+```json
+{
+  "ok": true,
+  "intervalMinutes": 1,
+  "count": 1440,
+  "data": [
+    { "t": 1712160000000, "avg": 30.2, "min": 28.1, "max": 31.5 },
+    { "t": 1712160060000, "avg": 29.8, "min": 27.3, "max": 30.9 }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `intervalMinutes` | number | Sampling interval (always `1`) |
+| `count` | number | Number of data points in the response |
+| `data[].t` | number | Unix timestamp in milliseconds |
+| `data[].avg` | number | Average FPS during this interval |
+| `data[].min` | number | Minimum FPS during this interval |
+| `data[].max` | number | Maximum FPS during this interval |
 

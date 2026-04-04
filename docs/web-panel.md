@@ -108,6 +108,8 @@ Click a player in the list or on the map to see full details:
 - **Send Message** — send a private in-game message to the player
 - **#ExecAs** — execute a command in the context of the player
 - **Give Item** — opens the item picker to spawn items for the player (see [Give Item](#give-item))
+- **Give Vehicle** — opens a vehicle picker to spawn any of the 19 vehicle types directly to the player (see [Give Vehicle](#give-vehicle))
+- **Spawn Entities** — opens a tabbed picker to spawn zombies, animals, armed NPCs, Brenner, or Razor near the player (see [Spawn Entities](#spawn-entities))
 - **Show on Map** — switches to the Map tab and flies to the player's location
 - **Teleport To...** — opens the map in teleport mode (see [Teleport from Map](#teleport-from-map))
 - **Kick** — kicks the player from the server (with confirmation dialog)
@@ -323,6 +325,35 @@ The **Give Item** button (available in the player detail popup) opens an item pi
 The item is spawned directly into the player's vicinity. No database modifications are required.
 
 ![Give Item Modal](assets/images/panel/panel-give-item.jpg)
+
+---
+
+## Give Vehicle
+
+The **Give Vehicle** button (available in the player detail popup) opens a vehicle picker modal showing all 19 vehicle types with their in-game icons.
+
+1. Browse the vehicle list — each entry shows the vehicle name and icon
+2. Click a vehicle to spawn it near the selected player
+
+The vehicle appears in the player's vicinity. Vehicle types are loaded from the game engine automatically.
+
+---
+
+## Spawn Entities
+
+The **Spawn Entities** button (available in the player detail popup) opens a tabbed picker for spawning AI entities near a player.
+
+**Tabs:**
+
+| Tab | Entity types |
+|---|---|
+| Zombies | 30 zombie variants (military, civilian, etc.) |
+| Animals | 14 animal types (bear, boar, deer, etc.) |
+| Armed NPCs | 20 armed NPC variants |
+| Brenner | Spawns a Brenner (no variants) |
+| Razor | Spawns a Razor (no variants) |
+
+Each tab shows a searchable list with humanized names. Click an entity to spawn it near the selected player.
 
 ---
 

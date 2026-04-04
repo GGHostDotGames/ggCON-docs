@@ -325,6 +325,83 @@ The target player must be online. Use [GET /items.json](http-api.md#get-itemsjso
 
 ---
 
+### #GiveVehicle
+
+Spawns a vehicle near a specific player.
+
+```
+#GiveVehicle <steamId> <vehicleClass>
+```
+
+| Parameter | Required | Description |
+|---|---|---|
+| `steamId` | Yes | The target player's 64-bit Steam ID |
+| `vehicleClass` | Yes | The vehicle class name (e.g., `BPC_Rager`, `BPC_Barba`) |
+
+**Example:**
+
+```
+#GiveVehicle 76561198031234567 BPC_Rager
+```
+
+**Response:**
+
+```json
+{
+  "ok": true,
+  "accepted": true,
+  "dispatched": true,
+  "command": "#GiveVehicle 76561198031234567 BPC_Rager"
+}
+```
+
+The target player must be online. Use [GET /vehicle-types.json](http-api.md#get-vehicle-typesjson) to browse all available vehicle types, or use the web panel's [Give Vehicle](web-panel.md#give-vehicle) feature.
+
+---
+
+### #SpawnEntity
+
+Spawns a zombie, animal, armed NPC, Brenner, or Razor near a specific player.
+
+```
+#SpawnEntity <steamId> <verb> [entityName]
+```
+
+| Parameter | Required | Description |
+|---|---|---|
+| `steamId` | Yes | The target player's 64-bit Steam ID |
+| `verb` | Yes | Spawn type: `SpawnZombie`, `SpawnAnimal`, `SpawnArmedNPC`, `SpawnBrenner`, `SpawnRazor` |
+| `entityName` | No | Entity variant name. Not needed for `SpawnBrenner` and `SpawnRazor` |
+
+**Examples:**
+
+```
+#SpawnEntity 76561198031234567 SpawnZombie BP_Zombie_Military_Normal_Male
+#SpawnEntity 76561198031234567 SpawnAnimal BP_Bear
+#SpawnEntity 76561198031234567 SpawnBrenner
+```
+
+**Response:**
+
+```json
+{
+  "ok": true,
+  "accepted": true,
+  "dispatched": true,
+  "command": "#SpawnEntity 76561198031234567 SpawnZombie BP_Zombie_Military_Normal_Male"
+}
+```
+
+The target player must be online. Use the catalog endpoints to browse available entities:
+
+- [GET /zombies.json](http-api.md#get-zombiesjson)
+- [GET /animals.json](http-api.md#get-animalsjson)
+- [GET /armed-npcs.json](http-api.md#get-armed-npcsjson)
+
+Or use the web panel's [Spawn Entities](web-panel.md#spawn-entities) feature for a searchable UI.
+
+---
+
 ### #ReloadConfig
 
 Reloads all configuration files (`ggCON.ini`, `ggcon_settings.json`, `ggcon_password`) and re-applies settings without restarting the server.
@@ -367,10 +444,15 @@ Returns server state as structured JSON — the same response as [GET /server.js
 {
   "ok": true,
   "online": true,
-  "modVersion": "0.2.0",
-  "scumVersion": "1.2.1.1.106289+0",
+  "modVersion": "0.12.2",
+  "modBuild": "2026-04-04 10:15:00",
+  "scumVersion": "1.2.2.1.108938+0",
   "onlinePlayers": 3,
-  "timeOfDay": 14.5
+  "timeOfDay": 14.5,
+  "timezoneOffsetMin": -300,
+  "fps": 30.4,
+  "avgFps": 30.3,
+  "minFps": 28.1
 }
 ```
 

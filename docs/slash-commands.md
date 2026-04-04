@@ -48,6 +48,28 @@ Plugins can register their own slash commands. For example, the [Loot Drops](plu
 
 The command name is configurable per pack. See each plugin's documentation for details on its commands.
 
+The [Quarter Master](plugins.md#quarter-master) plugin registers:
+
+- `/shop` — sends the player their personal storefront URL with a one-time login PIN
+
+---
+
+## Custom Slash Commands
+
+Admins can create their own slash commands with predefined responses — no plugin required. Go to **Settings > Slash Commands** in the web panel to add commands like `/discord`, `/rules`, or `/website`.
+
+For each custom command, you configure:
+
+- **Command name** — the word after `/` (e.g., `discord`)
+- **Response text** — the message sent back to the player
+- **Color** — the chat color of the response (Yellow, White, Cyan, Green, Red)
+- **Prefix** — optional text prepended to the response (e.g., `[INFO]`)
+
+Custom commands are registered at startup and when settings are saved. They appear in `/help` output alongside built-in and plugin commands.
+
+!!! note
+    Custom command names cannot conflict with built-in or plugin commands. If a collision is detected, the custom command is rejected.
+
 ---
 
 ## Requirements

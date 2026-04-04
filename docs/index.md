@@ -9,7 +9,10 @@
 - **Vehicle Management** — full vehicle list with ownership, sortable columns, type filtering, map overlay, and one-click destroy
 - **Squad Management** — view squads with live online status, remove members, delete squads
 - **Flag & Base Tracking** — all base building flags with owner info, element counts, and map markers
-- **Item Spawning** — searchable catalog of 6,000+ items with one-click spawning to any player
+- **Item Spawning** — searchable catalog of 6,000+ items with category filter and one-click spawning to any player
+- **Vehicle Spawning** — give any of the 19 vehicle types directly to a player from the panel
+- **Entity Spawning** — spawn zombies, animals, armed NPCs, Brenner, and Razor near any player with a tabbed picker
+- **Multi-language** — web panel available in English, Chinese, Thai, Russian, German, and Ukrainian
 - **AI NPCs** *(coming soon)* — AI-powered characters that interact with players in chat and execute admin commands
 - **Slash Commands** — players type `/help`, `/starter`, etc. in chat for instant responses; plugins can register custom commands
 - **Plugin System** — extend ggCON with plugins for loot drops, analytics, NPCs, dev tools, and more — with a built-in marketplace
