@@ -1,0 +1,1950 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Remote administration mod for SCUM dedicated servers">
+      
+      
+      
+        <link rel="canonical" href="https://ggcon.gghost.games/docs/config-reference/">
+      
+      
+        <link rel="prev" href="../log-watcher/">
+      
+      
+        <link rel="next" href="../contributing/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Config Reference - ggCON</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#config-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ggCON" class="md-header__button md-logo" aria-label="ggCON" data-md-component="logo">
+      
+  <img src="../assets/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ggCON
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Config Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GGHostDotGames/ggCON-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GGHostDotGames/ggCON-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../getting-started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../web-panel/" class="md-tabs__link">
+          
+  
+  
+  Features
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../http-api/" class="md-tabs__link">
+          
+  
+  
+  Integration
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ggCON" class="md-nav__button md-logo" aria-label="ggCON" data-md-component="logo">
+      
+  <img src="../assets/images/logo.png" alt="logo">
+
+    </a>
+    ggCON
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GGHostDotGames/ggCON-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GGHostDotGames/ggCON-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Features
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../web-panel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Panel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../slash-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slash Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../npc-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NPC System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../auto-update/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auto-Update
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Integration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../http-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rcon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RCON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../log-watcher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Log Watcher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config Reference
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ini-only-settings-managed-by-gg-host" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        INI-only settings (managed by GG Host)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="INI-only settings (managed by GG Host)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bindaddress" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BindAddress
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#port" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Port
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#panelid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PanelId
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rconenabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RconEnabled
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rconport" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RconPort
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rconbindaddress" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RconBindAddress
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rconmaxclients" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RconMaxClients
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rconidletimeoutsecs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RconIdleTimeoutSecs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#password" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Password
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-managed-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Panel-managed settings
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Panel-managed settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#allowallips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AllowAllIPs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allowedips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AllowedIPs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allowedcidrs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AllowedCIDRs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#restricttoadmins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RestrictToAdmins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adminsteamids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AdminSteamIDs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preferredsteamids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PreferredSteamIDs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitadmincommands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LimitAdminCommands
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#suppresscommandoutput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SuppressCommandOutput
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slashresponsecolor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SlashResponseColor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slashresponseprefix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SlashResponsePrefix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logminseverity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LogMinSeverity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discordlogwebhook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DiscordLogWebhook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discordauditwebhook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DiscordAuditWebhook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logwatchersources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LogWatcherSources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logwatcherbacklog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LogWatcherBacklog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logwatcherstartupdelay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LogWatcherStartupDelay
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allowedcommandsfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AllowedCommandsFile
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plugin-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../disclaimer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Disclaimer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ini-only-settings-managed-by-gg-host" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        INI-only settings (managed by GG Host)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="INI-only settings (managed by GG Host)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bindaddress" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BindAddress
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#port" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Port
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#panelid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PanelId
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rconenabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RconEnabled
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rconport" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RconPort
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rconbindaddress" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RconBindAddress
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rconmaxclients" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RconMaxClients
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rconidletimeoutsecs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RconIdleTimeoutSecs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#password" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Password
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-managed-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Panel-managed settings
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Panel-managed settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#allowallips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AllowAllIPs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allowedips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AllowedIPs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allowedcidrs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AllowedCIDRs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#restricttoadmins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RestrictToAdmins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adminsteamids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AdminSteamIDs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preferredsteamids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PreferredSteamIDs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitadmincommands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LimitAdminCommands
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#suppresscommandoutput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SuppressCommandOutput
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slashresponsecolor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SlashResponseColor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slashresponseprefix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SlashResponsePrefix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logminseverity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LogMinSeverity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discordlogwebhook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DiscordLogWebhook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discordauditwebhook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DiscordAuditWebhook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logwatchersources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LogWatcherSources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logwatcherbacklog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LogWatcherBacklog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logwatcherstartupdelay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LogWatcherStartupDelay
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allowedcommandsfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AllowedCommandsFile
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plugin-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="config-reference">Config Reference<a class="headerlink" href="#config-reference" title="Permanent link">&para;</a></h1>
+<p>ggCON uses two layers of configuration:</p>
+<ol>
+<li><strong><code>ggCON.ini</code></strong> — static settings managed by GG Host (network binding, ports, RCON). These are pre-configured for your server and not directly visible to customers.</li>
+<li><strong><code>ggcon_settings.json</code></strong> — runtime settings managed through the web panel's Settings tab, applied immediately without restart</li>
+<li><strong><code>ggcon_password</code></strong> — the authentication password, set during installation and changeable from the panel</li>
+</ol>
+<p>All three files live in:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&lt;GameRoot&gt;/Saved/Config/WindowsServer/
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">You don't need to edit the INI file</p>
+<p>The <code>ggCON.ini</code> file is managed by GG Host and pre-configured when ggCON is installed. All customer-facing settings are available in the web panel's <strong>Settings</strong> tab. The INI-only settings documented below are for reference only.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>What goes here</th>
+<th>How to change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ggCON.ini</code></td>
+<td>Network binding, ports, RCON</td>
+<td>Managed by GG Host</td>
+</tr>
+<tr>
+<td><code>ggcon_settings.json</code></td>
+<td>Everything else (admin IDs, logging, webhooks, etc.)</td>
+<td>Panel Settings tab</td>
+</tr>
+<tr>
+<td><code>ggcon_password</code></td>
+<td>Authentication password</td>
+<td>Panel Settings tab</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ini-only-settings-managed-by-gg-host">INI-only settings (managed by GG Host)<a class="headerlink" href="#ini-only-settings-managed-by-gg-host" title="Permanent link">&para;</a></h2>
+<p>These settings are pre-configured by GG Host during installation. They require a server restart to take effect and are not exposed in the web panel. All keys are under the <code>[ggCON]</code> section header.</p>
+<h3 id="bindaddress">BindAddress<a class="headerlink" href="#bindaddress" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> string &nbsp;|&nbsp; <strong>Default:</strong> <code>127.0.0.1</code></p>
+<p>The address the HTTP server binds to.</p>
+<ul>
+<li><code>127.0.0.1</code> — localhost only (recommended when using a reverse proxy)</li>
+<li><code>0.0.0.0</code> — all interfaces</li>
+</ul>
+<hr />
+<h3 id="port">Port<a class="headerlink" href="#port" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> integer &nbsp;|&nbsp; <strong>Default:</strong> <code>8081</code></p>
+<p>Port for the HTTP API.</p>
+<hr />
+<h3 id="panelid">PanelId<a class="headerlink" href="#panelid" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> string &nbsp;|&nbsp; <strong>Default:</strong> <em>(empty — proxy disabled)</em></p>
+<p>Identifier for the SSL panel proxy. When set, ggCON registers with the GG Host panel proxy, making the web panel available over HTTPS at:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>https://ggcon.gghost.games/s/&lt;PanelId&gt;/panel
+</code></pre></div>
+<p>For GG Host servers using TCAdmin, set this to your TCAdmin Service ID (available as <code>![ServiceId]</code> in TCAdmin templates).</p>
+<p>Leave empty to disable SSL proxy access entirely.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="na">PanelId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1234567</span>
+</code></pre></div>
+<hr />
+<h3 id="rconenabled">RconEnabled<a class="headerlink" href="#rconenabled" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> bool &nbsp;|&nbsp; <strong>Default:</strong> <code>false</code></p>
+<p>Set to <code>true</code> to start the RCON server on mod load.</p>
+<hr />
+<h3 id="rconport">RconPort<a class="headerlink" href="#rconport" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> integer &nbsp;|&nbsp; <strong>Default:</strong> <code>27020</code></p>
+<p>Port the RCON server listens on.</p>
+<hr />
+<h3 id="rconbindaddress">RconBindAddress<a class="headerlink" href="#rconbindaddress" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> string &nbsp;|&nbsp; <strong>Default:</strong> <em>(inherits <code>BindAddress</code>)</em></p>
+<p>Address the RCON server binds to. Leave empty to use the same value as <code>BindAddress</code>.</p>
+<hr />
+<h3 id="rconmaxclients">RconMaxClients<a class="headerlink" href="#rconmaxclients" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> integer &nbsp;|&nbsp; <strong>Default:</strong> <code>16</code></p>
+<p>Maximum number of simultaneous RCON connections. Additional connections are rejected until an existing client disconnects.</p>
+<hr />
+<h3 id="rconidletimeoutsecs">RconIdleTimeoutSecs<a class="headerlink" href="#rconidletimeoutsecs" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> integer (seconds) &nbsp;|&nbsp; <strong>Default:</strong> <code>30</code></p>
+<p>Seconds of inactivity before an idle RCON connection is dropped. Prevents automation tools from exhausting connection slots by leaving sessions open.</p>
+<hr />
+<h2 id="password">Password<a class="headerlink" href="#password" title="Permanent link">&para;</a></h2>
+<p>The password is stored in a dedicated file — <code>ggcon_password</code> — in the same config directory. It contains a single line of plain text.</p>
+<p>The password is required via the <code>X-Password</code> header for HTTP API and RCON authentication.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Passwords are transmitted in plaintext HTTP headers. Use the SSL panel proxy or a reverse proxy with TLS if the API is exposed beyond localhost.</p>
+</div>
+<p>You can change the password from the panel's <strong>Settings</strong> tab or by editing the <code>ggcon_password</code> file directly and running <code>#ReloadConfig</code>.</p>
+<hr />
+<h2 id="panel-managed-settings">Panel-managed settings<a class="headerlink" href="#panel-managed-settings" title="Permanent link">&para;</a></h2>
+<p>These settings are managed through the web panel's <strong>Settings</strong> tab. Changes apply immediately without a restart and are persisted to <code>ggcon_settings.json</code>.</p>
+<hr />
+<h3 id="allowallips">AllowAllIPs<a class="headerlink" href="#allowallips" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> bool &nbsp;|&nbsp; <strong>Default:</strong> <code>true</code></p>
+<p>When <code>true</code>, connections from any IP address are allowed (IP allowlist is skipped). Authentication still requires a valid password.</p>
+<p>This is the default — ggCON ships open and relies on password authentication. Set to <code>false</code> and configure <code>AllowedIPs</code> or <code>AllowedCIDRs</code> if you want IP-level restrictions.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>With the default <code>AllowAllIPs = true</code>, any IP can attempt to authenticate. Make sure you set a strong password.</p>
+</div>
+<hr />
+<h3 id="allowedips">AllowedIPs<a class="headerlink" href="#allowedips" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> semicolon-separated list &nbsp;|&nbsp; <strong>Default:</strong> <code>127.0.0.1;::1</code></p>
+<p>IP addresses allowed to connect. Both IPv4 and IPv6 are supported. Only used when <code>AllowAllIPs = false</code>.</p>
+<p>If both <code>AllowedIPs</code> and <code>AllowedCIDRs</code> are empty, the mod falls back to allowing only <code>127.0.0.1</code> and <code>::1</code>.</p>
+<hr />
+<h3 id="allowedcidrs">AllowedCIDRs<a class="headerlink" href="#allowedcidrs" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> semicolon-separated list &nbsp;|&nbsp; <strong>Default:</strong> <em>(empty)</em></p>
+<p>CIDR ranges allowed to connect. Only used when <code>AllowAllIPs = false</code>.</p>
+<hr />
+<h3 id="restricttoadmins">RestrictToAdmins<a class="headerlink" href="#restricttoadmins" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> bool &nbsp;|&nbsp; <strong>Default:</strong> <code>false</code></p>
+<p>If <code>true</code>, only players whose Steam ID is in <code>AdminSteamIDs</code> may be used as the command executor. If no qualifying admin is online when a command is issued, the command fails with <code>"no admin player is online"</code>.</p>
+<hr />
+<h3 id="adminsteamids">AdminSteamIDs<a class="headerlink" href="#adminsteamids" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> semicolon-separated list &nbsp;|&nbsp; <strong>Default:</strong> <em>(empty)</em></p>
+<p>The Steam IDs of players who are permitted to act as command executors when <code>RestrictToAdmins = true</code>.</p>
+<hr />
+<h3 id="preferredsteamids">PreferredSteamIDs<a class="headerlink" href="#preferredsteamids" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> semicolon-separated list &nbsp;|&nbsp; <strong>Default:</strong> <em>(empty)</em></p>
+<p>Ordered list of Steam IDs to prefer as the command executor. The mod tries each ID in order and uses the first one that is currently online.</p>
+<p>When <code>RestrictToAdmins = true</code>, candidates must also appear in <code>AdminSteamIDs</code>.
+When <code>RestrictToAdmins = false</code>, falls back to any online player if none of the preferred IDs are online.</p>
+<div class="admonition note">
+<p class="admonition-title">Per-command override with #ExecAs</p>
+<p>These settings control which player is used for commands that go through the normal executor selection pipeline. The <a href="../commands/#execas"><code>#ExecAs</code></a> command bypasses this entirely — it always targets the player you specify, regardless of <code>RestrictToAdmins</code> or <code>PreferredSteamIDs</code>. The target player does not need to be an admin.</p>
+</div>
+<hr />
+<h3 id="limitadmincommands">LimitAdminCommands<a class="headerlink" href="#limitadmincommands" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> bool &nbsp;|&nbsp; <strong>Default:</strong> <code>false</code></p>
+<p>If <code>true</code>, only commands listed in the allowed commands file will be executed. Any command not in the list is rejected before reaching the game. See <code>AllowedCommandsFile</code> below to configure a custom path.</p>
+<p>If the allowed commands file is missing or empty, <strong>all commands are blocked</strong> (fail-safe behaviour).</p>
+<hr />
+<h3 id="suppresscommandoutput">SuppressCommandOutput<a class="headerlink" href="#suppresscommandoutput" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> bool &nbsp;|&nbsp; <strong>Default:</strong> <code>false</code> &nbsp;|&nbsp; <strong>Recommended:</strong> <code>true</code></p>
+<p>When ggCON runs a command, the player being used receives the command output in their in-game chat. Set to <code>true</code> to suppress that in-game delivery. The output is still captured and returned in the API response as normal.</p>
+<p>This is recommended for most setups to avoid unexpected output appearing for whichever player happens to be online.</p>
+<hr />
+<h3 id="slashresponsecolor">SlashResponseColor<a class="headerlink" href="#slashresponsecolor" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> string &nbsp;|&nbsp; <strong>Default:</strong> <code>yellow</code></p>
+<p>Color used for slash command responses sent back to the player in chat. Valid values: <code>yellow</code>, <code>white</code>, <code>cyan</code>, <code>green</code>, <code>red</code>.</p>
+<hr />
+<h3 id="slashresponseprefix">SlashResponsePrefix<a class="headerlink" href="#slashresponseprefix" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> string &nbsp;|&nbsp; <strong>Default:</strong> <em>(empty)</em></p>
+<p>Optional prefix prepended to slash command responses in chat, e.g. <code>[SERVER]</code>.</p>
+<hr />
+<h3 id="logminseverity">LogMinSeverity<a class="headerlink" href="#logminseverity" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> string &nbsp;|&nbsp; <strong>Default:</strong> <code>INFO</code></p>
+<p>Minimum severity level for the log file. Valid values (from least to most severe):</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TRACE</code></td>
+<td>Verbose internal events</td>
+</tr>
+<tr>
+<td><code>INFO</code></td>
+<td>Normal operational messages</td>
+</tr>
+<tr>
+<td><code>WARN</code></td>
+<td>Warnings and recoverable issues</td>
+</tr>
+<tr>
+<td><code>ERROR</code></td>
+<td>Errors only</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="discordlogwebhook">DiscordLogWebhook<a class="headerlink" href="#discordlogwebhook" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> string &nbsp;|&nbsp; <strong>Default:</strong> <em>(empty)</em></p>
+<p>Discord webhook URL to receive operational log messages. Leave empty to disable Discord logging.</p>
+<p>Log entries at or above <code>LogMinSeverity</code> are sent as Discord messages.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The URL must start with <code>https://</code>. An invalid URL triggers a one-time warning in the log file and disables Discord logging.</p>
+</div>
+<hr />
+<h3 id="discordauditwebhook">DiscordAuditWebhook<a class="headerlink" href="#discordauditwebhook" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> string &nbsp;|&nbsp; <strong>Default:</strong> <em>(empty)</em></p>
+<p>Discord webhook URL to receive the audit log. Each command dispatched through ggCON generates one audit entry, regardless of <code>LogMinSeverity</code>.</p>
+<p>Leave empty to disable Discord audit logging.</p>
+<hr />
+<h3 id="logwatchersources">LogWatcherSources<a class="headerlink" href="#logwatchersources" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> semicolon-separated list &nbsp;|&nbsp; <strong>Default:</strong> <em>(empty — auto-discover)</em></p>
+<p>Explicit list of log sources to watch. Leave empty to automatically discover all log file prefixes in <code>SaveFiles/Logs/</code>.</p>
+<p><code>SCUM</code> refers to the main <code>SCUM.log</code> file. All other names correspond to prefixes of files in <code>SaveFiles/Logs/</code> (e.g. <code>chat</code> watches <code>chat_20260316183008.log</code>).</p>
+<hr />
+<h3 id="logwatcherbacklog">LogWatcherBacklog<a class="headerlink" href="#logwatcherbacklog" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> integer &nbsp;|&nbsp; <strong>Default:</strong> <code>100</code></p>
+<p>Number of historical lines to load from each log file when the watcher starts. Set to <code>0</code> to only capture lines written after startup.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Changes to this setting require a server restart to take effect.</p>
+</div>
+<hr />
+<h3 id="logwatcherstartupdelay">LogWatcherStartupDelay<a class="headerlink" href="#logwatcherstartupdelay" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> integer (seconds) &nbsp;|&nbsp; <strong>Default:</strong> <code>30</code></p>
+<p>Seconds to wait after mod load before scanning for log files. This gives the SCUM server time to create its log files during startup.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Changes to this setting require a server restart to take effect.</p>
+</div>
+<hr />
+<h3 id="allowedcommandsfile">AllowedCommandsFile<a class="headerlink" href="#allowedcommandsfile" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> string (file path) &nbsp;|&nbsp; <strong>Default:</strong> <em>(empty)</em></p>
+<p>Path to the allowed commands file used when <code>LimitAdminCommands</code> is enabled. One command per line (case-insensitive). Leave empty to use <code>ggCON_allowed_commands.txt</code> in the config directory.</p>
+<hr />
+<h2 id="plugin-configuration">Plugin configuration<a class="headerlink" href="#plugin-configuration" title="Permanent link">&para;</a></h2>
+<p>Plugins can have their own configuration sections in <code>ggCON.ini</code> using the <code>[Plugin:&lt;id&gt;]</code> section header, where <code>&lt;id&gt;</code> is the plugin's unique identifier. Plugin configuration is INI-only and requires a restart.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">[Plugin:loot-drops]</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="na">DropCooldownSecs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">300</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="na">MaxActiveDrops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">3</span>
+</code></pre></div>
+<p>See <a href="../plugins/">Plugins</a> for available plugins and their configuration options.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Made by <a href="https://www.gghost.games" target="_blank">GG Host</a>
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

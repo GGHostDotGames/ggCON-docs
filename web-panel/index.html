@@ -1,0 +1,2032 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Remote administration mod for SCUM dedicated servers">
+      
+      
+      
+        <link rel="canonical" href="https://ggcon.gghost.games/docs/web-panel/">
+      
+      
+        <link rel="prev" href="../getting-started/">
+      
+      
+        <link rel="next" href="../plugins/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Web Panel - ggCON</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#web-panel" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ggCON" class="md-header__button md-logo" aria-label="ggCON" data-md-component="logo">
+      
+  <img src="../assets/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ggCON
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Web Panel
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GGHostDotGames/ggCON-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GGHostDotGames/ggCON-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../getting-started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Features
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../http-api/" class="md-tabs__link">
+          
+  
+  
+  Integration
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../config-reference/" class="md-tabs__link">
+          
+  
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ggCON" class="md-nav__button md-logo" aria-label="ggCON" data-md-component="logo">
+      
+  <img src="../assets/images/logo.png" alt="logo">
+
+    </a>
+    ggCON
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GGHostDotGames/ggCON-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GGHostDotGames/ggCON-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Features
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Panel
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Panel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#accessing-the-panel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing the Panel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#navigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Navigation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-time-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Real-time updates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-display-toggle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Time display toggle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tabs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#players" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Players
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#player-detail-popup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Player Detail Popup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Player Detail Popup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#economy-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Economy Controls
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#offline-player-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Offline Player Card
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#console" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Console
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Map
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vehicles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vehicles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flags
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#squads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Squads
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugin-tabs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Tabs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#give-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Give Item
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#give-vehicle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Give Vehicle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spawn-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spawn Entities
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teleport-from-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teleport from Map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#execas-button" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        #ExecAs Button
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../slash-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slash Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../npc-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NPC System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../auto-update/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auto-Update
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Integration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../http-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rcon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RCON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../log-watcher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Log Watcher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../disclaimer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Disclaimer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#accessing-the-panel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing the Panel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#navigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Navigation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-time-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Real-time updates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-display-toggle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Time display toggle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tabs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#players" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Players
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#player-detail-popup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Player Detail Popup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Player Detail Popup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#economy-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Economy Controls
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#offline-player-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Offline Player Card
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#console" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Console
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Map
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vehicles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vehicles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flags
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#squads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Squads
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugin-tabs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Tabs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#give-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Give Item
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#give-vehicle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Give Vehicle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spawn-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spawn Entities
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teleport-from-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teleport from Map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#execas-button" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        #ExecAs Button
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="web-panel">Web Panel<a class="headerlink" href="#web-panel" title="Permanent link">&para;</a></h1>
+<p>ggCON includes a built-in web panel for managing your SCUM server from any browser. No additional software or setup is required — the panel is served directly by ggCON.</p>
+<h2 id="accessing-the-panel">Accessing the Panel<a class="headerlink" href="#accessing-the-panel" title="Permanent link">&para;</a></h2>
+<p>For GG Host servers, the quickest way is the <strong>ggCON Web Panel</strong> shortcut in the left sidebar of your game panel — it logs you in automatically.</p>
+<p>You can also access the panel directly over HTTPS:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>https://ggcon.gghost.games/s/&lt;panelId&gt;/panel
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Bookmarkable login</p>
+<p>You can include your password in the URL for one-click access: <code>https://ggcon.gghost.games/s/&lt;panelId&gt;/panel?pw=yourpassword</code>. The password is stripped from the browser's address bar after login.</p>
+</div>
+<p>You will be prompted to enter your ggCON password (the value stored in your <code>ggcon_password</code> file).</p>
+<p><img alt="Login Screen" src="../assets/images/panel/login-screen.jpg" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The panel uses the same IP allowlist and password authentication as the HTTP API. If you cannot reach the panel, verify your IP is in the <code>AllowedIPs</code> or <code>AllowedCIDRs</code> list, or that <code>AllowAllIPs</code> is enabled. When using the SSL proxy, IP allowlists apply to the original client IP.</p>
+</div>
+<hr />
+<h2 id="navigation">Navigation<a class="headerlink" href="#navigation" title="Permanent link">&para;</a></h2>
+<p>The panel uses a collapsible sidebar for navigation. All core tabs have SVG icons. Plugin tabs appear under a "Plugins" divider with a puzzle-piece icon.</p>
+<ul>
+<li><strong>Collapse toggle</strong> — click the arrow at the bottom of the sidebar to switch between full labels and icon-only mode. Your preference is saved across sessions.</li>
+<li><strong>Tab order</strong> — Status (default landing page) → Map → Players → Squads → Vehicles → Flags → Chat → Logs → Console → Settings. Plugin tabs can be reordered by dragging.</li>
+<li><strong>Update indicator</strong> — the Settings button shows a colored dot when an update is available: green for minor updates, orange for major updates, blue when an update is staged.</li>
+</ul>
+<hr />
+<h2 id="real-time-updates">Real-time updates<a class="headerlink" href="#real-time-updates" title="Permanent link">&para;</a></h2>
+<p>The panel receives live data via Server-Sent Events (SSE). Player positions, chat messages, logs, server status, weather, squads, vehicles, and flags all update in real-time with no manual refresh needed. If SSE is unavailable (e.g., older ggCON versions), the panel falls back to polling automatically.</p>
+<p>When the server goes offline, the panel detects it within seconds and shows a branded "Server is offline" splash screen. It reconnects and refreshes all data automatically when the server comes back.</p>
+<hr />
+<h2 id="time-display-toggle">Time display toggle<a class="headerlink" href="#time-display-toggle" title="Permanent link">&para;</a></h2>
+<p>A toggle in the header bar lets you switch all timestamps between your local time and the server's time. Both sides show their UTC offset so you can always see the difference. The toggle affects all timestamps across the panel: chat, logs, player last login/logout, FPS chart labels, and plugin timestamps. Your preference is saved to localStorage.</p>
+<hr />
+<h2 id="tabs">Tabs<a class="headerlink" href="#tabs" title="Permanent link">&para;</a></h2>
+<h3 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h3>
+<p>The default landing page. Shows server information and live controls:</p>
+<ul>
+<li>SCUM version and ggCON version with build timestamp</li>
+<li>Online player count</li>
+<li>Live FPS (current, average, minimum)</li>
+<li>Time of day, weather conditions</li>
+<li>Temperature, wind, humidity, fog, cloud coverage</li>
+</ul>
+<p><strong>Server controls:</strong></p>
+<ul>
+<li><strong>Time slider</strong> — drag to set the time of day (0–23 hours) with day/night icons</li>
+<li><strong>Weather slider</strong> — drag to set weather intensity (0–1) with sun/storm icons</li>
+</ul>
+<p><img alt="Status Tab" src="../assets/images/panel/panel-status.jpg" /></p>
+<hr />
+<h3 id="players">Players<a class="headerlink" href="#players" title="Permanent link">&para;</a></h3>
+<p>Lists all online players with sortable columns. Use the <strong>"Online / All Players"</strong> toggle to switch between online-only and a full search of every player who has ever connected (including offline players).</p>
+<p>The "All Players" mode queries the server database and supports search by name or Steam ID. Offline player cards show last login/logout, economy data, and a "Show on Map" button for their last known position.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>SCUM in-game character name</td>
+</tr>
+<tr>
+<td>Steam</td>
+<td>Steam profile name</td>
+</tr>
+<tr>
+<td>Steam ID</td>
+<td>64-bit Steam ID (clickable — opens Steam profile)</td>
+</tr>
+<tr>
+<td>Fame</td>
+<td>Fame points</td>
+</tr>
+<tr>
+<td>Ping</td>
+<td>Network latency</td>
+</tr>
+<tr>
+<td>Flags</td>
+<td>Admin, God Mode, Immortal, Dead, Drone badges</td>
+</tr>
+<tr>
+<td>Actions</td>
+<td>MSG (send message) and #ExecAs (run command as player)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Click any player row</strong> to open a detailed popup.</p>
+<p><img alt="Players Tab" src="../assets/images/panel/panel-players.jpg" /></p>
+<h3 id="player-detail-popup">Player Detail Popup<a class="headerlink" href="#player-detail-popup" title="Permanent link">&para;</a></h3>
+<p>Click a player in the list or on the map to see full details:</p>
+<ul>
+<li><strong>Online/offline indicator</strong> — green glowing dot for online players, red glowing dot for offline players</li>
+<li><strong>Character</strong> — health bar, movement speed (m/s), item in hands, gender, gear weight</li>
+<li><strong>Connection</strong> — ping, IP address</li>
+<li><strong>World</strong> — world coordinates, map location</li>
+<li><strong>Economy</strong> — fame (with level), cash balance, gold balance — each with inline edit buttons (Set, +, -)</li>
+<li><strong>Conditions</strong> — active body effects with severity (exhaustion, illness, etc.)</li>
+<li><strong>Skills &amp; Attributes</strong> — 27 skills grouped by attribute (Strength, Constitution, Dexterity, Intelligence) with level and XP; base attribute values displayed as headers</li>
+<li><strong>Squad</strong> — if the player belongs to a squad, the squad name is shown and clickable (navigates to the Squads tab)</li>
+<li><strong>Steam Profile</strong> — clickable Steam ID link opens the player's Steam profile</li>
+</ul>
+<p><strong>Actions:</strong></p>
+<ul>
+<li><strong>Send Message</strong> — send a private in-game message to the player</li>
+<li><strong>#ExecAs</strong> — execute a command in the context of the player</li>
+<li><strong>Give Item</strong> — opens the item picker to spawn items for the player (see <a href="#give-item">Give Item</a>)</li>
+<li><strong>Give Vehicle</strong> — opens a vehicle picker to spawn any of the 19 vehicle types directly to the player (see <a href="#give-vehicle">Give Vehicle</a>)</li>
+<li><strong>Spawn Entities</strong> — opens a tabbed picker to spawn zombies, animals, armed NPCs, Brenner, or Razor near the player (see <a href="#spawn-entities">Spawn Entities</a>)</li>
+<li><strong>Show on Map</strong> — switches to the Map tab and flies to the player's location</li>
+<li><strong>Teleport To...</strong> — opens the map in teleport mode (see <a href="#teleport-from-map">Teleport from Map</a>)</li>
+<li><strong>Kick</strong> — kicks the player from the server (with confirmation dialog)</li>
+<li><strong>Ban</strong> — bans the player from the server (with confirmation dialog)</li>
+</ul>
+<p>The popup updates in real-time as new data is polled from the server.</p>
+<p><img alt="Player Detail Popup" src="../assets/images/panel/panel-player-detail.jpg" /></p>
+<h4 id="economy-controls">Economy Controls<a class="headerlink" href="#economy-controls" title="Permanent link">&para;</a></h4>
+<p>Each economy field (Fame, Cash, Gold) has inline edit buttons:</p>
+<ul>
+<li><strong>Set</strong> — set to an exact value</li>
+<li><strong>+</strong> — add an amount</li>
+<li><strong>-</strong> — subtract an amount</li>
+</ul>
+<p>Enter the value and confirm. The change is applied immediately via the REST API.</p>
+<h3 id="offline-player-card">Offline Player Card<a class="headerlink" href="#offline-player-card" title="Permanent link">&para;</a></h3>
+<p>Clicking any player name throughout the panel (in the Flags, Vehicles, or Squads tabs) when that player is not currently online opens a minimal player card with available information:</p>
+<ul>
+<li>Player name and Steam ID</li>
+<li>Online/offline status indicator (red dot)</li>
+<li>Owned flags and flag count</li>
+<li>Owned vehicles</li>
+<li>Squad membership</li>
+</ul>
+<p>This allows you to look up player details even when they are not connected to the server.</p>
+<h3 id="console">Console<a class="headerlink" href="#console" title="Permanent link">&para;</a></h3>
+<p>Interactive admin command console. Type any SCUM admin command and see the response.</p>
+<ul>
+<li><strong>Autocomplete</strong> — commands are suggested as you type; press Tab, Enter, or click to complete; arrow keys to navigate suggestions</li>
+<li><strong>ggCON vs SCUM badges</strong> — commands are labelled so you can tell at a glance whether a command is a ggCON command or a native SCUM admin command</li>
+<li><strong>Argument completion</strong> — after selecting a command, the next argument is suggested automatically: online players for player args, and the full item, vehicle, zombie, and animal catalogs for spawn-type args</li>
+<li><strong>Required / optional arg hints</strong> — free-text arguments show whether they are required or optional as you fill them in</li>
+<li><strong>SCUM command warning</strong> — a warning appears when typing a native SCUM command directly, linking to <code>#ExecAs</code> for targeted execution</li>
+<li>Command history with up/down arrow keys</li>
+<li>Color-coded output (commands, responses, errors)</li>
+<li>Supports all ggCON and native SCUM commands</li>
+</ul>
+<p><img alt="Console Tab" src="../assets/images/panel/panel-console.jpg" /></p>
+<h3 id="chat">Chat<a class="headerlink" href="#chat" title="Permanent link">&para;</a></h3>
+<p>Real-time chat viewer showing all in-game chat messages.</p>
+<ul>
+<li><strong>Channel colors</strong> — messages are tagged with colored pills matching in-game colors: white (Local), blue (Global), green (Squad), gold (Admin), gray (System)</li>
+<li><strong>Clickable player names</strong> — click a player's name to open their detail popup</li>
+<li><strong>Broadcast input</strong> — type a message and click Broadcast to send to all players</li>
+</ul>
+<p><strong>Method dropdown</strong> — select the notification delivery method:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chat</td>
+<td>Standard in-game chat message. Choose a color from the color picker (Yellow, White, Cyan, Green, Red)</td>
+</tr>
+<tr>
+<td>Warning</td>
+<td>Center-screen notification. Choose a custom color from the color picker and set display duration in seconds</td>
+</tr>
+<tr>
+<td>Kill Feed</td>
+<td>Bottom-center notification with prefix, name, and suffix fields. Toggle the sound on or off</td>
+</tr>
+<tr>
+<td>HUD</td>
+<td>Bottom-left overlay notification. Does not appear in chat — ideal for non-intrusive alerts</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Chat Tab" src="../assets/images/panel/panel-chat.jpg" /></p>
+<h3 id="map">Map<a class="headerlink" href="#map" title="Permanent link">&para;</a></h3>
+<p>Live map showing player and vehicle positions on the SCUM island. The map uses a 14K tiled image with 7 zoom levels for smooth navigation.</p>
+<p><strong>Players:</strong></p>
+<ul>
+<li><strong>Player dots</strong> — green for regular players, red for admins</li>
+<li><strong>Name labels</strong> — toggle with the "Names" checkbox</li>
+<li><strong>Click a player dot</strong> to open their detail popup</li>
+</ul>
+<p><strong>Vehicles:</strong></p>
+<ul>
+<li><strong>Vehicle markers</strong> — blue squares for all vehicles, orange for rendered (near players)</li>
+<li><strong>Vehicle checkbox</strong> — toggle vehicle markers on/off</li>
+<li><strong>Type filter</strong> — dropdown next to the Vehicles checkbox filters markers by vehicle class (e.g., "Barba", "Rager"). The list is populated dynamically from the server's vehicle data with counts per type</li>
+<li><strong>Click a vehicle marker</strong> to see vehicle details</li>
+</ul>
+<p><strong>Flags:</strong></p>
+<ul>
+<li><strong>Flag markers</strong> — flag icon markers showing base locations</li>
+<li><strong>Flags checkbox</strong> — toggle flag markers on/off in the map toolbar</li>
+<li><strong>Click a flag marker</strong> to see flag details (owner, base name, element count, location)</li>
+</ul>
+<p><strong>Measurement tool:</strong></p>
+<ul>
+<li>Click the ruler/measure button in the map toolbar to enter measurement mode</li>
+<li>First click places point A, second click places point B</li>
+<li>Displays distance in meters (or km for distances over 1,000 m) with a dashed line between points</li>
+<li>Click again to start a new measurement</li>
+<li>Press <strong>Escape</strong> or click the measure button again to exit measurement mode</li>
+</ul>
+<p><strong>Right-click menu:</strong></p>
+<ul>
+<li><strong>Right-click anywhere on the map</strong> to open a context menu</li>
+<li><strong>Copy Coordinates</strong> — copies the world coordinates at that location</li>
+<li><strong>Teleport Player</strong> — teleport any online player to the clicked location</li>
+</ul>
+<p><strong>Map controls:</strong></p>
+<ul>
+<li><strong>Drones</strong> — drone players are shown as purple markers; toggle visibility in the Layers panel under Player Names</li>
+<li><strong>Layers dropdown</strong> — floating panel with toggle switches for each layer (Players, Names, Drones, Vehicles, Flags, Grid) with green dot indicators for active layers</li>
+<li><strong>Marker size slider</strong> — adjust the size of player and vehicle markers</li>
+<li><strong>Mouse coordinates</strong> — world coordinates shown as you move the cursor</li>
+</ul>
+<p><img alt="Map Tab" src="../assets/images/panel/panel-map.jpg" /></p>
+<h3 id="vehicles">Vehicles<a class="headerlink" href="#vehicles" title="Permanent link">&para;</a></h3>
+<p>Full vehicle list with sortable columns and filtering.</p>
+<p><strong>Columns (click to sort A→Z / Z→A):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID</td>
+<td>Vehicle entity ID</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Vehicle class name. Green dot indicates the vehicle is rendered (near a player)</td>
+</tr>
+<tr>
+<td>Owner</td>
+<td>Owner's character name, or "None" if unowned</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>World coordinates (X, Y)</td>
+</tr>
+<tr>
+<td>Actions</td>
+<td>Details button to open vehicle popup</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Filter bar</strong> — type to filter vehicles by name, owner, or ID.</p>
+<p><img alt="Vehicles Tab" src="../assets/images/panel/panel-vehicles.jpg" /></p>
+<p><strong>Vehicle detail popup:</strong></p>
+<ul>
+<li>Vehicle ID, class, and owner</li>
+<li>World coordinates</li>
+<li>Spawn date (when the vehicle was spawned)</li>
+<li>Live/database position indicator</li>
+<li><strong>Show on Map</strong> — switches to the Map tab and flies to the vehicle's location</li>
+<li><strong>Destroy Vehicle</strong> — destroys the vehicle (with confirmation dialog)</li>
+<li><strong>Show Owner</strong> — opens the owner's player detail popup (if owner is online) or offline card</li>
+</ul>
+<h3 id="flags">Flags<a class="headerlink" href="#flags" title="Permanent link">&para;</a></h3>
+<p>Searchable list of all base building flags on the server.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Flag ID</td>
+<td>Unique flag identifier</td>
+</tr>
+<tr>
+<td>Owner</td>
+<td>Owner's character name (clickable — opens player detail popup)</td>
+</tr>
+<tr>
+<td>Base Name</td>
+<td>Name of the base</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>World coordinates (X, Y)</td>
+</tr>
+<tr>
+<td>Elements</td>
+<td>Current / maximum building elements</td>
+</tr>
+<tr>
+<td>Expanded</td>
+<td>Number of expanded elements</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Filter bar</strong> — type to filter flags by owner name, base name, or flag ID.</p>
+<p><strong>Refresh button</strong> — forces an immediate reload of flag data.</p>
+<p>Flag data auto-refreshes every 30 seconds.</p>
+<p><img alt="Flags Tab" src="../assets/images/panel/panel-flags.jpg" /></p>
+<h3 id="squads">Squads<a class="headerlink" href="#squads" title="Permanent link">&para;</a></h3>
+<p>Full squad list with member details and management actions.</p>
+<ul>
+<li><strong>Squad list</strong> — all squads with name, score, member count, and online indicator (green dot when any member is online)</li>
+<li><strong>Online squads</strong> are sorted to the top</li>
+<li><strong>Click a squad</strong> to expand and see members with their rank, online/alive/danger status</li>
+<li><strong>Refresh</strong> — forces a reload of squad data from the database</li>
+<li><strong>Remove Member</strong> — removes a player from their squad</li>
+<li><strong>Delete Squad</strong> — removes all members and destroys the squad</li>
+</ul>
+<p><img alt="Squads Tab" src="../assets/images/panel/panel-squads.jpg" /></p>
+<h3 id="logs">Logs<a class="headerlink" href="#logs" title="Permanent link">&para;</a></h3>
+<p>Real-time log viewer for SCUM server log files.</p>
+<ul>
+<li><strong>Source filters</strong> — pill-style buttons to toggle log sources (chat, kill, admin, economy, login, etc.) with color coding</li>
+<li><strong>Text filter</strong> — type to filter log lines by content</li>
+<li><strong>SCUM source</strong> — off by default (verbose game engine output)</li>
+<li><strong>Auto-scroll</strong> — new lines appear at the bottom with automatic scrolling</li>
+<li><strong>Max 1000 lines</strong> — older lines are pruned as new ones arrive</li>
+</ul>
+<p><img alt="Logs Tab" src="../assets/images/panel/panel-logs.jpg" /></p>
+<h3 id="plugin-tabs">Plugin Tabs<a class="headerlink" href="#plugin-tabs" title="Permanent link">&para;</a></h3>
+<p>Loaded plugins that provide a panel tab appear in the sidebar under the "Plugins" divider. Plugin tabs have a subtly different style to distinguish them from core tabs. You can drag plugin tabs to reorder them — your preferred order is saved across sessions. See <a href="../plugins/">Plugins</a> for details on available plugins.</p>
+<hr />
+<h2 id="settings">Settings<a class="headerlink" href="#settings" title="Permanent link">&para;</a></h2>
+<p>Click the <strong>Settings</strong> button in the sidebar to access settings, plugin management, and updates.</p>
+<ul>
+<li><strong>Settings</strong> — manage authentication, allowed IPs, Discord webhooks, executor selection, and other runtime settings. Changes take effect immediately.</li>
+<li><strong>Plugins</strong> — install, update, and uninstall plugins from the marketplace. See <a href="../plugins/#marketplace">Plugins</a> for details.</li>
+<li><strong>Updates</strong> — check for ggCON updates and stage them for installation on the next server restart. See <a href="../auto-update/">Auto-Update</a> for details.</li>
+</ul>
+<p><img alt="Settings — Plugin Manager" src="../assets/images/panel/panel-settings.jpg" /></p>
+<hr />
+<h2 id="give-item">Give Item<a class="headerlink" href="#give-item" title="Permanent link">&para;</a></h2>
+<p>The <strong>Give Item</strong> button (available in the player detail popup) opens an item picker modal:</p>
+<ol>
+<li><strong>Search</strong> — type to instantly search across 6,000+ SCUM items</li>
+<li><strong>Category filter</strong> — dropdown to filter by item category</li>
+<li><strong>Quantity</strong> — set how many to spawn (default: 1)</li>
+<li>Click an item to spawn it for the selected player</li>
+</ol>
+<p>The item is spawned directly into the player's vicinity. No database modifications are required.</p>
+<p><img alt="Give Item Modal" src="../assets/images/panel/panel-give-item.jpg" /></p>
+<hr />
+<h2 id="give-vehicle">Give Vehicle<a class="headerlink" href="#give-vehicle" title="Permanent link">&para;</a></h2>
+<p>The <strong>Give Vehicle</strong> button (available in the player detail popup) opens a vehicle picker modal showing all 19 vehicle types with their in-game icons.</p>
+<ol>
+<li>Browse the vehicle list — each entry shows the vehicle name and icon</li>
+<li>Click a vehicle to spawn it near the selected player</li>
+</ol>
+<p>The vehicle appears in the player's vicinity. Vehicle types are loaded from the game engine automatically.</p>
+<hr />
+<h2 id="spawn-entities">Spawn Entities<a class="headerlink" href="#spawn-entities" title="Permanent link">&para;</a></h2>
+<p>The <strong>Spawn Entities</strong> button (available in the player detail popup) opens a tabbed picker for spawning AI entities near a player.</p>
+<p><strong>Tabs:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tab</th>
+<th>Entity types</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Zombies</td>
+<td>30 zombie variants (military, civilian, etc.)</td>
+</tr>
+<tr>
+<td>Animals</td>
+<td>14 animal types (bear, boar, deer, etc.)</td>
+</tr>
+<tr>
+<td>Armed NPCs</td>
+<td>20 armed NPC variants</td>
+</tr>
+<tr>
+<td>Brenner</td>
+<td>Spawns a Brenner (no variants)</td>
+</tr>
+<tr>
+<td>Razor</td>
+<td>Spawns a Razor (no variants)</td>
+</tr>
+</tbody>
+</table>
+<p>Each tab shows a searchable list with humanized names. Click an entity to spawn it near the selected player.</p>
+<hr />
+<h2 id="teleport-from-map">Teleport from Map<a class="headerlink" href="#teleport-from-map" title="Permanent link">&para;</a></h2>
+<p>The <strong>Teleport To...</strong> button in the player detail popup opens the map in teleport mode:</p>
+<ol>
+<li>Click <strong>Teleport To...</strong> on any online player</li>
+<li>The map opens with a red banner showing the target player's name and a <strong>Cancel</strong> button</li>
+<li>The cursor changes to a crosshair</li>
+<li><strong>Click anywhere on the map</strong> to select a destination</li>
+<li>A confirmation dialog shows the target coordinates — click <strong>OK</strong> to teleport, or <strong>Cancel</strong> to pick a different spot</li>
+<li>The teleport command executes and the result appears in the Console tab</li>
+</ol>
+<p>Press <strong>Escape</strong> or click <strong>Cancel</strong> in the banner to exit teleport mode without teleporting.</p>
+<hr />
+<h2 id="execas-button">#ExecAs Button<a class="headerlink" href="#execas-button" title="Permanent link">&para;</a></h2>
+<p>The <strong>#ExecAs</strong> button (available in the player list and detail popup) lets you execute an admin command in the context of a specific player. The player's Steam ID is automatically filled in — you just type the command.</p>
+<p>For example, clicking #ExecAs on a player and typing <code>Knockout 10</code> will execute:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>#ExecAs 76561198000000003 #Knockout 10
+</code></pre></div>
+<p>This is useful for commands that target a specific player, such as teleporting, spawning items near them, or applying effects.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Made by <a href="https://www.gghost.games" target="_blank">GG Host</a>
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
