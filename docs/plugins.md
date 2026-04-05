@@ -87,13 +87,13 @@ Real-time trap event feed showing crafting, arming, disarming, and triggering of
 
 A complete in-game economy and player reward system with a web storefront — give your players something to work toward.
 
-Admins build item packages and set prices using in-game currency (rations or money). Players browse and purchase from a web storefront, then claim their items in-game. Combined with GG Coins — a cross-server currency earned by playtime — Quarter Master turns your server's economy into a reason to keep playing.
+Admins build item packages and set prices in Rations, in-game Cash, or both. Players browse and purchase from a web storefront, then claim their items in-game. Combined with GG Coins — a cross-server currency earned by playtime — Quarter Master turns your server's economy into a reason to keep playing.
 
 #### Admin Panel
 
 The Quarter Master tab in the web panel is where you create and manage everything:
 
-- **Packages** — bundle any combination of items into purchasable packages; set a name, description, and price in rations, money, or both
+- **Packages** — bundle any combination of items into purchasable packages; set a name, description, and price in Rations, Cash, or both
 - **Categories** — organize packages into custom categories (e.g., Weapons, Supplies, Gear); categories appear as filter pills in the storefront
 - **Discounts** — set a percentage discount on any package with an optional expiry date; storefront shows the original price crossed out with a "X% OFF" badge
 - **Stock limits** — cap how many times a package can be purchased; storefront shows "3 left" or "Sold Out" automatically
@@ -107,18 +107,18 @@ Players access their server's storefront at `shop.gghost.games`, log in with the
 
 - **Browse and filter** — category pills, package cards with item icons, quantity badges, and descriptions
 - **Purchase flow** — select a package, confirm the price, items are added to the player's stash
-- **Offline purchasing** — players can buy packages even when not connected to the server; ration deductions happen immediately, money deductions are queued for next login
+- **Offline purchasing** — players can buy packages even when not connected to the server; Ration deductions happen immediately, Cash deductions are queued for next login
 - **Stash** — purchased items are grouped by package in a persistent stash; players click "Claim All" in the storefront when in-game to receive their items
 - **Bank Statement** — full purchase history with timestamps
 - **Multi-language** — storefront available in English, Chinese, Thai, Russian, German, and Ukrainian; language picker on login and in the header
 
 #### GG Coins
 
-A cross-server currency that rewards players for time spent on your server.
+A global currency earned through playtime across all GG Host servers. The earn rate is the same globally, with special events offering multipliers (e.g. 2x weekend).
 
-- **Earn by playing** — players automatically earn GG Coins based on time played (configurable rate)
+- **Earn by playing** — players automatically earn GG Coins based on time spent online; the rate is the same across all servers
 - **Cross-server wallet** — GG Coins are stored in a global wallet, not tied to a single server; players who play on multiple GG Host servers accumulate coins across all of them
-- **Withdraw to in-game money** — players can convert GG Coins into in-game currency at an admin-configured exchange rate via the storefront
+- **Withdraw to Rations** — players can convert GG Coins into Rations at an admin-configured exchange rate via the storefront
 - **Balance display** — current GG Coin balance shown in the storefront header with a withdraw button
 
 #### Delivery Safety
