@@ -992,25 +992,6 @@ Bottom-center notification in the kill feed area.
 | `ping` | No | Play notification sound (default: `true`) |
 | `steamId` | No | Target player's Steam ID. Omit to send to all players |
 
-### HUD notification
-
-Bottom-left overlay notification. Does not appear in chat — ideal for non-intrusive alerts.
-
-```json
-{
-  "method": "hud",
-  "text": "Quest complete!"
-}
-```
-
-| Field | Required | Description |
-|---|---|---|
-| `method` | Yes | `"hud"` |
-| `text` | Yes | Notification text |
-| `steamId` | No | Target player's Steam ID. Omit to send to all players |
-
----
-
 ### Per-player targeting
 
 Any method supports targeting a specific player by adding the `steamId` field:
