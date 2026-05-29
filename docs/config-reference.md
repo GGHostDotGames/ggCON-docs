@@ -190,10 +190,24 @@ This is recommended for most setups to avoid unexpected output appearing for whi
 
 ---
 
+### SuppressSpawnedReplies
+**Type:** bool &nbsp;|&nbsp; **Default:** `false`
+
+When ggCON spawns items for a player (from the panel, the API, or a plugin), the player used to deliver them normally sees `Spawned X.` confirmations in their in-game chat. Set to `true` to suppress those confirmations. The asset-loading chatter (`Loading X…`) is always suppressed for ggCON-dispatched items regardless of this setting. Commands an admin types in-game manually are unaffected.
+
+---
+
+### UnlockDeveloperCommands
+**Type:** bool &nbsp;|&nbsp; **Default:** `false`
+
+When `true`, unlocks hidden developer-only commands (such as `#UpgradeBaseBuildingElementsWithinRadius`) so admins can use them in-game — no separate Lua mod required. Leave off unless you specifically need them.
+
+---
+
 ### SlashResponseColor
 **Type:** string &nbsp;|&nbsp; **Default:** `yellow`
 
-Color used for slash command responses sent back to the player in chat. Valid values: `yellow`, `white`, `cyan`, `green`, `red`.
+Color used for slash command responses sent back to the player in chat. Valid values: `yellow`, `white`, `cyan`, `green`, `red`, `orange`.
 
 ---
 
@@ -201,6 +215,55 @@ Color used for slash command responses sent back to the player in chat. Valid va
 **Type:** string &nbsp;|&nbsp; **Default:** *(empty)*
 
 Optional prefix prepended to slash command responses in chat, e.g. `[SERVER]`.
+
+---
+
+### AdminDisplayName
+**Type:** string &nbsp;|&nbsp; **Default:** `ADMIN`
+
+The name substituted for the `{name}` placeholder in the admin chat prefix templates below.
+
+---
+
+### AdminChatBroadcastTemplate
+**Type:** string &nbsp;|&nbsp; **Default:** `[ADMIN] {message}`
+
+Template applied to broadcasts sent from the panel's **Send Message** feature, so players can tell an admin is talking. Placeholders: `{name}` (the `AdminDisplayName`) and `{message}` (the text you typed). Clear it to send broadcasts with no prefix. Plugin-dispatched chat and slash command responses are unaffected.
+
+---
+
+### AdminChatWhisperTemplate
+**Type:** string &nbsp;|&nbsp; **Default:** `[WHISPER from {name}] {message}`
+
+Template applied to private (per-player) messages sent from the panel. Placeholders: `{name}`, `{message}`, and `{playerName}` (the recipient's name). Clear it to send whispers with no prefix.
+
+---
+
+### UnstuckDistanceMeters
+**Type:** integer (meters) &nbsp;|&nbsp; **Default:** `100`
+
+How far a player is moved when they use the [`/unstuck`](slash-commands.md#unstuck) slash command.
+
+---
+
+### UnstuckCooldownHours
+**Type:** integer (hours) &nbsp;|&nbsp; **Default:** `5`
+
+How long a player must wait between `/unstuck` uses. Set to `0` to disable the cooldown.
+
+---
+
+### UnstuckRequiresApproval
+**Type:** bool &nbsp;|&nbsp; **Default:** `false`
+
+When `true`, `/unstuck` requests are queued for an admin to approve or deny from the panel header instead of teleporting the player immediately.
+
+---
+
+### DiscordUnstuckWebhook
+**Type:** string &nbsp;|&nbsp; **Default:** *(empty)*
+
+Discord webhook URL that receives an alert whenever a new `/unstuck` request is queued for approval (used only when `UnstuckRequiresApproval = true`). Leave empty to disable.
 
 ---
 

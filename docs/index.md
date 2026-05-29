@@ -13,15 +13,19 @@
 - **Vehicle Spawning** — give any of the 19 vehicle types directly to a player from the panel
 - **Entity Spawning** — spawn zombies, animals, armed NPCs, Brenner, and Razor near any player with a tabbed picker
 - **Multi-language** — web panel available in English, Chinese, Thai, Russian, German, and Ukrainian
+- **In-game Economy** — the Quarter Master plugin adds a web storefront, a package shop priced in Rations or Cash, cross-server GG Coins, stock and discounts, and PvP/NPC kill rewards
+- **Kill Feed & Leaderboards** — real-time PvP, NPC, trap, and suicide kill feed with a player leaderboard, in-game chat broadcasts, and Discord webhooks
+- **NPC Tracking** — live status, health, and map positions for guards, drifters, zombies, animals, sentries, drones, and Razor
+- **Paid Teleport (Taxi)** — players pay in-game cash to travel to admin-set destinations, with a PvP-safe countdown
 - **AI NPCs** *(coming soon)* — AI-powered characters that interact with players in chat and execute admin commands
-- **Slash Commands** — players type `/help`, `/starter`, etc. in chat for instant responses; plugins can register custom commands
-- **Plugin System** — extend ggCON with plugins for loot drops, analytics, NPCs, dev tools, and more — with a built-in marketplace
+- **Slash Commands** — players type `/help`, `/unstuck`, `/shop`, `/taxi`, and more in chat for instant responses; admins and plugins can register custom commands
+- **Plugin System** — extend ggCON with plugins for the in-game shop, kill feed, loot drops, NPC tracking, paid taxi, analytics, and more — with a built-in marketplace
 - **Auto-Update** — check for and stage updates directly from the panel, applied on next server restart
 - **SSL Access** — access the panel securely over HTTPS via GG Host's built-in SSL proxy
 - **Server Controls** — set time of day and weather directly from the panel
 - Run admin commands and capture their output via HTTP or RCON
 - Execute developer commands without any database modifications
-- Send in-game messages, warnings, HUD overlays, and kill feed notifications to all players or a specific player
+- Send in-game chat messages, center-screen warnings, kill feed notifications, and HUD overlays to all players or a specific player
 - Monitor server logs in real-time (chat, kills, economy, admin, and more)
 - Secure access with IP allowlists, password authentication, and rate limiting
 

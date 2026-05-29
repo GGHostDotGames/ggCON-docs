@@ -73,13 +73,18 @@ The default landing page. Shows server information and live controls:
 
 Lists all online players with sortable columns. Use the **"Online / All Players"** toggle to switch between online-only and a full search of every player who has ever connected (including offline players).
 
-The "All Players" mode queries the server database and supports search by name or Steam ID. Offline player cards show last login/logout, economy data, and a "Show on Map" button for their last known position.
+The "All Players" mode queries the server database and supports search by name or Steam ID. Offline player cards show last login/logout, economy data, and a "Show on Map" button for their last known position. The All Players list also shows Account ID and Fake IGN columns.
+
+The filter box matches against the character name, Steam ID, Account ID, Real IGN, and Fake IGN, so you can search by any of them.
 
 | Column | Description |
 |---|---|
 | Name | SCUM in-game character name |
 | Steam | Steam profile name |
 | Steam ID | 64-bit Steam ID (clickable — opens Steam profile) |
+| Account ID | SCUM's internal user profile ID |
+| Real IGN | Character's real in-game name from the database |
+| Fake IGN | Character's alias, if set |
 | Fame | Fame points |
 | Ping | Network latency |
 | Flags | Admin, God Mode, Immortal, Dead, Drone badges |
@@ -111,7 +116,7 @@ Click a player in the list or on the map to see full details:
 - **Give Vehicle** — opens a vehicle picker to spawn any of the 19 vehicle types directly to the player (see [Give Vehicle](#give-vehicle))
 - **Spawn Entities** — opens a tabbed picker to spawn zombies, animals, armed NPCs, Brenner, or Razor near the player (see [Spawn Entities](#spawn-entities))
 - **Show on Map** — switches to the Map tab and flies to the player's location
-- **Teleport To...** — opens the map in teleport mode (see [Teleport from Map](#teleport-from-map))
+- **Teleport To...** — choose a destination by pasting coordinates, picking a saved location, or clicking the map, with an optional facing direction (see [Teleport a player](#teleport-a-player))
 - **Kick** — kicks the player from the server (with confirmation dialog)
 - **Ban** — bans the player from the server (with confirmation dialog)
 
@@ -168,10 +173,9 @@ Real-time chat viewer showing all in-game chat messages.
 
 | Method | Description |
 |---|---|
-| Chat | Standard in-game chat message. Choose a color from the color picker (Yellow, White, Cyan, Green, Red) |
+| Chat | Standard in-game chat message. Choose a color from the color picker (Yellow, White, Cyan, Green, Red, Orange) |
 | Warning | Center-screen notification. Choose a custom color from the color picker and set display duration in seconds |
 | Kill Feed | Bottom-center notification with prefix, name, and suffix fields. Toggle the sound on or off |
-| HUD | Bottom-left overlay notification. Does not appear in chat — ideal for non-intrusive alerts |
 
 ![Chat Tab](assets/images/panel/panel-chat.jpg)
 
@@ -305,11 +309,23 @@ Loaded plugins that provide a panel tab appear in the sidebar under the "Plugins
 
 Click the **Settings** button in the sidebar to access settings, plugin management, and updates.
 
-- **Settings** — manage authentication, allowed IPs, Discord webhooks, executor selection, and other runtime settings. Changes take effect immediately.
+- **Settings** — manage authentication, allowed IPs, Discord webhooks, executor selection, slash command appearance, the Admin Chat Sender Prefix, and toggles such as Suppress Command Output, **Suppress 'Spawned X' Confirmations**, and **Unlock Developer Commands**. Changes take effect immediately.
 - **Plugins** — install, update, and uninstall plugins from the marketplace. See [Plugins](plugins.md#marketplace) for details.
 - **Updates** — check for ggCON updates and stage them for installation on the next server restart. See [Auto-Update](auto-update.md) for details.
 
 ![Settings — Plugin Manager](assets/images/panel/panel-settings.jpg)
+
+### Admin Chat Sender Prefix
+
+Under **Settings → General**, configure how chat sent from the panel is labelled so players can tell an admin is talking. Set a display name and templates for broadcasts (default `[ADMIN] {message}`) and private whispers (default `[WHISPER from {name}] {message}`). The placeholders `{name}`, `{message}`, and `{playerName}` are filled in when the message is sent, and you can override the template per message from the Send Message dialog. Clear a template to send with no prefix. Plugin-dispatched chat and slash command responses are unaffected. See the [config reference](config-reference.md#adminchatbroadcasttemplate) for details.
+
+### Saved Teleport Destinations
+
+Under **Settings**, manage a list of named locations (e.g. "Outpost B4") with X/Y/Z coordinates and an optional yaw. Saved destinations appear in the [Teleport](#teleport-a-player) popup's dropdown for one-click teleporting.
+
+### Server Notifications
+
+Under **Settings**, an editor for SCUM's `Notifications.json` lets you manage the server's timed in-game broadcasts without editing the file by hand. The panel validates the JSON before saving. Restart the server for changes to take effect (SCUM reads this file at boot).
 
 ---
 
@@ -357,18 +373,17 @@ Each tab shows a searchable list with humanized names. Click an entity to spawn 
 
 ---
 
-## Teleport from Map
+## Teleport a player
 
-The **Teleport To...** button in the player detail popup opens the map in teleport mode:
+The **Teleport To...** button in the player detail popup opens a popup with three ways to choose a destination:
 
-1. Click **Teleport To...** on any online player
-2. The map opens with a red banner showing the target player's name and a **Cancel** button
-3. The cursor changes to a crosshair
-4. **Click anywhere on the map** to select a destination
-5. A confirmation dialog shows the target coordinates — click **OK** to teleport, or **Cancel** to pick a different spot
-6. The teleport command executes and the result appears in the Console tab
+- **Paste coordinates** — type or paste `X Y Z` (also accepts `X, Y, Z` or `X Y`). Ideal for sending a player to an exact spot
+- **Saved destination** — pick from the named locations you've configured (see [Saved Teleport Destinations](#saved-teleport-destinations))
+- **Pick on map** — opens the map in teleport mode: a red banner shows the target player's name, the cursor becomes a crosshair, and clicking the map selects the destination (confirm in the dialog). Press **Escape** or **Cancel** to exit without teleporting
 
-Press **Escape** or click **Cancel** in the banner to exit teleport mode without teleporting.
+An optional **yaw** field sets which direction the player faces on arrival (0 = North, 90 = East, 180 = South, 270 = West; leave empty to keep their current facing). The teleport result appears in the Console tab.
+
+You can also right-click anywhere on the map and choose **Teleport Player** to send any online player to that point directly.
 
 ---
 

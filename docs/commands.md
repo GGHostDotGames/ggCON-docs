@@ -6,11 +6,11 @@ The leading `#` is optional for ggCON-specific commands but is required for nati
 
 ## How commands are executed
 
-Native SCUM admin commands require at least one player to be online — ggCON runs each command through whichever player is currently available on the server. No dedicated admin account is required; any online player will do, though you can restrict or prefer specific players using the [executor selection settings](config-reference.md#executor-selection).
+Native SCUM admin commands require at least one player to be online — ggCON runs each command through whichever player is currently available on the server. No dedicated admin account is required; any online player will do, though you can restrict or prefer specific players using the [executor selection settings](config-reference.md#restricttoadmins).
 
 This has three important implications:
 
-**Commands appear in SCUM's admin log under that player's name.** Depending on your [executor selection settings](config-reference.md#executor-selection), this may be a specific player you've configured or simply whoever happens to be online.
+**Commands appear in SCUM's admin log under that player's name.** Depending on your [executor selection settings](config-reference.md#restricttoadmins), this may be a specific player you've configured or simply whoever happens to be online.
 
 **Context-sensitive commands act on the executing player if no target is specified.** For example:
 
@@ -29,7 +29,7 @@ This applies to any command that accepts an optional player argument. When in do
 **The player being used will see the command output in their in-game chat.** Any `#ListPlayers` result, economy query, or automated command output will appear on that player's screen. Enable [`SuppressCommandOutput`](config-reference.md#suppresscommandoutput) to prevent this — it is recommended for most setups.
 
 !!! tip "Restrict the executor"
-    Use `RestrictToAdmins` and `PreferredSteamIDs` in the panel's **Settings** tab to control which player's account commands run under. See [Executor selection](config-reference.md#executor-selection).
+    Use `RestrictToAdmins` and `PreferredSteamIDs` in the panel's **Settings** tab to control which player's account commands run under. See [Executor selection](config-reference.md#restricttoadmins).
 
 ---
 
@@ -167,6 +167,7 @@ Sends a message to all players currently on the server.
 #Broadcast Cyan Global-style message
 #Broadcast Green Squad-style message
 #Broadcast Red Something went wrong!
+#Broadcast Orange Attention-grabbing notice
 #Broadcast ServerMessage Also yellow (semantic alias)
 #Broadcast Error Also red (semantic alias)
 ```
@@ -246,7 +247,7 @@ The target player must be online. If they are not, the command is rejected:
 ```
 
 !!! note
-    `#ExecAs` overrides [executor selection settings](config-reference.md#executor-selection) for the duration of that single command. The target player temporarily becomes the executor, so any command that acts on "the running player" will act on them.
+    `#ExecAs` overrides [executor selection settings](config-reference.md#restricttoadmins) for the duration of that single command. The target player temporarily becomes the executor, so any command that acts on "the running player" will act on them.
 
 !!! tip "No admin status required"
     The target player does not need to be an admin or have any elevated permissions. ggCON handles command dispatch internally, bypassing the normal in-game permission checks. Any online player can be used as the executor.
@@ -290,7 +291,7 @@ The `#SetAttributes` command has no Steam ID parameter — it acts on the player
 Spawns an item for a specific player. The item appears near the player's location.
 
 ```
-#GiveItem <steamId> <itemName> [quantity]
+#GiveItem <steamId> <itemName> [quantity] [StackCount <stack>]
 ```
 
 | Parameter | Required | Description |
@@ -298,6 +299,7 @@ Spawns an item for a specific player. The item appears near the player's locatio
 | `steamId` | Yes | The target player's 64-bit Steam ID |
 | `itemName` | Yes | The item class name (e.g., `Backpack_Tactical_01`, `Knife_Hunting`) |
 | `quantity` | No | Number of items to spawn (default: 1) |
+| `StackCount <stack>` | No | Stack size per item — use for ammo, cash, and other stackable items so the player gets one stack instead of `quantity` separate piles |
 
 **Examples:**
 
@@ -305,7 +307,11 @@ Spawns an item for a specific player. The item appears near the player's locatio
 #GiveItem 76561198031234567 Backpack_Tactical_01 1
 #GiveItem 76561198031234567 Knife_Hunting 3
 #GiveItem 76561198031234567 Ammo_Rifle_556x45_30rnd
+#GiveItem 76561198031234567 Magazine_AK15 3 StackCount 30
 ```
+
+!!! tip "Stack count"
+    SCUM's native keyword form (`StackCount 30`) and the positional form (`... 3 30`) both work. To give 10,000 cash, use quantity 1 with `StackCount 10000` rather than quantity 10000.
 
 **Response:**
 
@@ -585,4 +591,4 @@ If `LimitAdminCommands = true` is set in your config, only commands listed in `g
 }
 ```
 
-See the [Config Reference](config-reference.md#command-filtering) for details.
+See the [Config Reference](config-reference.md#limitadmincommands) for details.

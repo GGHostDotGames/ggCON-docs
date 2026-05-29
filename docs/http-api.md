@@ -42,8 +42,8 @@ Returns the mod's running status. **No authentication required.**
 {
   "ok": true,
   "mod": "ggCON",
-  "version": "0.12.2",
-  "build": "2026-04-04 10:15:00",
+  "version": "0.13.3",
+  "build": "2026-05-28 10:22:24",
   "service": "http",
   "running": true
 }
@@ -89,6 +89,9 @@ Returns the current player list. Auth required.
       "characterName": "John Smith",
       "steamName": "jsmith99",
       "userId": "76561198000000001",
+      "profileId": 8,
+      "realName": "John Smith",
+      "fakeName": "Shadow",
       "fame": 1500,
       "accountBalance": 2500,
       "goldBalance": 10,
@@ -132,6 +135,9 @@ Returns the current player list. Auth required.
 | `characterName` | string | SCUM in-game character name |
 | `steamName` | string | Steam display name |
 | `userId` | string | Steam ID (64-bit) |
+| `profileId` | number | SCUM internal user profile ID (`0` if not matched in the database) |
+| `realName` | string | Character's real in-game name from the database |
+| `fakeName` | string | Character's alias / fake name if set, otherwise empty |
 | `fame` | number \| null | Fame points |
 | `accountBalance` | number \| null | In-game currency balance |
 | `goldBalance` | number \| null | Gold balance |
@@ -249,8 +255,8 @@ Returns server state. Auth required.
 {
   "ok": true,
   "online": true,
-  "modVersion": "0.12.2",
-  "modBuild": "2026-04-03 14:30:00",
+  "modVersion": "0.13.3",
+  "modBuild": "2026-05-28 10:22:24",
   "scumVersion": "1.2.2.1.108938+0",
   "onlinePlayers": 12,
   "timeOfDay": 14.5,
@@ -750,6 +756,43 @@ Returns the admin command reference, built from the game engine at startup. Auth
 
 ---
 
+## GET /slash-commands.json
+
+Returns all registered slash commands, grouped by source. Auth required.
+
+This is the same data shown by the in-game `/help` command. See [Slash Commands](slash-commands.md) for details.
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "groups": [
+    {
+      "plugin": "core",
+      "commands": [
+        { "command": "/help", "description": "Show available commands" },
+        { "command": "/unstuck", "description": "Free yourself when stuck" }
+      ]
+    },
+    {
+      "plugin": "loot-drops",
+      "commands": [
+        { "command": "/starter", "description": "Claim the Starter Kit" }
+      ]
+    }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `groups[].plugin` | string | Source of the commands: `core` for built-ins, or a plugin's ID for plugin commands |
+| `groups[].commands[].command` | string | The slash command, including the leading `/` |
+| `groups[].commands[].description` | string | Human-readable description shown in `/help` |
+
+---
+
 ## POST /spawn
 
 Spawns item(s) for a player. Auth required.
@@ -992,25 +1035,6 @@ Bottom-center notification in the kill feed area.
 | `ping` | No | Play notification sound (default: `true`) |
 | `steamId` | No | Target player's Steam ID. Omit to send to all players |
 
-### HUD notification
-
-Bottom-left overlay notification. Does not appear in chat — ideal for non-intrusive alerts.
-
-```json
-{
-  "method": "hud",
-  "text": "Quest complete!"
-}
-```
-
-| Field | Required | Description |
-|---|---|---|
-| `method` | Yes | `"hud"` |
-| `text` | Yes | Notification text |
-| `steamId` | No | Target player's Steam ID. Omit to send to all players |
-
----
-
 ### Per-player targeting
 
 Any method supports targeting a specific player by adding the `steamId` field:
@@ -1050,6 +1074,7 @@ The `type` field controls the color of the message in-game. Values are case-inse
 | `Green` | Green | |
 | `Red` | Red | Same as `Error` |
 | `Error` | Red | Alias for `Red` |
+| `Orange` | Orange | Bright attention color (matches SCUM's MOTD highlight) |
 
 Unknown values fall back to `Yellow`.
 
