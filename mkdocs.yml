@@ -15,6 +15,7 @@ theme:
   features:
     - navigation.tabs
     - navigation.sections
+    - navigation.indexes
     - navigation.top
     - search.highlight
     - content.code.copy
@@ -28,6 +29,7 @@ nav:
   - Home: index.md
   - Getting Started: getting-started.md
   - Features:
+    - features.md
     - Web Panel: web-panel.md
     - Plugins: plugins.md
     - Slash Commands: slash-commands.md
@@ -45,6 +47,7 @@ nav:
 
 markdown_extensions:
   - attr_list
+  - md_in_html
   - admonition
   - pymdownx.highlight:
       anchor_linenums: true

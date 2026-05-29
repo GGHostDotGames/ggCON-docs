@@ -33,6 +33,7 @@
 
 | I want to… | Go to |
 |---|---|
+| See everything ggCON can do | [Features](features.md) |
 | Install and configure the mod | [Getting Started](getting-started.md) |
 | Use the web panel | [Web Panel](web-panel.md) |
 | Set up AI NPCs | [NPC System](npc-system.md) |
