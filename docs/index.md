@@ -44,6 +44,7 @@
 | See all available commands | [Commands](commands.md) |
 | Look up a config key | [Config Reference](config-reference.md) |
 | Set up auto-updates | [Auto-Update](auto-update.md) |
+| See what's new | [Changelog](changelog.md) |
 
 ## Built by GG Host
 
