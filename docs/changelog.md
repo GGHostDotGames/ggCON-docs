@@ -7,6 +7,16 @@ Release notes for ggCON, newest first.
 
 ---
 
+## 0.13.4 — June 1, 2026
+
+### Fixes
+- Stability: fixed a rare server crash that could happen when a player disconnected at the exact moment the server was processing an action for them (admin commands, chat or kill notifications, shop currency changes, squad edits) — the server now safely skips the stale action instead of crashing
+- Item deliveries no longer crawl on busy servers — loot-drop packs, shop claims, and bulk grants that could dribble out one item every several seconds now deliver at full speed again; in-game chat and live panel updates are no longer held up either
+- Panel update checks and Plugin Manager are now much faster — fixed a Windows-side delay that could add up to 10 seconds per check on certain server configurations
+- Kill Feed: turning off "Include map image" in the public webhook settings now stays off after a reload
+
+---
+
 ## 0.13.3 — May 26, 2026
 
 ### New Features
