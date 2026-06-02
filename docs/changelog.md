@@ -7,6 +7,21 @@ Release notes for ggCON, newest first.
 
 ---
 
+## 0.13.6 — June 2, 2026
+
+### New Features
+- Kill Feed leaderboard now ranks NPC, Animal, and Puppet kills too — new Animal and Puppet columns on the Leaderboard tab, and `/leaderboard` (and `/top`) accept a type, e.g. `/leaderboard npc`, `/leaderboard animal 30d`, or `/leaderboard puppet`
+- The events feed now shows NPC and animal kills when the NPC Tracker plugin is installed
+
+### Improvements
+- Player detail window now has a one-click Copy SteamID button next to the Steam profile link
+
+### Fixes
+- Taxi: free rides (fare set to 0) now work instead of failing with "Fare deduction failed. No charge, no ride."
+- Kill Feed leaderboard no longer shows NPCs (like Drifters) as top players — only player kills are ranked
+
+---
+
 ## 0.13.5 — June 2, 2026
 
 ### New Features
