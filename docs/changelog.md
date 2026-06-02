@@ -7,6 +7,16 @@ Release notes for ggCON, newest first.
 
 ---
 
+## 0.13.5 — June 2, 2026
+
+### New Features
+- After a ggCON update, the panel now shows a quick "What's New" popup with a link to the changelog, plus a reminder of where to send feedback and feature requests. Appears once per version
+
+### Fixes
+- Squads panel now shows each member's correct online and alive status — a living, online squad member could previously show as dead
+
+---
+
 ## 0.13.4 — June 1, 2026
 
 ### Fixes
