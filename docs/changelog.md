@@ -7,6 +7,17 @@ Release notes for ggCON, newest first.
 
 ---
 
+## 0.13.8 — June 4, 2026
+
+### Improvements
+- Kill Feed leaderboard: the **NPC** column (and `/leaderboard npc`) is now **Armed NPC** — it counts only armed human enemies (Drifters, Guards), so animals and puppets are no longer double-counted there (they keep their own columns). Drones and sentries aren't counted. `/leaderboard armed` also works
+
+### Fixes
+- Stability: fixed a rare server crash that could happen when items, vehicles, or NPCs were spawned for a player on a busy server — for example claiming a loot pack or completing a shop purchase right as that player's session was changing. The server now delivers against the player's current session instead of crashing (and if the player has just left, the items stay claimable instead of being lost)
+- Kill Feed leaderboard: the in-game `/leaderboard` (alias `/top`) and the scheduled Discord leaderboard now match the panel — previously they could come back empty or wrong for time-windowed views while the panel showed the right standings. Usage: `/leaderboard [type] [window]` — **type** = `pvp` (default), `armed`, `animal`, or `puppet`; **window** = `24h`, `7d` (default), `30d`, or `all` (e.g. `/leaderboard armed 30d`)
+
+---
+
 ## 0.13.7 — June 3, 2026
 
 ### New Features
