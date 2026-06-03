@@ -7,6 +7,19 @@ Release notes for ggCON, newest first.
 
 ---
 
+## 0.13.7 — June 3, 2026
+
+### New Features
+- Quarter Master: each shop package can now be assigned its own delivery zone, so players claim that package only inside the chosen zone (e.g. boats at the docks, planes at the airfield). Packages left on "Any zone" behave as before. Applies when "Require delivery zone" is enabled
+
+### Improvements
+- The Copy SteamID button now also appears on offline players' detail cards (previously it was only on online players)
+
+### Fixes
+- Taxi rides, shop purchases, and panel currency adjustments no longer occasionally fail with "Fare deduction failed" (or a similar error) on busy servers
+
+---
+
 ## 0.13.6 — June 2, 2026
 
 ### New Features
