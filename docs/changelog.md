@@ -7,6 +7,19 @@ Release notes for ggCON, newest first.
 
 ---
 
+## 0.13.10 — June 5, 2026
+
+### Improvements
+- Admin chat/whisper templates now support a `{playerDisplayName}` placeholder that inserts the recipient's fake IGN (their `#setfakename` alias) when they have one, and otherwise their normal character name — so one template can address VIPs by their alias and everyone else by their real name. (The existing `{playerName}` still always shows the real character name.)
+
+### Fixes
+- Fixed a server crash that could happen when a large batch of items was delivered at once — for example a big shop package or loot pack, or several players claiming at the same time on a busy server. Large item deliveries are now paced out smoothly instead of spawning everything in a single instant
+- The panel's Send Message and Warning fields no longer trigger your browser's saved-login autofill popup
+- Fixed repeated panel Settings saves slowly corrupting text fields that contain backslashes (e.g. file paths or message templates) — backslashes were duplicated on each save, which over time could bloat the settings file and mangle the log watcher source list
+- `/unstuck` now posts to its Discord webhook every time a player uses it (previously only when admin-approval mode was enabled). Also, the saved Discord webhook fields in Settings now clearly show "✓ Saved" instead of appearing blank, so it's obvious the URL is still stored
+
+---
+
 ## 0.13.8 — June 4, 2026
 
 ### Improvements
