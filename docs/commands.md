@@ -522,39 +522,10 @@ Output lines from the game (if any) are returned in the `lines` array of the res
 
 ### #SendNotification
 
-Sends a notification to one or all players using different display styles.
+`#SendNotification` is a developer-level SCUM command. To send on-screen notifications to players, use the **web panel** or the **notification API** instead — they're more reliable and offer more options:
 
-```
-#SendNotification <type> <userId> "<message>"
-```
-
-| Parameter | Required | Description |
-|---|---|---|
-| `type` | Yes | Notification style (see table below) |
-| `userId` | Yes | Target player's Steam64 ID, or `-1` for all players |
-| `message` | Yes | Notification text. Must be in quotes for multi-word messages |
-
-**Notification types:**
-
-| Type | Style | Location |
-|---|---|---|
-| 1 | Basic | Top-right corner |
-| 2 | Warning | Center of screen |
-| 4 | HUD | Bottom-left |
-| 5 | KillFeed | Bottom-center |
-
-Type 3 (LevelUp) is not useful as it ignores the message text.
-
-**Examples:**
-
-```
-#SendNotification 2 -1 "Server restarting in 5 minutes!"
-#SendNotification 1 76561198000000003 "You have a new quest!"
-#SendNotification 5 -1 "Admin alert"
-```
-
-!!! tip "Use the web panel for more options"
-    The web panel's Chat tab provides a more user-friendly interface for sending notifications with additional options such as custom colors, display duration, and sound toggle. See [Web Panel](web-panel.md#chat).
+- **Web panel** — the Chat tab sends **Warning** (center-screen, custom color + duration), **Kill Feed** (bottom-center banner), or **Chat** messages, to a single player or everyone. See [Web Panel](web-panel.md#chat).
+- **API** — [`POST /message`](http-api.md#post-message) with `method` set to `warning`, `killfeed`, or `chat` (target a player by Steam64 ID, or omit it to send to everyone).
 
 ---
 
