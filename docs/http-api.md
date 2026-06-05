@@ -591,8 +591,8 @@ This is the same catalog used by the panel's Give Item feature.
   "n": 2585,
   "items": [
     {
-      "i": "Backpack_Tactical_01",
-      "ico": "ICO_Backpack_Tactical_01",
+      "i": "Backpack_02_01",
+      "ico": "ICO_Backpack_02_01",
       "c": "Equipment"
     },
     {
@@ -609,8 +609,24 @@ This is the same catalog used by the panel's Give Item feature.
 | `source` | string | Data source (`"engine"` = queried from the running game) |
 | `n` | number | Total number of items |
 | `items[].i` | string | Item class name (use with `POST /spawn`) |
-| `items[].ico` | string \| absent | Icon asset name (present when an icon mapping exists) |
+| `items[].ico` | string \| absent | Icon asset name (present when an icon mapping exists). Turn it into an image URL — see [Icon images](#icon-images) below |
 | `items[].c` | string \| absent | Item category (e.g., `"Weapons"`, `"Ammunition"`, `"Food"`, `"Equipment"`) |
+
+### Icon images
+
+Every `ico` value maps to a publicly served icon image — no authentication and no API key required:
+
+```
+https://icons.gghost.games/icons/{ico}.webp
+```
+
+For example, an item with `"ico": "ICO_Backpack_02_01"` has its icon at
+[`https://icons.gghost.games/icons/ICO_Backpack_02_01.webp`](https://icons.gghost.games/icons/ICO_Backpack_02_01.webp).
+
+- **Format:** WebP (`Content-Type: image/webp`). These are the same icons the web panel and storefront display.
+- **Public + cached:** the icon CDN is open and edge-cached, so you can hotlink these URLs directly from your own tool or website — you do not need to proxy them through your game server.
+- **No icon:** items without an icon mapping omit the `ico` field entirely — there is simply no image to fetch, so render your own placeholder. A small number of mapped icons may also return `404` if the item was added in a newer game build than the current icon set; fall back to a placeholder in that case too.
+- The same `{ico}` → URL scheme applies to the `ico` field on [`/vehicle-types.json`](#get-vehicle-typesjson), [`/zombies.json`](#get-zombiesjson), [`/animals.json`](#get-animalsjson), and [`/armed-npcs.json`](#get-armed-npcsjson).
 
 ---
 
