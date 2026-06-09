@@ -7,6 +7,18 @@ Release notes for ggCON, newest first.
 
 ---
 
+## 0.13.11 — June 9, 2026
+
+### New Features
+- Warning messages can now use a custom prefix / sender template (for example `Server Botcast: {message}`) so they read like an official announcement. Set it in Settings → General → Warning Prefix; leave it blank to keep sending warnings with no prefix
+- Save named colour presets for warning messages in Settings → General → Saved Warning Colours, then pick one from a dropdown when sending a Warning — no more re-choosing the colour each time
+
+### Fixes
+- Further reduced server crashes that can occur when items, vehicles, or NPCs are spawned for players — for example shop deliveries, loot packs, or several players claiming at once on a busy server
+- Kill Feed leaderboard: the **All** time window now loads quickly on servers with a long kill history, instead of being slow or timing out
+
+---
+
 ## 0.13.10 — June 5, 2026
 
 ### Improvements
