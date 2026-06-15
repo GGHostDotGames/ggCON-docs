@@ -7,6 +7,22 @@ Release notes for ggCON, newest first.
 
 ---
 
+## 0.13.12 — June 15, 2026
+
+### Plugin Published!
+- Player Spawn Plus — give players a configurable gear loadout automatically: on a new player's first deploy, after a character re-roll, on every respawn, or on demand from a player's detail card. First-deploy and respawn kits can teleport the player to a location you choose first. Build multiple named loadouts with worn clothing and inventory items (weapons included — they're delivered to the player's inventory, so make sure the kit includes enough storage). Separate configurable cooldowns keep respawn and re-roll kits from being farmed. Automatic loadouts require `scum.EnableSpawnOnGround=True` in your server settings (the Rules page checks this for you and explains if it isn't set). When you first turn it on, players who have already played on your server are treated as existing players — only brand-new arrivals get the new-player kit. Ships disabled by default
+
+### New Features
+- Quarter Master: new "Clear All" button in Economy → Player Balances sets every player's ration balance to zero — for resetting the shop economy after a server wipe. Requires typing CLEAR to confirm; GG Coins are not affected
+
+### Fixes
+- Fixed a rare timing issue where an item delivery could freeze the server for about 15 seconds and disconnect players
+- Fixed a rare issue where recording a crash report could freeze the server for several minutes before it restarted — crash details are now saved instantly
+- Quarter Master: renaming a claim/delivery zone no longer clears that zone from your packages — package zone assignments now follow the renamed zone automatically
+- Item thumbnails: Military Masks / Balaclavas now show their real mask icons instead of a beanie picture. The same fix corrects about 30 other items whose thumbnail showed a lookalike item — including some ammo piles (7.62x39 vs 7.62x54R), fish fillets, harvested animal parts, and the red RK beanie
+
+---
+
 ## 0.13.11 — June 9, 2026
 
 ### New Features
