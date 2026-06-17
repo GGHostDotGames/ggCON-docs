@@ -146,6 +146,38 @@ Use `#ListPlayersJson` when you need structured data for automation. Use `#ListP
 
 ---
 
+### #ListSpawnedVehiclesJson
+
+Returns the live spawned-vehicle list as structured JSON — the same response as [GET /vehicles.json](http-api.md#get-vehiclesjson).
+
+```
+#ListSpawnedVehiclesJson
+```
+
+---
+
+### #Teleport
+
+Teleports a player to exact world coordinates. ggCON runs this on a fast internal path (sub-second) instead of the slower native dispatch.
+
+```
+#Teleport <X> <Y> <Z> <steamId> [yaw]
+```
+
+| Parameter | Required | Description |
+|---|---|---|
+| `X` / `Y` / `Z` | Yes | Destination world coordinates |
+| `steamId` | Yes | The target player's 64-bit Steam ID (must be online; quoted or unquoted both work) |
+| `yaw` | No | Facing on arrival: `0` = N, `90` = E, `180` = S, `270` = W |
+
+**Example:**
+
+```
+#Teleport -145230 87420 12300 76561198031234567 90
+```
+
+---
+
 ### #Broadcast
 
 Sends a message to all players currently on the server.
@@ -156,8 +188,10 @@ Sends a message to all players currently on the server.
 
 | Parameter | Required | Description |
 |---|---|---|
-| `type` | No | Message color. See [Message types](http-api.md#message-types). Defaults to `Yellow` |
+| `type` | No | Message color. See [Message types](http-api.md#message-types). Defaults to `Orange` (the bright ServerMessage color) |
 | `text` | Yes | Message text |
+
+Omitting the type sends the message as ServerMessage/Orange. Pass `Yellow` explicitly for the admin-yellow color.
 
 **Examples:**
 
@@ -168,7 +202,7 @@ Sends a message to all players currently on the server.
 #Broadcast Green Squad-style message
 #Broadcast Red Something went wrong!
 #Broadcast Orange Attention-grabbing notice
-#Broadcast ServerMessage Also yellow (semantic alias)
+#Broadcast ServerMessage Same as Orange (semantic alias)
 #Broadcast Error Also red (semantic alias)
 ```
 
@@ -195,8 +229,10 @@ Sends a private message to a single player.
 | Parameter | Required | Description |
 |---|---|---|
 | `steamId` | Yes | The target player's 64-bit Steam ID |
-| `type` | No | Message color. Defaults to `Yellow` |
+| `type` | No | Message color. Defaults to `Orange` (the bright ServerMessage color) |
 | `text` | Yes | Message text |
+
+Omitting the type sends the message as ServerMessage/Orange. Pass `Yellow` explicitly for the admin-yellow color.
 
 **Examples:**
 
@@ -313,18 +349,22 @@ Spawns an item for a specific player. The item appears near the player's locatio
 !!! tip "Stack count"
     SCUM's native keyword form (`StackCount 30`) and the positional form (`... 3 30`) both work. To give 10,000 cash, use quantity 1 with `StackCount 10000` rather than quantity 10000.
 
-**Response:**
+**Response — success:**
 
 ```json
-{
-  "ok": true,
-  "accepted": true,
-  "dispatched": true,
-  "command": "#GiveItem 76561198031234567 Backpack_Tactical_01 1"
-}
+{ "ok": true, "message": "Spawned 1x Backpack_Tactical_01 for player 76561198031234567" }
+```
+
+**Response — player offline:**
+
+```json
+{ "ok": false, "error": "Player not online" }
 ```
 
 The target player must be online. Use [GET /items.json](http-api.md#get-itemsjson) to browse all available item names, or use the web panel's [Give Item](web-panel.md#give-item) feature for a searchable UI.
+
+!!! note "The `message` field is status text, not a contract"
+    On success the `message` string is human-readable status text and its exact wording is not stable to string-match against (for example it may read `Spawned 1x <item>` or `Spawned <item>`). Integrators should branch on the `ok` field, not parse `message`.
 
 !!! tip "No database modifications"
     Items are spawned directly in the game world near the player. No database changes are made, and the operation works with any item in the game.
@@ -350,15 +390,16 @@ Spawns a vehicle near a specific player.
 #GiveVehicle 76561198031234567 BPC_Rager
 ```
 
-**Response:**
+**Response — success:**
 
 ```json
-{
-  "ok": true,
-  "accepted": true,
-  "dispatched": true,
-  "command": "#GiveVehicle 76561198031234567 BPC_Rager"
-}
+{ "ok": true, "message": "Spawned BPC_Rager for player 76561198031234567" }
+```
+
+**Response — player offline:**
+
+```json
+{ "ok": false, "error": "Player not online" }
 ```
 
 The target player must be online. Use [GET /vehicle-types.json](http-api.md#get-vehicle-typesjson) to browse all available vehicle types, or use the web panel's [Give Vehicle](web-panel.md#give-vehicle) feature.
@@ -387,15 +428,16 @@ Spawns a zombie, animal, armed NPC, Brenner, or Razor near a specific player.
 #SpawnEntity 76561198031234567 SpawnBrenner
 ```
 
-**Response:**
+**Response — success:**
 
 ```json
-{
-  "ok": true,
-  "accepted": true,
-  "dispatched": true,
-  "command": "#SpawnEntity 76561198031234567 SpawnZombie BP_Zombie_Military_Normal_Male"
-}
+{ "ok": true, "message": "Spawned SpawnZombie BP_Zombie_Military_Normal_Male for player 76561198031234567" }
+```
+
+**Response — player offline:**
+
+```json
+{ "ok": false, "error": "Player not online" }
 ```
 
 The target player must be online. Use the catalog endpoints to browse available entities:

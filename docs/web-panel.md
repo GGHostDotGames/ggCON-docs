@@ -64,6 +64,7 @@ The default landing page. Shows server information and live controls:
 
 - **Time slider** — drag to set the time of day (0–23 hours) with day/night icons
 - **Weather slider** — drag to set weather intensity (0–1) with sun/storm icons
+- **FPS History chart** — plots server FPS over time, with Current / 24h / 7-day window buttons
 
 ![Status Tab](assets/images/panel/panel-status.jpg)
 
@@ -87,7 +88,7 @@ The filter box matches against the character name, Steam ID, Account ID, Real IG
 | Fake IGN | Character's alias, if set |
 | Fame | Fame points |
 | Ping | Network latency |
-| Flags | Admin, God Mode, Immortal, Dead, Drone badges |
+| Flags | Status badges: Admin, God, Immortal, Drone, Dead, Inf. Ammo, Super Jump |
 | Actions | MSG (send message) and #ExecAs (run command as player) |
 
 **Click any player row** to open a detailed popup.
@@ -106,7 +107,7 @@ Click a player in the list or on the map to see full details:
 - **Conditions** — active body effects with severity (exhaustion, illness, etc.)
 - **Skills & Attributes** — 27 skills grouped by attribute (Strength, Constitution, Dexterity, Intelligence) with level and XP; base attribute values displayed as headers
 - **Squad** — if the player belongs to a squad, the squad name is shown and clickable (navigates to the Squads tab)
-- **Steam Profile** — clickable Steam ID link opens the player's Steam profile
+- **Steam Profile** — clickable Steam ID link opens the player's Steam profile, with a one-click **Copy SteamID** button alongside it
 
 **Actions:**
 
@@ -120,7 +121,7 @@ Click a player in the list or on the map to see full details:
 - **Kick** — kicks the player from the server (with confirmation dialog)
 - **Ban** — bans the player from the server (with confirmation dialog)
 
-The popup updates in real-time as new data is polled from the server.
+The popup updates in real-time as new data arrives (via SSE, or polling on older versions).
 
 ![Player Detail Popup](assets/images/panel/panel-player-detail.jpg)
 
@@ -138,7 +139,7 @@ Enter the value and confirm. The change is applied immediately via the REST API.
 
 Clicking any player name throughout the panel (in the Flags, Vehicles, or Squads tabs) when that player is not currently online opens a minimal player card with available information:
 
-- Player name and Steam ID
+- Player name and Steam ID, with a one-click **Copy SteamID** button
 - Online/offline status indicator (red dot)
 - Owned flags and flag count
 - Owned vehicles
@@ -241,6 +242,8 @@ Full vehicle list with sortable columns and filtering.
 
 **Filter bar** — type to filter vehicles by name, owner, or ID.
 
+If a vehicle's data becomes corrupted, ggCON detects it, stops re-reading it (protecting server stability), and flags it in the Vehicles list so you can identify and remove it.
+
 ![Vehicles Tab](assets/images/panel/panel-vehicles.jpg)
 
 **Vehicle detail popup:**
@@ -284,6 +287,7 @@ Full squad list with member details and management actions.
 - **Refresh** — forces a reload of squad data from the database
 - **Remove Member** — removes a player from their squad
 - **Delete Squad** — removes all members and destroys the squad
+- **Ban All** — bans every member of the squad from the server (with confirmation)
 
 ![Squads Tab](assets/images/panel/panel-squads.jpg)
 
@@ -295,7 +299,7 @@ Real-time log viewer for SCUM server log files.
 - **Text filter** — type to filter log lines by content
 - **SCUM source** — off by default (verbose game engine output)
 - **Auto-scroll** — new lines appear at the bottom with automatic scrolling
-- **Max 1000 lines** — older lines are pruned as new ones arrive
+- **Max 2000 lines** — older lines are pruned as new ones arrive
 
 ![Logs Tab](assets/images/panel/panel-logs.jpg)
 
@@ -318,6 +322,14 @@ Click the **Settings** button in the sidebar to access settings, plugin manageme
 ### Admin Chat Sender Prefix
 
 Under **Settings → General**, configure how chat sent from the panel is labelled so players can tell an admin is talking. Set a display name and templates for broadcasts (default `[ADMIN] {message}`) and private whispers (default `[WHISPER from {name}] {message}`). The placeholders `{name}`, `{message}`, and `{playerName}` are filled in when the message is sent, and you can override the template per message from the Send Message dialog. Clear a template to send with no prefix. Plugin-dispatched chat and slash command responses are unaffected. See the [config reference](config-reference.md#adminchatbroadcasttemplate) for details.
+
+### Warning Prefix
+
+Under **Settings → General**, set a **Warning Prefix** template applied server-side to every Warning notification sent from the panel's Send Message feature (e.g. `Server Botcast: {message}`). The `{message}` placeholder is replaced with the warning text when it is sent. Leave it blank for no prefix.
+
+### Saved Warning Colours
+
+Under **Settings → General**, manage a list of named reusable colours. Saved colours appear as a dropdown when sending a Warning notification, so you can apply a consistent colour with one click instead of re-entering a hex value each time.
 
 ### Saved Teleport Destinations
 
@@ -363,9 +375,9 @@ The **Spawn Entities** button (available in the player detail popup) opens a tab
 
 | Tab | Entity types |
 |---|---|
-| Zombies | 30 zombie variants (military, civilian, etc.) |
-| Animals | 14 animal types (bear, boar, deer, etc.) |
-| Armed NPCs | 20 armed NPC variants |
+| Zombie | 30 zombie variants (military, civilian, etc.) |
+| Animal | 14 animal types (bear, boar, deer, etc.) |
+| NPC | 20 armed NPC variants |
 | Brenner | Spawns a Brenner (no variants) |
 | Razor | Spawns a Razor (no variants) |
 

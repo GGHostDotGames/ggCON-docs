@@ -8,7 +8,7 @@ ggCON is provided **as-is**, without warranty of any kind, express or implied. B
 
 - ggCON interacts directly with the SCUM dedicated server process at a low level. Incorrect configuration or misuse may result in server instability, unexpected behaviour, or data loss.
 - GG Host is not responsible for any loss of game data, player data, server downtime, or damages of any kind arising from the use or misuse of ggCON.
-- ggCON is provided as a closed-alpha service and may change, be interrupted, or be discontinued at any time without notice.
+- ggCON is under active development and may change, be interrupted, or be discontinued at any time without notice.
 - Compatibility with future SCUM updates is not guaranteed. SCUM game updates may break functionality without prior warning.
 
 ## Security & Attack Surface

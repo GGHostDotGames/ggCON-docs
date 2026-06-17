@@ -70,13 +70,29 @@ No desktop tools, no manual database edits, no fragile scripts. Install it, set 
 
     [Slash commands →](slash-commands.md)
 
--   📊 __Server Analytics__
+-   🎽 __Spawn Loadouts__
 
     ---
 
-    Track FPS, frame time, and entity counts over time with interactive charts, so you can see exactly how your server performs and when.
+    Auto-equip players with a gear kit on first deploy, on respawn, after a character re-roll, or on demand. Build multiple named loadouts with worn clothing, weapons, and inventory — with per-trigger cooldowns and optional teleport-on-spawn.
 
-    [Analytics →](plugins.md#log-analyzer)
+    [Player Spawn Plus →](plugins.md#player-spawn-plus)
+
+-   🧊 __Place Appliances__
+
+    ---
+
+    Drop appliances into the world from the panel — spawn a fridge in front of any online player, then keep it permanently (it survives restarts) or remove it. Fridges to start, with more types to come.
+
+    [ggHaul →](plugins.md#gghaul)
+
+-   📊 __Log Analyzer__
+
+    ---
+
+    Server performance and entity metrics straight from SCUM's stats logs — FPS history, uptime, and live entity counts in interactive charts, so you can see exactly how your server performs and when.
+
+    [Log Analyzer →](plugins.md#log-analyzer)
 
 -   🔌 __Plugin Marketplace__
 

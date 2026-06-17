@@ -4,7 +4,7 @@ ggCON uses two layers of configuration:
 
 1. **`ggCON.ini`** — static settings managed by GG Host (network binding, ports, RCON). These are pre-configured for your server and not directly visible to customers.
 2. **`ggcon_settings.json`** — runtime settings managed through the web panel's Settings tab, applied immediately without restart
-3. **`ggcon_password`** — the authentication password, set during installation and changeable from the panel
+3. **`ggcon_password.ini`** — the authentication password, set during installation and changeable from the panel
 
 All three files live in:
 
@@ -19,13 +19,13 @@ All three files live in:
 |---|---|---|
 | `ggCON.ini` | Network binding, ports, RCON | Managed by GG Host |
 | `ggcon_settings.json` | Everything else (admin IDs, logging, webhooks, etc.) | Panel Settings tab |
-| `ggcon_password` | Authentication password | Panel Settings tab |
+| `ggcon_password.ini` | Authentication password | Panel Settings tab |
 
 ---
 
 ## INI-only settings (managed by GG Host)
 
-These settings are pre-configured by GG Host during installation. They require a server restart to take effect and are not exposed in the web panel. All keys are under the `[ggCON]` section header.
+These settings are pre-configured by GG Host during installation and are not exposed in the web panel. All keys are under the `[ggCON]` section header. The network and port settings take effect only after a restart, since the listeners are already bound; other INI settings can be re-applied live with `#ReloadConfig`.
 
 ### BindAddress
 **Type:** string &nbsp;|&nbsp; **Default:** `127.0.0.1`
@@ -98,16 +98,53 @@ Seconds of inactivity before an idle RCON connection is dropped. Prevents automa
 
 ---
 
+### Enabled
+**Type:** bool &nbsp;|&nbsp; **Default:** `true`
+
+Master switch for the mod. When `false`, the mod loads but starts no HTTP API, RCON, or web panel.
+
+---
+
+### PanelProxyUrl
+**Type:** string &nbsp;|&nbsp; **Default:** *(GG Host SSL proxy — pre-configured)*
+
+Base URL of the SSL panel proxy. Do not change this unless GG Host support instructs you to.
+
+---
+
+### NpcEnabled
+**Type:** bool &nbsp;|&nbsp; **Default:** `false`
+
+Master switch for the AI NPC system. Requires `NpcApiKey` to be set.
+
+---
+
+### NpcApiKey
+**Type:** string &nbsp;|&nbsp; **Default:** *(empty)*
+
+API key for the AI model used by the AI NPC system. Treat it as a secret — it is stored unencrypted on disk.
+
+---
+
 ## Password
 
-The password is stored in a dedicated file — `ggcon_password` — in the same config directory. It contains a single line of plain text.
+The password is stored in a dedicated file — `ggcon_password.ini` — in the same config directory, in INI format:
+
+```ini
+[ggCON]
+Password = your-password-here
+```
+
+Older installations may still have a plain-text `ggcon_password` file (the password on a single line); ggCON reads it if present and automatically migrates it to `ggcon_password.ini` on the next load.
+
+When a password is present, password authentication is enabled automatically. The `RequirePassword` key (default `false`) can also force it on.
 
 The password is required via the `X-Password` header for HTTP API and RCON authentication.
 
 !!! warning
     Passwords are transmitted in plaintext HTTP headers. Use the SSL panel proxy or a reverse proxy with TLS if the API is exposed beyond localhost.
 
-You can change the password from the panel's **Settings** tab or by editing the `ggcon_password` file directly and running `#ReloadConfig`.
+You can change the password from the panel's **Settings** tab or by editing the `ggcon_password.ini` file directly and running `#ReloadConfig`.
 
 ---
 
@@ -235,7 +272,14 @@ Template applied to broadcasts sent from the panel's **Send Message** feature, s
 ### AdminChatWhisperTemplate
 **Type:** string &nbsp;|&nbsp; **Default:** `[WHISPER from {name}] {message}`
 
-Template applied to private (per-player) messages sent from the panel. Placeholders: `{name}`, `{message}`, and `{playerName}` (the recipient's name). Clear it to send whispers with no prefix.
+Template applied to private (per-player) messages sent from the panel. Placeholders: `{name}`, `{message}`, `{playerName}` (the recipient's name), and `{playerDisplayName}` (the recipient's fake IGN when set via the `#setfakename` alias, otherwise their real character name). Clear it to send whispers with no prefix.
+
+---
+
+### WarningPrefixTemplate
+**Type:** string &nbsp;|&nbsp; **Default:** *(empty — no prefix)*
+
+Applied server-side to every Warning sent from the panel's **Send Message** feature. Placeholders: `{message}`, `{name}` (the `AdminDisplayName`), and `{playerName}` (the recipient, for per-player warnings only). For example, `Server Botcast: {message}`.
 
 ---
 
@@ -338,14 +382,29 @@ Path to the allowed commands file used when `LimitAdminCommands` is enabled. One
 
 ---
 
+### List settings
+
+Some panel settings hold a list of entries rather than a single value. These are also stored in `ggcon_settings.json` and edited entirely through the **Settings** tab:
+
+- **Saved Warning Colours** — named hex colour presets, offered as a dropdown when sending a Warning notification.
+- **Teleport Destinations** — named spots that appear in the player teleport picker.
+- **Custom Slash Commands** — a verb plus a canned response, registered as a slash command.
+
+---
+
 ## Plugin configuration
 
-Plugins can have their own configuration sections in `ggCON.ini` using the `[Plugin:<id>]` section header, where `<id>` is the plugin's unique identifier. Plugin configuration is INI-only and requires a restart.
+Most plugins are configured entirely from their own tab in the web panel and store their settings separately — they have no INI section. A small number expose a `[Plugin:<id>]` INI section (in `ggCON.ini`) for bootstrap settings that must be set before the panel is reachable, where `<id>` is the plugin's unique identifier. For example, the AI NPC plugin:
 
 ```ini
-[Plugin:loot-drops]
-DropCooldownSecs = 300
-MaxActiveDrops = 3
+[Plugin:ai-npcs]
+Enabled = true
+ApiKey = <your key>
 ```
+
+Plugin INI config is read once at load and requires a restart.
+
+!!! warning
+    The `ApiKey` is stored unencrypted on disk in the INI file. Protect access to the config directory accordingly, and treat the key as a secret.
 
 See [Plugins](plugins.md) for available plugins and their configuration options.
