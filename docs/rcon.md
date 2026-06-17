@@ -29,6 +29,9 @@ Rejected connections receive an auth failure response (`id = -1`) and are immedi
 !!! warning "Brute-force lockout"
     Five failed authentication attempts within 60 seconds locks the IP out for 5 minutes. All connection attempts from that IP are rejected during the lockout window.
 
+!!! note "Re-authentication after config changes"
+    If the RCON password or the IP allowlist is changed while a client is connected, ggCON drops the existing session. The client must reconnect and authenticate again with the new credentials.
+
 ## Connecting with mcrcon
 
 [mcrcon](https://github.com/Tiiffi/mcrcon) is a command-line RCON client that works with ggCON.

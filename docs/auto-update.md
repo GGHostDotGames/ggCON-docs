@@ -12,16 +12,26 @@ Only a single server restart is needed to apply the update.
 
 ## Update Banner
 
-Shortly after logging into the web panel, ggCON checks for updates. If a new version is available, a green banner appears at the top of the panel showing the available version.
+Shortly after you log in, ggCON checks for updates and re-checks every few minutes while the panel stays open. A small dot appears on the **Settings** navigation item when a new version is available (it turns blue once staged), so you'll notice even on another tab. Open Settings to see the full banner showing the available version.
 
 Click **Stage Update** to download the new version. The banner confirms when the update is staged and ready.
+
+The server also checks for updates in the background on startup and periodically, even with no panel open.
 
 !!! note
     The update is not applied until the server restarts. You can continue using the current version until you're ready to restart.
 
 ## Critical Updates
 
-Some updates are marked as **critical** (force deploy). When a critical update is available, ggCON automatically stages it — you only need to restart the server to apply it.
+Some updates are marked as **critical** (force deploy). When a critical update is released, ggCON downloads and stages it automatically in the background — no admin needs to open the panel. You only need to restart the server to apply it.
+
+## Major Updates
+
+When a larger version jump is available, the banner turns orange and warns that your current version may lose license support soon — update promptly.
+
+## What's New
+
+The first time you open the panel after an update, a one-time **What's New** popup appears with a link to the changelog. It shows once per version.
 
 ## Settings Panel
 

@@ -56,7 +56,7 @@ Returns log lines that have been captured since a given timestamp. Auth required
 | `lines[].t` | number | Capture timestamp (Unix ms) — use this for the next `since` value |
 | `lines[].src` | string | Source name (e.g. `SCUM`, `chat`, `login`, `admin`, `economy`) |
 | `lines[].line` | string | The raw log line content |
-| `next` | number | Suggested value for `since` on your next poll (equals `max(t) + 1`) |
+| `next` | number | Suggested value for `since` on your next poll. When new lines are returned this equals the highest `t` + 1; when no new lines are available it echoes back the `since` value you sent. Always pass it back as your next `since`. |
 
 **Response — LogWatcher disabled**
 
@@ -65,7 +65,7 @@ HTTP `503`:
 ```json
 {
   "ok": false,
-  "error": "LogWatcher is not enabled"
+  "error": "LogWatcher not enabled"
 }
 ```
 
@@ -84,6 +84,7 @@ When auto-discovery is enabled (default), the watcher finds all log file types p
 | `economy` | Currency transactions |
 | `kill` | Player kills |
 | `event_kill` | Event-related kills |
+| `npc_kill` | NPC and animal kills (present when the NPC Tracker plugin is installed) |
 | `famepoints` | Fame point changes |
 | `loot` | Loot spawning events |
 | `gameplay` | General gameplay events |
@@ -104,9 +105,15 @@ When auto-discovery is enabled (default), the watcher finds all log file types p
 
 ## Configuration
 
-The LogWatcher starts automatically — no configuration is needed for basic use. You can configure **LogWatcherSources** in the panel's **Settings** tab to filter which log sources are monitored (leave empty to auto-discover all available sources).
+The LogWatcher starts automatically — no configuration is needed for basic use. All three settings can be edited in the panel's **Settings** tab:
 
-The following optional settings are INI-only and must be set in `ggCON.ini` under the `[ggCON]` section:
+- **Log Sources** — filter which log sources are monitored (leave empty to auto-discover all available sources).
+- **Backlog Lines** — number of historical lines to load per file on startup (default 100; `0` = only new lines).
+- **Startup Delay (seconds)** — how long to wait before scanning for log files (default 30).
+
+Backlog Lines and Startup Delay take effect on the next server restart.
+
+If you prefer, these keys can also be set in `ggCON.ini` under the `[ggCON]` section:
 
 ```ini
 ; (Optional) Number of historical lines to load per file on startup.

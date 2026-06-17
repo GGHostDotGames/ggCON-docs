@@ -32,9 +32,9 @@ Click the green **Install** checkmark to confirm.
 
 ### 4. Set your password
 
-After installation, go to **Configuration Files** in the left sidebar. Under the **ggCON** section at the bottom, click **Config Editor** next to `ggcon_password`.
+After installation, go to **Configuration Files** in the left sidebar. Under the **ggCON** section at the bottom, click **Config Editor** next to `ggcon_password.ini`.
 
-![Configuration Files with ggCON password](assets/images/install-config-files.png)
+![Configuration Files with ggCON password (ggcon_password.ini)](assets/images/install-config-files.png)
 
 Enter a strong password and save. This is the only configuration required — ggCON ships with sensible defaults and all other settings can be managed through the web panel once you're logged in.
 
@@ -72,11 +72,14 @@ Expected response:
 {
   "ok": true,
   "mod": "ggCON",
-  "version": "0.11.0",
+  "version": "0.13.13",
+  "build": "YYYY-MM-DD HH:MM",
   "service": "http",
   "running": true
 }
 ```
+
+(Your version will match whatever build your server is running.)
 
 ## Make your first API call
 

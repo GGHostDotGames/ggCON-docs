@@ -15,16 +15,16 @@ Displays all available slash commands, grouped by source.
 **Output example:**
 
 ```
-ggCON Commands:
-  /help — Show available commands
-  /unstuck — Free yourself when stuck
-
-Loot Drops:
-  /starter — Claim the Starter Kit
-  /event-drop — Claim the Event Drop
+Commands:
+  /help - Show available commands
+  /unstuck - Teleport a short distance to escape stuck states
+  [loot-drops]
+    /starter - Claim the Starter Kit drop
+  [kill-feed]
+    /leaderboard - Show the top players
 ```
 
-Commands from plugins are grouped under the plugin name so you can quickly find what's available.
+Commands from plugins are grouped under their plugin ID (in brackets) so you can quickly find what's available.
 
 ---
 
@@ -76,13 +76,19 @@ The command name is configurable per pack.
 
 [Kill Feed](plugins.md#kill-feed) registers:
 
-- `/leaderboard` (alias `/top`) — shows a top-10 leaderboard in chat; optional window argument (`24h` / `7d` / `30d` / `all`)
+- `/leaderboard` (alias `/top`) — shows a top-10 leaderboard in chat. Usage: `/leaderboard [type] [window]`, with the two arguments in any order:
+    - **type** — `pvp` (default), `armed` (the Armed NPC board; `npc` also works), `animal`, or `puppet`. Plural forms (`animals`, `puppets`) are accepted too, and `zombie` / `zombies` are aliases for the Puppet board
+    - **window** — `24h`, `7d` (default), `30d`, or `all`
+    - e.g. `/leaderboard armed 30d`, `/top animal`
 
 [Taxi Service](plugins.md#taxi-service) registers:
 
-- `/taxi` — lists destinations and fares; `/taxi <name>` books a ride; `/taxi cancel` cancels a pending ride and refunds the fare
+- `/taxi` — lists destinations and fares; `/taxi <name>` books a ride; `/taxi <group>` books a ride to a random destination in that group; `/taxi cancel` cancels a pending ride and refunds the fare
 
 See each plugin's documentation for details on its commands.
+
+!!! note "Panel-driven plugins"
+    Not every plugin adds slash commands. The [ggHaul](plugins.md#gghaul) and [Player Spawn Plus](plugins.md#player-spawn-plus) plugins are driven entirely from the web panel and register **no** slash commands — so there's no `/fridge`, `/loadout`, or similar to type in chat.
 
 ---
 
