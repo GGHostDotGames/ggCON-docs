@@ -7,6 +7,37 @@ Release notes for ggCON, newest first.
 
 ---
 
+## 0.13.13 — June 17, 2026
+
+### Plugin Published!
+- **ggHaul** — a new admin tool for placing appliances in the world. From the new **Appliances** panel tab, spawn a fridge right in front of any online player (it lands on the ground, facing them), then **Complete** it to keep it permanently — it survives server restarts — or **Delete** it. To move one, delete it and add it again from a better spot. Fridges to start, with more appliance types to come
+
+### New Features
+- Taxi: you can now hide a destination from the `/taxi` list while keeping it bookable by its exact name — handy for secret or reward destinations
+- Taxi: each destination can show a short description on the `/taxi` list (for example `Novice Bay ($0): Safe spawn for newcomers`)
+- Taxi: optional per-player lifetime trip limit per destination (for example one free trip to a reward spot); admins can reset trip counts from the panel
+- Quarter Master: players can cancel a purchased package from their stash as long as it hasn't been claimed yet, and get refunded automatically — the refund goes back in whatever currency they paid. A new admin "Cancellation refund %" setting controls how much is returned (default is a full refund)
+- Loot Drops: the Claim list now has a search box, sortable columns, and filtering by pack, Steam ID, or name
+- Kill Feed: the scheduled leaderboard webhook can now post the Armed NPC, Animal, and Puppet boards as well — pick any combination in the schedule settings, each posted as its own message
+- Taxi: group destinations into clusters — `/taxi <group>` sends the player to a random spot in that group, you can enable or disable a whole group in one click (great for event drop-offs), and a group can share a single trip limit
+- Kill Feed: Animal kills now have their own filter button in the live feed, separate from the NPC filter
+- Player Spawn Plus: the respawn loadout no longer replaces a player's gear when they are revived on the spot (for example with Phoenix Tears) — it now only fires on a real respawn. This is on by default; you can turn the distinction off, and set how far a player must move for it to count as a respawn
+
+### Improvements
+- Panel: Save buttons now show a clear "Saved" confirmation in the corner, with a red message if a save fails
+
+### Fixes
+- Kill Feed: kills of NPCs, animals, and puppets no longer show a misleading weapon (you could see things like "killed with a banana" — the held item at the time, not the actual weapon). These kills now simply show who made the kill, with no weapon. Player-vs-player weapons are unchanged.
+- NPC Tracker: animal and bird kills now register correctly, and live animals (crows in particular) no longer show as "dead" while they're still alive. Animal health bars are also more accurate.
+- Fixed players sometimes vanishing from the live player list and map — and shop deliveries, loot packs, teleports, and Give Item failing with "player not online" even though the player was actually online
+- Fixed certain weapons (the MP5 family and other load-on-demand items) failing to spawn at a map location via the bot/API — they now spawn at the requested coordinates
+- Loot Drops: allow-list player names now stay visible when you reopen a pack's editor (they were showing up blank)
+- Fixed some panel inputs and helper text that could appear blank or invisible
+- Fixed the panel, storefront, or API sometimes staying locked out ("too many attempts") even once you started entering the correct password — the lockout now counts down and clears on its own
+- Reduced crashes on servers that have a corrupted vehicle: ggCON now detects the bad vehicle, stops re-reading it, and flags it in the dashboard so it can be removed
+
+---
+
 ## 0.13.12 — June 15, 2026
 
 ### Plugin Published!
