@@ -1077,45 +1077,6 @@ Any method supports targeting a specific player by adding the `steamId` field:
 
 ---
 
-## GET /sse/events
-
-Opens a [Server-Sent Events](https://developer.mozilla.org/docs/Web/API/Server-sent_events) stream that pushes live updates as they happen, replacing repeated polling with a single long-lived connection. Auth required.
-
-The web panel uses this stream to keep player, vehicle, server, and plugin data current. The response is an event stream (`Content-Type: text/event-stream`); each message has an `event:` type and a `data:` JSON payload, for example:
-
-```
-event: players
-data: {"ok":true,"count":12,"players":[ ... ]}
-```
-
-Keepalive comments (lines beginning with `:`) are sent periodically. Connections are recycled after about 5 minutes by design, so clients should reconnect automatically. There is a cap on simultaneous connections; once reached, additional connections receive `503`. Standard `EventSource` clients are supported.
-
----
-
-## GET /settings.json / POST /settings
-
-`GET /settings.json` (auth required) returns the current runtime-changeable settings (always includes `playerScanIntervalMs`). `POST /settings` (auth required) updates them — send only the fields you want to change; `playerScanIntervalMs` accepts 500–30000. Both reply `{ "ok": true, ... }`.
-
----
-
-## GET/POST /notifications-config
-
-`GET` returns the raw text of the server's `Notifications.json` inside `{ "ok": true, "content": "..." }` (an empty file returns `"[]"`). `POST` overwrites it with `{ "content": "..." }`; `content` must be a JSON array (first non-whitespace character `[`), else `400`. Auth required.
-
----
-
-## Unstuck request endpoints
-
-When `/unstuck` is set to require admin approval, requests queue here. `GET /unstuck-requests.json` lists pending requests (id, steamId, charName, x/y/z, ageSeconds), oldest first. `POST /unstuck-requests/{id}/approve` teleports the player a short distance and notifies them; `POST /unstuck-requests/{id}/deny` notifies them it was denied. `404` if the request expired; approve returns `409` if the player went offline. Auth required.
-
----
-
-## POST /disclaimer/accept
-
-Records that an administrator accepted the ggCON usage disclaimer. No body required; replies `{ "ok": true }`. Auth required.
-
----
-
 ## GET /icons/{name}.webp
 
 Serves an item/vehicle icon (WebP, cached 24h) directly from your game server. **No authentication required** (image tags can't send auth headers). The icon name comes from the `ico` field on catalog endpoints such as `/items.json`. Returns `404` for an unknown icon, `400` for a malformed name. Most integrations should prefer the edge-cached CDN at `https://icons.gghost.games/icons/{ico}.webp`.

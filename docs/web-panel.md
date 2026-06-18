@@ -121,7 +121,7 @@ Click a player in the list or on the map to see full details:
 - **Kick** — kicks the player from the server (with confirmation dialog)
 - **Ban** — bans the player from the server (with confirmation dialog)
 
-The popup updates in real-time as new data arrives (via SSE, or polling on older versions).
+The popup updates in real time as new data arrives.
 
 ![Player Detail Popup](assets/images/panel/panel-player-detail.jpg)
 
