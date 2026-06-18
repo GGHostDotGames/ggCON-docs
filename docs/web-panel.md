@@ -36,7 +36,7 @@ The panel uses a collapsible sidebar for navigation. All core tabs have SVG icon
 
 ## Real-time updates
 
-The panel receives live data via Server-Sent Events (SSE). Player positions, chat messages, logs, server status, weather, squads, vehicles, and flags all update in real-time with no manual refresh needed. If SSE is unavailable (e.g., older ggCON versions), the panel falls back to polling automatically.
+The panel receives live data automatically. Player positions, chat messages, logs, server status, weather, squads, vehicles, and flags all update in real time with no manual refresh needed.
 
 When the server goes offline, the panel detects it within seconds and shows a branded "Server is offline" splash screen. It reconnects and refreshes all data automatically when the server comes back.
 
