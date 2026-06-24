@@ -51,29 +51,6 @@ Returns the mod's running status. **No authentication required.**
 
 ---
 
-## GET /help
-
-Returns all available HTTP routes and RCON commands. Auth required.
-
-**Response**
-
-```json
-{
-  "ok": true,
-  "rcon": [
-    { "command": "#Help", "description": "Show this help" },
-    { "command": "#ReloadConfig", "description": "Reload all configuration without restarting the server" }
-  ],
-  "http": [
-    { "method": "GET", "path": "/health", "auth": false, "description": "Mod health check" },
-    { "method": "GET", "path": "/help",   "auth": true,  "description": "This help document" },
-    { "method": "GET", "path": "/players.json", "auth": true, "description": "List all online players" }
-  ]
-}
-```
-
----
-
 ## GET /players.json
 
 Returns the current player list. Auth required.
@@ -387,30 +364,6 @@ Vehicle data comes from the server database and is enriched with live data for v
 
 ---
 
-## POST /vehicles/refresh
-
-Forces a full vehicle cache rebuild. Auth required.
-
-**Response — success**
-
-```json
-{
-  "ok": true,
-  "message": "Vehicle data refreshed."
-}
-```
-
-**Response — partial (no player online)**
-
-```json
-{
-  "ok": false,
-  "message": "Partial refresh — no player online. Database data updated."
-}
-```
-
----
-
 ## GET /squads.json
 
 Returns all squads on the server. Auth required.
@@ -471,54 +424,6 @@ Squad data is loaded from the server database and enriched with live online stat
 
 ---
 
-## POST /squads/refresh
-
-Forces a squad data reload from the database. Auth required.
-
-**Response**
-
-```json
-{ "ok": true }
-```
-
----
-
-## POST /squads/remove-member
-
-Removes a player from their squad. Auth required.
-
-**Request body**
-
-```json
-{ "profileId": 8 }
-```
-
-**Response**
-
-```json
-{ "ok": true }
-```
-
----
-
-## POST /squads/delete
-
-Deletes a squad by removing all its members. Auth required.
-
-**Request body**
-
-```json
-{ "squadId": 42 }
-```
-
-**Response**
-
-```json
-{ "ok": true }
-```
-
----
-
 ## GET /flags.json
 
 Returns all base building flags with owner info, location, and element counts. Auth required.
@@ -561,18 +466,6 @@ Flag data auto-refreshes every 30 seconds. Read-only database access — does no
 | `flags[].elementCount` | number | Current number of building elements |
 | `flags[].expandedElements` | number | Number of expanded elements |
 | `flags[].maxElements` | number | Maximum allowed elements |
-
----
-
-## POST /flags/refresh
-
-Forces an immediate refresh of flag data. Auth required.
-
-**Response**
-
-```json
-{ "ok": true }
-```
 
 ---
 
@@ -769,43 +662,6 @@ Returns the admin command reference, built from the game engine at startup. Auth
 | `commands[].verb` | string | Command name (used after `#` in commands) |
 | `commands[].description` | string | Human-readable description |
 | `commands[].args` | array | Argument definitions with name, type, and required flag |
-
----
-
-## GET /slash-commands.json
-
-Returns all registered slash commands, grouped by source. Auth required.
-
-This is the same data shown by the in-game `/help` command. See [Slash Commands](slash-commands.md) for details.
-
-**Response**
-
-```json
-{
-  "ok": true,
-  "groups": [
-    {
-      "plugin": "core",
-      "commands": [
-        { "command": "/help", "description": "Show available commands" },
-        { "command": "/unstuck", "description": "Free yourself when stuck" }
-      ]
-    },
-    {
-      "plugin": "loot-drops",
-      "commands": [
-        { "command": "/starter", "description": "Claim the Starter Kit" }
-      ]
-    }
-  ]
-}
-```
-
-| Field | Type | Description |
-|---|---|---|
-| `groups[].plugin` | string | Source of the commands: `core` for built-ins, or a plugin's ID for plugin commands |
-| `groups[].commands[].command` | string | The slash command, including the leading `/` |
-| `groups[].commands[].description` | string | Human-readable description shown in `/help` |
 
 ---
 
@@ -1326,3 +1182,1293 @@ Used by the panel's FPS chart on the Status tab.
 | `data[].min` | number | Minimum FPS during this interval |
 | `data[].max` | number | Maximum FPS during this interval |
 
+---
+
+## Plugin endpoints
+
+These endpoints are provided by optional ggCON plugins. They are only available when the matching plugin is installed on the server — if a plugin is not installed, its endpoints return `404`. All require the same authentication (IP allowlist + `X-Password`) as the core endpoints.
+
+### Kill Feed
+
+The Kill Feed plugin records every kill, suicide, and trap death on the server and exposes them over the HTTP API. These endpoints are only available when the **Kill Feed** plugin is installed.
+
+#### GET /kill-feed/events.json
+
+Returns kill events from the current session, newest data held in memory. Designed for polling — pass the `since` cursor from the previous response to fetch only new events. Auth required.
+
+Requires the **Kill Feed** plugin installed.
+
+**Query parameters**
+
+| Parameter | Required | Description |
+|---|---|---|
+| `since` | No | Only return events with a timestamp greater than this value. Pass the `next` value from the previous response to poll for new events. Defaults to `0` (all in-memory events) |
+| `type` | No | Filter by event type: `pvp`, `npc`, `suicide`, `trap`, or `all` (default) |
+| `player` | No | Filter by player. Case-insensitive substring match against killer/victim name, or an exact match against a Steam ID |
+| `weapon` | No | Filter by weapon. Case-insensitive substring match against the cleaned weapon name |
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "events": [
+    {
+      "t": 1712160045123,
+      "type": "pvp",
+      "killer": {
+        "name": "John Smith",
+        "sid": "76561198000000001",
+        "x": -253574.0,
+        "y": 443844.0,
+        "z": 91506.7
+      },
+      "victim": {
+        "name": "Jane Doe",
+        "sid": "76561198000000002",
+        "x": -253210.0,
+        "y": 444102.0,
+        "z": 91500.2
+      },
+      "weapon": "MP5",
+      "weaponRaw": "Weapon_MP5_C [Projectile]",
+      "icon": "Weapon_MP5",
+      "dmgType": "Projectile",
+      "dist": 142.6,
+      "tod": "14:32"
+    },
+    {
+      "t": 1712160098456,
+      "type": "npc",
+      "killer": {
+        "name": "John Smith",
+        "sid": "76561198000000001",
+        "x": -250100.0,
+        "y": 441002.0,
+        "z": 90120.0
+      },
+      "victim": {
+        "name": "BP_Bear",
+        "sid": "",
+        "x": -250080.0,
+        "y": 441050.0,
+        "z": 90118.0
+      },
+      "weapon": "Compound Bow",
+      "weaponRaw": "Weapon_CompoundBow_C [Projectile]",
+      "icon": "Weapon_CompoundBow",
+      "dmgType": "Projectile",
+      "dist": 31.4,
+      "cat": "Animal",
+      "tod": "14:36"
+    }
+  ],
+  "next": 1712160098456,
+  "total": 1284
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `events[].t` | number | Event timestamp in milliseconds |
+| `events[].type` | string | Event type: `pvp`, `npc`, `suicide`, or `trap` |
+| `events[].killer` | object | Killer info `{name, sid, x, y, z}`. `sid` is empty for kills made by an NPC |
+| `events[].victim` | object | Victim info `{name, sid, x, y, z}`. For NPC kills the victim is the NPC and `sid` is empty |
+| `events[].weapon` | string | Cleaned weapon name for display (e.g. `"MP5"`) |
+| `events[].weaponRaw` | string | Raw weapon string as written by the game |
+| `events[].icon` | string | Weapon icon name. Build an image URL with `https://icons.gghost.games/icons/{icon}.webp` |
+| `events[].dmgType` | string | Damage type (e.g. `"Projectile"`, `"Melee"`) |
+| `events[].dist` | number | Distance between killer and victim in metres |
+| `events[].cat` | string \| absent | NPC category (e.g. `"Animal"`, `"Zombie"`, `"Guard"`, `"Drifter"`). Present only for NPC kills |
+| `events[].tod` | string \| absent | In-game time of day when the event occurred. Present when available |
+| `next` | number | Cursor for the next poll — pass this back as the `since` parameter |
+| `total` | number | Total number of events held in memory for the current session |
+
+---
+
+#### GET /kill-feed/history.json
+
+Returns kill events across stored log history, not just the current session. Use this to query past kills over a fixed time window. Auth required.
+
+Requires the **Kill Feed** plugin installed.
+
+**Query parameters**
+
+| Parameter | Required | Description |
+|---|---|---|
+| `range` | No | Time window: `session` (in-memory events, default), `24h`, `48h`, or `all` |
+| `type` | No | Filter by event type: `pvp`, `npc`, `suicide`, `trap`, or `all` |
+| `player` | No | Filter by player. Case-insensitive substring match against killer/victim name, or a Steam ID match |
+| `weapon` | No | Filter by weapon (case-insensitive substring). Applies to the `session` range only |
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "events": [
+    {
+      "t": 1712070045123,
+      "type": "pvp",
+      "killer": {
+        "name": "John Smith",
+        "sid": "76561198000000001",
+        "x": -253574.0,
+        "y": 443844.0,
+        "z": 91506.7
+      },
+      "victim": {
+        "name": "Jane Doe",
+        "sid": "76561198000000002",
+        "x": -253210.0,
+        "y": 444102.0,
+        "z": 91500.2
+      },
+      "weapon": "M9",
+      "weaponRaw": "Weapon_M9_C [Projectile]",
+      "icon": "Weapon_M9",
+      "dmgType": "Projectile",
+      "dist": 18.3,
+      "tod": "21:07"
+    }
+  ],
+  "next": 1712070045123,
+  "total": 1,
+  "capped": false
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `events[]` | array | Kill events for the selected window, sorted oldest-first. Each entry uses the same fields as `/kill-feed/events.json` |
+| `next` | number | Timestamp of the newest event in the response |
+| `total` | number | Number of events returned |
+| `capped` | boolean \| absent | Present and `true` only when the result hit the maximum size limit and was truncated |
+
+---
+
+#### GET /kill-feed/stats.json
+
+Returns aggregate kill statistics for the current session, including totals by type and the top weapons and killers. Auth required.
+
+Requires the **Kill Feed** plugin installed.
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "total": 1284,
+  "pvp": 842,
+  "npc": 401,
+  "suicide": 28,
+  "trap": 13,
+  "topWeapons": [
+    { "name": "MP5", "count": 211 },
+    { "name": "M9", "count": 168 }
+  ],
+  "topKillers": [
+    { "name": "John Smith", "count": 94 },
+    { "name": "Jane Doe", "count": 71 }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `total` | number | Total number of events in the current session |
+| `pvp` | number | Number of player-vs-player kills |
+| `npc` | number | Number of NPC kills |
+| `suicide` | number | Number of suicides |
+| `trap` | number | Number of trap deaths |
+| `topWeapons` | array | Up to the 10 most-used weapons, each `{name, count}`, sorted by count descending |
+| `topKillers` | array | Up to the 10 players with the most PvP kills, each `{name, count}`, sorted by count descending |
+
+---
+
+#### GET /kill-feed/leaderboard.json
+
+Returns a per-player kill leaderboard aggregated over a time window. Auth required.
+
+Requires the **Kill Feed** plugin installed.
+
+**Query parameters**
+
+| Parameter | Required | Description |
+|---|---|---|
+| `window` | No | Time window to aggregate: `session`, `24h`, `7d` (default), `30d`, or `all` |
+| `limit` | No | Maximum number of rows to return (default: 50, minimum: 1, maximum: 500) |
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "count": 2,
+  "rows": [
+    {
+      "name": "John Smith",
+      "sid": "76561198000000001",
+      "pvpKills": 94,
+      "pvpDeaths": 37,
+      "kd": 2.54,
+      "armedNpcKills": 22,
+      "animalKills": 15,
+      "puppetKills": 88,
+      "trapKills": 3,
+      "suicides": 1,
+      "longestShot": 312.7,
+      "favoriteWeapon": "MP5"
+    },
+    {
+      "name": "Jane Doe",
+      "sid": "76561198000000002",
+      "pvpKills": 71,
+      "pvpDeaths": 0,
+      "kd": null,
+      "armedNpcKills": 9,
+      "animalKills": 4,
+      "puppetKills": 40,
+      "trapKills": 0,
+      "suicides": 2,
+      "longestShot": 198.4,
+      "favoriteWeapon": "M9"
+    }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `count` | number | Number of rows returned |
+| `rows[].name` | string | Player character name |
+| `rows[].sid` | string | Player's Steam ID |
+| `rows[].pvpKills` | number | Player-vs-player kills |
+| `rows[].pvpDeaths` | number | Times killed by another player |
+| `rows[].kd` | number \| null | Kill/death ratio (PvP kills ÷ PvP deaths). `null` when the player has zero PvP deaths |
+| `rows[].armedNpcKills` | number | Kills of armed human NPCs |
+| `rows[].animalKills` | number | Animal kills |
+| `rows[].puppetKills` | number | Puppet (zombie) kills |
+| `rows[].trapKills` | number | Kills credited to the player's traps |
+| `rows[].suicides` | number | Number of suicides |
+| `rows[].longestShot` | number | Longest kill distance in metres |
+| `rows[].favoriteWeapon` | string | The player's most-used weapon |
+
+---
+
+### NPC Tracker
+
+Endpoints provided by the **NPC Tracker** plugin. Real-time tracking of non-player characters — guards, drifters, zombies, animals, sentries, and drones — including current health, alive/dead status, world location, and a session kill log.
+
+---
+
+#### GET /npc-tracker/npcs.json
+
+Returns every tracked NPC currently in loaded areas, plus a log of NPC kills recorded this session. Auth required.
+
+Requires the **NPC Tracker** plugin installed.
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "npcs": [
+    {
+      "type": "Guard",
+      "class": "BP_Guard_Lvl_1_C",
+      "name": "Guard Lvl 1",
+      "health": 320.0,
+      "maxHealth": 400.0,
+      "alive": true,
+      "x": -185420.5,
+      "y": 372110.0,
+      "z": 21805.3,
+      "killerSteamId": "",
+      "killerName": ""
+    },
+    {
+      "type": "Animal",
+      "class": "BP_Deer_C",
+      "name": "Deer",
+      "health": 0.0,
+      "maxHealth": 150.0,
+      "alive": false,
+      "x": -142003.0,
+      "y": 410882.7,
+      "z": 18950.0,
+      "killerSteamId": "76561198000000001",
+      "killerName": "PlayerName"
+    }
+  ],
+  "kills": [
+    {
+      "type": "Zombie",
+      "class": "BP_Infected_C",
+      "name": "Infected",
+      "x": -150220.0,
+      "y": 398540.5,
+      "z": 19002.0,
+      "killerSteamId": "76561198000000001",
+      "killerName": "PlayerName"
+    }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `npcs` | array | NPCs currently in loaded areas (both alive and recently dead) |
+| `npcs[].type` | string | Category — one of `Guard`, `Drifter`, `Zombie`, `Animal`, `Sentry`, `Drone`, `Unknown` |
+| `npcs[].class` | string | NPC class name |
+| `npcs[].name` | string | Human-readable display name derived from the class |
+| `npcs[].health` | number | Current health |
+| `npcs[].maxHealth` | number | Maximum health |
+| `npcs[].alive` | boolean | Whether the NPC is currently alive |
+| `npcs[].x` | number | World X position in Unreal units |
+| `npcs[].y` | number | World Y position in Unreal units |
+| `npcs[].z` | number | World Z position in Unreal units |
+| `npcs[].killerSteamId` | string | Steam ID of the killer (empty while the NPC is alive or if the killer is unknown) |
+| `npcs[].killerName` | string | Character name of the killer (empty while the NPC is alive or if the killer is unknown) |
+| `kills` | array | Kill log for this session, most recent first |
+| `kills[].type` | string | Category of the killed NPC — same set of values as `npcs[].type` |
+| `kills[].class` | string | Killed NPC class name |
+| `kills[].name` | string | Human-readable display name of the killed NPC |
+| `kills[].x` | number | World X position where the kill occurred, in Unreal units |
+| `kills[].y` | number | World Y position where the kill occurred, in Unreal units |
+| `kills[].z` | number | World Z position where the kill occurred, in Unreal units |
+| `kills[].killerSteamId` | string | Steam ID of the killer (empty if unknown) |
+| `kills[].killerName` | string | Character name of the killer (empty if unknown) |
+
+---
+
+---
+
+### Trap Feed
+
+The Trap Feed plugin tracks trap crafting, arming, disarming, and trigger events in real time and exposes them over the HTTP API. Both endpoints below return the same event shape; `events.json` serves the live current-session feed (ideal for incremental polling), while `history.json` reaches back across past log files over a chosen time range.
+
+#### GET /trap-alerts/events.json
+
+Live trap events from the current session, held in memory. Supports an incremental cursor for efficient polling.
+
+Auth required.
+
+Requires the Trap Feed plugin installed.
+
+**Query parameters**
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `since` | No | Only return events newer than this cursor (the `next` value from a previous response). Defaults to `0` (all events). |
+| `action` | No | Filter by event type: `crafted`, `armed`, `disarmed`, `triggered`, or `all`. |
+| `player` | No | Case-insensitive substring match against the player or owner name, or a Steam ID. |
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "events": [
+    {
+      "t": 1719240512000,
+      "action": "crafted",
+      "trap": "Improvised Mine",
+      "player": {
+        "name": "Alex Rivers",
+        "sid": "76561198000000001",
+        "id": 482
+      },
+      "x": -41250.5,
+      "y": 18730.0,
+      "z": 1024.0
+    },
+    {
+      "t": 1719240731000,
+      "action": "triggered",
+      "trap": "Bear Trap",
+      "player": {
+        "name": "Mara Voss",
+        "sid": "76561198000000002",
+        "id": 615
+      },
+      "owner": {
+        "name": "Alex Rivers",
+        "sid": "76561198000000001",
+        "id": 482
+      },
+      "x": -39880.0,
+      "y": 20115.5,
+      "z": 1031.0
+    }
+  ],
+  "next": 1719240731000,
+  "total": 2
+}
+```
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `ok` | boolean | Always `true` on success. |
+| `events` | array | List of trap events matching the filters, oldest to newest. |
+| `events[].t` | number | Event timestamp in epoch milliseconds. |
+| `events[].action` | string | One of `crafted`, `armed`, `disarmed`, `triggered`. |
+| `events[].trap` | string | Display name of the trap (e.g. `Improvised Mine`, `Bear Trap`). |
+| `events[].player` | object | The player who performed the action (crafted / armed / disarmed), or who triggered the trap. |
+| `events[].player.name` | string | Player display name. |
+| `events[].player.sid` | string | Player Steam ID. |
+| `events[].player.id` | number | Player profile ID. |
+| `events[].owner` | object | Only present on `triggered` events: the player who originally placed the trap. Omitted otherwise. |
+| `events[].owner.name` | string | Trap owner display name. |
+| `events[].owner.sid` | string | Trap owner Steam ID. |
+| `events[].owner.id` | number | Trap owner profile ID. |
+| `events[].x` | number | World X coordinate of the event. |
+| `events[].y` | number | World Y coordinate of the event. |
+| `events[].z` | number | World Z coordinate of the event. |
+| `next` | number | Cursor to pass as `since` on the next request to fetch only newer events. |
+| `total` | number | Total number of events held for the current session (before filtering). |
+
+---
+
+#### GET /trap-alerts/history.json
+
+Historical trap events parsed from server log files over a chosen time range. Returns the same event shape as `events.json`. Results are capped at 10,000 events.
+
+Auth required.
+
+Requires the Trap Feed plugin installed.
+
+**Query parameters**
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `range` | No | Time window to cover: `session` (current session only, the default), `24h`, or `48h`. |
+| `action` | No | Filter by event type: `crafted`, `armed`, `disarmed`, `triggered`, or `all`. |
+| `player` | No | Case-insensitive substring match against the player or owner name, or a Steam ID. |
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "events": [
+    {
+      "t": 1719154100000,
+      "action": "armed",
+      "trap": "Improvised Mine",
+      "player": {
+        "name": "Devon Park",
+        "sid": "76561198000000003",
+        "id": 207
+      },
+      "x": -38120.0,
+      "y": 16540.5,
+      "z": 998.0
+    },
+    {
+      "t": 1719161842000,
+      "action": "triggered",
+      "trap": "Improvised Mine",
+      "player": {
+        "name": "Mara Voss",
+        "sid": "76561198000000002",
+        "id": 615
+      },
+      "owner": {
+        "name": "Devon Park",
+        "sid": "76561198000000003",
+        "id": 207
+      },
+      "x": -38120.0,
+      "y": 16540.5,
+      "z": 998.0
+    }
+  ],
+  "next": 1719161842000,
+  "total": 2
+}
+```
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `ok` | boolean | Always `true` on success. |
+| `events` | array | Matching trap events over the requested range, sorted oldest to newest. |
+| `events[].t` | number | Event timestamp in epoch milliseconds. |
+| `events[].action` | string | One of `crafted`, `armed`, `disarmed`, `triggered`. |
+| `events[].trap` | string | Display name of the trap. |
+| `events[].player` | object | The player who performed the action or triggered the trap (with `name`, `sid`, `id`). |
+| `events[].owner` | object | Only present on `triggered` events: the player who placed the trap (with `name`, `sid`, `id`). |
+| `events[].x` | number | World X coordinate of the event. |
+| `events[].y` | number | World Y coordinate of the event. |
+| `events[].z` | number | World Z coordinate of the event. |
+| `next` | number | Timestamp of the most recent event returned. |
+| `total` | number | Number of events returned. |
+| `capped` | boolean | Present and `true` only when the 10,000-event limit was reached and results were truncated. |
+
+---
+
+### Log Analyzer
+
+These endpoints serve server performance and entity-count metrics parsed from the SCUM server's Global Stats log lines (FPS, character/zombie/animal/vehicle/item counts, and network object counts). They power the **Analytics** tab in the panel.
+
+Data covers the **current server session only** (since the last restart). It is read on demand — call the plugin's load action from the panel to ingest new log lines before reading these endpoints.
+
+#### GET /analyzer/stats.json
+
+Returns the most recent metrics sample. Auth required.
+
+Requires the Log Analyzer plugin installed.
+
+**Response — data available**
+
+```json
+{
+  "ok": true,
+  "hasData": true,
+  "timestamp": 1712160300000,
+  "minFps": 27.4,
+  "avgFps": 30.1,
+  "maxFps": 32.8,
+  "characters": 142,
+  "charactersAlive": 138,
+  "prisoners": 12,
+  "prisonersAlive": 12,
+  "zombies": 96,
+  "zombiesAlive": 94,
+  "razors": 3,
+  "razorsAlive": 3,
+  "sentries": 8,
+  "sentrysAlive": 8,
+  "animals": 24,
+  "animalsAlive": 22,
+  "vehicles": 268,
+  "itemsTotal": 184302,
+  "itemsActive": 9120,
+  "netObjectsTotal": 41250,
+  "netObjectsActive": 6840
+}
+```
+
+**Response — no data loaded yet**
+
+```json
+{
+  "ok": true,
+  "hasData": false
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `hasData` | boolean | `false` when no samples have been loaded; the metrics fields are then omitted |
+| `timestamp` | number | Unix timestamp in milliseconds of this sample |
+| `minFps` | number | Minimum server FPS during the sample window |
+| `avgFps` | number | Average server FPS during the sample window |
+| `maxFps` | number | Maximum server FPS during the sample window |
+| `characters` | number | Total characters tracked by the server |
+| `charactersAlive` | number | Characters currently alive |
+| `prisoners` | number | Total prisoners (players) |
+| `prisonersAlive` | number | Prisoners currently alive |
+| `zombies` | number | Total zombies |
+| `zombiesAlive` | number | Zombies currently alive |
+| `razors` | number | Total Razors |
+| `razorsAlive` | number | Razors currently alive |
+| `sentries` | number | Total sentries |
+| `sentrysAlive` | number | Sentries currently alive |
+| `animals` | number | Total animals |
+| `animalsAlive` | number | Animals currently alive |
+| `vehicles` | number | Total vehicles |
+| `itemsTotal` | number | Total items in virtualization |
+| `itemsActive` | number | Items currently active |
+| `netObjectsTotal` | number | Total network objects |
+| `netObjectsActive` | number | Network objects currently active |
+
+---
+
+#### GET /analyzer/history.json
+
+Returns a time series of metrics over a selectable time window, for charting. Auth required.
+
+Requires the Log Analyzer plugin installed.
+
+**Query parameters**
+
+| Parameter | Required | Description |
+|---|---|---|
+| `range` | No | Time window: `1h` (default), `6h`, `24h`, or `7d`. The `1h` range returns per-sample resolution; longer ranges return one point per minute. An unrecognized value falls back to `1h` |
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "range": "1h",
+  "data": [
+    {
+      "t": 1712160000000,
+      "minFps": 27.4,
+      "avgFps": 30.1,
+      "maxFps": 32.8,
+      "C": 142,
+      "Ca": 138,
+      "P": 12,
+      "Pa": 12,
+      "Z": 96,
+      "Za": 94,
+      "R": 3,
+      "Ra": 3,
+      "S": 8,
+      "Sa": 8,
+      "A": 24,
+      "Aa": 22,
+      "V": 268,
+      "IV": 184302,
+      "IVa": 9120,
+      "NO": 41250,
+      "NOa": 6840
+    }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `range` | string | The applied time window (`1h`, `6h`, `24h`, or `7d`) |
+| `data` | array | Time-ordered data points within the window |
+| `data[].t` | number | Unix timestamp in milliseconds |
+| `data[].minFps` | number | Minimum FPS |
+| `data[].avgFps` | number | Average FPS |
+| `data[].maxFps` | number | Maximum FPS |
+| `data[].C` / `data[].Ca` | number | Characters total / alive |
+| `data[].P` / `data[].Pa` | number | Prisoners total / alive |
+| `data[].Z` / `data[].Za` | number | Zombies total / alive |
+| `data[].R` / `data[].Ra` | number | Razors total / alive |
+| `data[].S` / `data[].Sa` | number | Sentries total / alive |
+| `data[].A` / `data[].Aa` | number | Animals total / alive |
+| `data[].V` | number | Vehicles |
+| `data[].IV` / `data[].IVa` | number | Items in virtualization, total / active |
+| `data[].NO` / `data[].NOa` | number | Network objects, total / active |
+
+---
+
+#### GET /analyzer/summary.json
+
+Returns aggregate statistics computed across all loaded samples — useful for a high-level overview card. Auth required.
+
+Requires the Log Analyzer plugin installed.
+
+**Response — data available**
+
+```json
+{
+  "ok": true,
+  "totalSamples": 4320,
+  "fpsAvg": 29.6,
+  "fpsMin": 18.2,
+  "fpsMax": 34.1,
+  "peakZombies": 118,
+  "peakAnimals": 31,
+  "peakVehicles": 271,
+  "peakItems": 192044,
+  "peakNetObjects": 44210,
+  "timeSpanMs": 86400000
+}
+```
+
+**Response — no data loaded yet**
+
+```json
+{
+  "ok": true,
+  "totalSamples": 0
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `totalSamples` | number | Number of samples loaded for the current session. When `0`, the aggregate fields are omitted |
+| `fpsAvg` | number | Average FPS across all samples |
+| `fpsMin` | number | Lowest FPS observed |
+| `fpsMax` | number | Highest FPS observed |
+| `peakZombies` | number | Highest zombie count observed |
+| `peakAnimals` | number | Highest animal count observed |
+| `peakVehicles` | number | Highest vehicle count observed |
+| `peakItems` | number | Highest item-in-virtualization count observed |
+| `peakNetObjects` | number | Highest network-object count observed |
+| `timeSpanMs` | number | Milliseconds between the first and last loaded sample (effective coverage window) |
+
+---
+
+### Loot Drops
+
+These endpoints are added by the **Loot Drops** plugin. They expose the plugin's reward packs and the per-player claim history shown in the panel.
+
+#### GET /drops/packs.json
+
+Returns every reward pack configured on the server, including disabled ones, with each pack's items, allowlist, and total claim count.
+
+Auth required.
+
+Requires the **Loot Drops** plugin installed.
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "packs": [
+    {
+      "id": 1,
+      "displayName": "Starter Kit",
+      "description": "A small care package for new arrivals.",
+      "command": "starter",
+      "claimLimit": 1,
+      "enabled": true,
+      "expiresAt": "",
+      "createdAt": "2026-06-01 14:22:08",
+      "updatedAt": "2026-06-18 09:41:55",
+      "items": [
+        {
+          "id": 12,
+          "itemClass": "BP_Weapon_M9",
+          "vehicleClass": "",
+          "quantity": 1,
+          "stackCount": 0
+        },
+        {
+          "id": 13,
+          "itemClass": "Cal_9mm_FMJ_Ammo",
+          "vehicleClass": "",
+          "quantity": 1,
+          "stackCount": 60
+        }
+      ],
+      "allowlist": [
+        {
+          "steamId": "76561198000000001",
+          "name": "SurvivorJoe"
+        }
+      ],
+      "totalClaims": 14
+    }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `id` | number | Unique pack identifier. |
+| `displayName` | string | Player-facing pack name. |
+| `description` | string | Optional description shown in the panel. |
+| `command` | string | The slash command players type in chat to claim the pack (without the leading slash). |
+| `claimLimit` | number | How many times a player may claim the pack. `0` means unlimited, `1` means one-time, `N` means up to N claims. |
+| `enabled` | boolean | Whether the pack is currently claimable. |
+| `expiresAt` | string | ISO datetime after which the pack can no longer be claimed; empty means no expiry. |
+| `createdAt` | string | When the pack was created. |
+| `updatedAt` | string | When the pack was last modified. |
+| `items` | array | The contents granted on claim. |
+| `items[].id` | number | Unique row identifier. |
+| `items[].itemClass` | string | Item to grant; empty for vehicle rows. |
+| `items[].vehicleClass` | string | Vehicle to grant; empty for item rows. |
+| `items[].quantity` | number | Number of separate items or vehicles spawned per claim. |
+| `items[].stackCount` | number | Stack size for stackable items such as ammo or cash. `0` for single items; always `0` for vehicles. |
+| `allowlist` | array | If non-empty, only these players may claim the pack. An empty array means everyone may claim. |
+| `allowlist[].steamId` | string | Steam ID permitted to claim. |
+| `allowlist[].name` | string | Optional display name stored alongside the Steam ID. |
+| `totalClaims` | number | Total number of times this pack has been claimed. |
+
+---
+
+#### GET /drops/claims.json
+
+Returns the claim history — which players have claimed which packs, and when. Supports filtering by pack or player and pagination.
+
+Auth required.
+
+Requires the **Loot Drops** plugin installed.
+
+**Query parameters**
+
+| Parameter | Required | Description |
+|---|---|---|
+| `limit` | No | Maximum number of claims to return. Defaults to `1000`. Use `0` to return all claims. |
+| `offset` | No | Number of claims to skip, for pagination. Defaults to `0`. |
+| `pack_id` | No | Return only claims for the pack with this ID. |
+| `steam_id` | No | Return only claims made by this Steam ID. |
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "claims": [
+    {
+      "id": 482,
+      "packId": 1,
+      "steamId": "76561198000000001",
+      "charName": "SurvivorJoe",
+      "claimedAt": "2026-06-24 11:05:37"
+    },
+    {
+      "id": 481,
+      "packId": 3,
+      "steamId": "76561198000000002",
+      "charName": "RaiderKim",
+      "claimedAt": "2026-06-24 09:48:12"
+    }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `id` | number | Unique claim identifier. |
+| `packId` | number | ID of the pack that was claimed. |
+| `steamId` | string | Steam ID of the player who claimed the pack. |
+| `charName` | string | Character name of the player at the time of the claim. |
+| `claimedAt` | string | When the claim was made. |
+
+---
+
+### Quarter Master
+
+The following endpoints are provided by the Quarter Master shop plugin. They return read-only shop data — packages, categories, player balances, and sales figures — for building dashboards or external integrations. Each requires the Quarter Master plugin to be installed and enabled on the server.
+
+#### GET /shop/stats.json
+
+Returns headline shop statistics: lifetime sales, currency spent and granted, and currency currently held by players. Auth required.
+
+Requires the Quarter Master plugin installed.
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "totalPackagesSold": 1284,
+  "totalCoinsSpent": 96750,
+  "totalCoinsGranted": 142300,
+  "coinsInCirculation": 45550,
+  "activePlayers": 87
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `totalPackagesSold` | number | Total number of packages purchased over the shop's lifetime |
+| `totalCoinsSpent` | number | Total rations spent on purchases |
+| `totalCoinsGranted` | number | Total rations granted to players (rewards and admin grants) |
+| `coinsInCirculation` | number | Total rations currently held across all player balances |
+| `activePlayers` | number | Number of players with a balance greater than zero |
+
+---
+
+#### GET /shop/sales-summary.json
+
+Returns aggregated sales figures, broken down by category and by best-selling package. Auth required.
+
+Requires the Quarter Master plugin installed.
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "totalSales": 1284,
+  "totalRations": 96750,
+  "totalMoney": 41200,
+  "byCategory": [
+    {
+      "categoryId": 1,
+      "name": "Weapons",
+      "salesCount": 412,
+      "totalRations": 38600,
+      "totalMoney": 12400
+    },
+    {
+      "categoryId": 2,
+      "name": "Vehicles",
+      "salesCount": 96,
+      "totalRations": 28800,
+      "totalMoney": 9600
+    }
+  ],
+  "topPackages": [
+    {
+      "packageId": 14,
+      "name": "Starter Rifle Kit",
+      "category": "Weapons",
+      "salesCount": 203,
+      "totalRations": 10150,
+      "totalMoney": 0
+    },
+    {
+      "packageId": 31,
+      "name": "Off-Road Jeep",
+      "category": "Vehicles",
+      "salesCount": 64,
+      "totalRations": 19200,
+      "totalMoney": 6400
+    }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `totalSales` | number | Total number of completed purchases |
+| `totalRations` | number | Total rations spent across all purchases |
+| `totalMoney` | number | Total in-game cash spent across all purchases |
+| `byCategory[].categoryId` | number | Category ID |
+| `byCategory[].name` | string | Category name |
+| `byCategory[].salesCount` | number | Number of purchases in this category |
+| `byCategory[].totalRations` | number | Rations spent in this category |
+| `byCategory[].totalMoney` | number | In-game cash spent in this category |
+| `topPackages[].packageId` | number | Package ID |
+| `topPackages[].name` | string | Package name |
+| `topPackages[].category` | string | Name of the category the package belongs to |
+| `topPackages[].salesCount` | number | Number of times this package was purchased |
+| `topPackages[].totalRations` | number | Rations spent on this package |
+| `topPackages[].totalMoney` | number | In-game cash spent on this package |
+
+---
+
+#### GET /shop/balances.json
+
+Returns the rations balance and lifetime totals for every player who has a shop balance. Auth required.
+
+Requires the Quarter Master plugin installed.
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "balances": [
+    {
+      "steamId": "76561198000000001",
+      "coins": 525,
+      "totalEarned": 1340,
+      "totalSpent": 815,
+      "ggCoinsCached": 0
+    },
+    {
+      "steamId": "76561198000000002",
+      "coins": 90,
+      "totalEarned": 600,
+      "totalSpent": 510,
+      "ggCoinsCached": 250
+    }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `balances[].steamId` | string | Player's Steam ID |
+| `balances[].coins` | number | Current rations balance |
+| `balances[].totalEarned` | number | Lifetime rations earned by the player |
+| `balances[].totalSpent` | number | Lifetime rations spent by the player |
+| `balances[].ggCoinsCached` | number | Last-known cross-server coin balance for the player |
+
+---
+
+#### GET /shop/packages.json
+
+Returns every shop package, including pricing, any active discount, stock, and the items each package delivers. Auth required.
+
+Requires the Quarter Master plugin installed.
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "packages": [
+    {
+      "id": 14,
+      "categoryId": 1,
+      "name": "Starter Rifle Kit",
+      "description": "A reliable rifle with two spare magazines.",
+      "imageUrl": "",
+      "priceCoins": 50,
+      "priceMoney": 0,
+      "effectiveCoins": 40,
+      "effectiveMoney": 0,
+      "discountPercent": 20,
+      "discountExpiresAt": "2026-07-01T00:00:00",
+      "stockLimit": -1,
+      "stockSold": 203,
+      "enabled": true,
+      "vehicleClass": "",
+      "leadItemClass": "Weapon_M16A4",
+      "dropzoneName": "",
+      "items": [
+        {
+          "itemClass": "Weapon_M16A4",
+          "quantity": 1,
+          "stackCount": 0,
+          "ico": "Weapon_M16A4"
+        },
+        {
+          "itemClass": "Cal_556x45mm_Ammobox",
+          "quantity": 2,
+          "stackCount": 30,
+          "ico": "Cal_556x45mm_Ammobox"
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "categoryId": 2,
+      "name": "Off-Road Jeep",
+      "description": "A rugged 4x4 delivered to your drop zone.",
+      "imageUrl": "",
+      "priceCoins": 300,
+      "priceMoney": 100,
+      "effectiveCoins": 300,
+      "effectiveMoney": 100,
+      "discountPercent": 0,
+      "discountExpiresAt": "",
+      "stockLimit": 10,
+      "stockSold": 6,
+      "enabled": true,
+      "vehicleClass": "BPC_LaikaOffroad",
+      "leadItemClass": "",
+      "dropzoneName": "North Outpost",
+      "vehicleIco": "BPC_LaikaOffroad",
+      "items": []
+    }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `packages[].id` | number | Package ID |
+| `packages[].categoryId` | number | ID of the category the package belongs to |
+| `packages[].name` | string | Package name |
+| `packages[].description` | string | Package description |
+| `packages[].imageUrl` | string | Optional custom image URL for the storefront card |
+| `packages[].priceCoins` | number | List price in rations |
+| `packages[].priceMoney` | number | List price in in-game cash |
+| `packages[].effectiveCoins` | number | Rations price after any active discount |
+| `packages[].effectiveMoney` | number | Cash price after any active discount |
+| `packages[].discountPercent` | number | Discount percentage (0–100); 0 means no discount |
+| `packages[].discountExpiresAt` | string | ISO 8601 UTC expiry for the discount, or empty for no expiry |
+| `packages[].stockLimit` | number | Maximum units available; `-1` means unlimited |
+| `packages[].stockSold` | number | Units sold so far |
+| `packages[].enabled` | boolean | Whether the package is available in the storefront |
+| `packages[].vehicleClass` | string | Vehicle identifier for vehicle packages, or empty for item packages |
+| `packages[].leadItemClass` | string | Item shown as the package's storefront image; empty falls back to the first item |
+| `packages[].dropzoneName` | string | Drop zone the package is restricted to, or empty for any zone |
+| `packages[].vehicleIco` | string | Icon name for the vehicle (vehicle packages only) |
+| `packages[].items` | array | Items delivered by the package (empty for vehicle packages) |
+| `packages[].items[].itemClass` | string | Item identifier |
+| `packages[].items[].quantity` | number | Number of this item delivered |
+| `packages[].items[].stackCount` | number | Stack size per delivered entity; 0 means single items |
+| `packages[].items[].ico` | string | Icon name for the item |
+
+---
+
+#### GET /shop/categories.json
+
+Returns the shop's categories, in display order. Auth required.
+
+Requires the Quarter Master plugin installed.
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "categories": [
+    {
+      "id": 1,
+      "name": "Weapons",
+      "sortOrder": 0,
+      "icon": "weapon",
+      "isProtected": false,
+      "enabled": true
+    },
+    {
+      "id": 2,
+      "name": "Vehicles",
+      "sortOrder": 1,
+      "icon": "vehicle",
+      "isProtected": true,
+      "enabled": true
+    }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `categories[].id` | number | Category ID |
+| `categories[].name` | string | Category name |
+| `categories[].sortOrder` | number | Display order; lower values appear first |
+| `categories[].icon` | string | Icon name for the category |
+| `categories[].isProtected` | boolean | Whether the category is auto-managed and cannot be deleted |
+| `categories[].enabled` | boolean | Whether the category and its packages are shown in the storefront |
+
+---
+
+### Taxi Service
+
+Endpoints provided by the **Taxi Service** plugin for reading the configured taxi destinations and destination clusters. These are available only when the plugin is installed.
+
+#### GET /taxi/destinations.json
+
+Returns all configured taxi destinations with their fare, location, and availability flags. Auth required.
+
+Requires the **Taxi Service** plugin installed.
+
+**Response**
+
+```json
+{
+  "destinations": [
+    {
+      "id": 1,
+      "name": "Airfield",
+      "x": -123456.0,
+      "y": 654321.0,
+      "z": 12500.0,
+      "fare": 250,
+      "enabled": true,
+      "listed": true,
+      "description": "Central airfield drop-off",
+      "tripLimit": 0
+    },
+    {
+      "id": 2,
+      "name": "Trader B4",
+      "x": 305120.0,
+      "y": -88240.0,
+      "z": 9800.0,
+      "fare": 100,
+      "enabled": true,
+      "listed": false,
+      "description": "",
+      "tripLimit": 3
+    }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `destinations[].id` | number | Destination ID |
+| `destinations[].name` | string | Destination name (used when booking a ride) |
+| `destinations[].x` | number | World X position in Unreal units |
+| `destinations[].y` | number | World Y position in Unreal units |
+| `destinations[].z` | number | World Z position in Unreal units |
+| `destinations[].fare` | number | Cost of a ride to this destination |
+| `destinations[].enabled` | boolean | Whether the destination is bookable |
+| `destinations[].listed` | boolean | Whether the destination appears in the public destination list (when `false`, it is hidden from the list but still bookable by exact name) |
+| `destinations[].description` | string | Optional note shown alongside the destination |
+| `destinations[].tripLimit` | number | Per-player lifetime ride limit for this destination (`0` means unlimited) |
+
+---
+
+#### GET /taxi/clusters.json
+
+Returns all configured destination clusters, which group multiple destinations under a single name with a shared ride limit. Auth required.
+
+Requires the **Taxi Service** plugin installed.
+
+**Response**
+
+```json
+{
+  "clusters": [
+    {
+      "id": 1,
+      "name": "Traders",
+      "members": "trader b4,trader z3,trader c2",
+      "enabled": true,
+      "listed": true,
+      "tripLimit": 5
+    },
+    {
+      "id": 2,
+      "name": "Airfields",
+      "members": "airfield,airfield north",
+      "enabled": true,
+      "listed": false,
+      "tripLimit": 0
+    }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `clusters[].id` | number | Cluster ID |
+| `clusters[].name` | string | Cluster name (used when booking a ride) |
+| `clusters[].members` | string | Comma-separated list of the destination names belonging to this cluster |
+| `clusters[].enabled` | boolean | Whether the cluster is bookable |
+| `clusters[].listed` | boolean | Whether the cluster appears in the public destination list (when `false`, it is hidden from the list but still bookable by exact name) |
+| `clusters[].tripLimit` | number | Shared per-player lifetime ride limit across the whole cluster (`0` means unlimited) |
+
+---
+
+---
+
+### ggHaul
+
+Endpoints provided by the ggHaul plugin, which lets admins place persistent appliances (such as fridges) into the world and keeps a registry of every appliance that has been placed.
+
+#### GET /gghaul/appliances
+
+Returns every appliance in the ggHaul registry, newest first. Auth required.
+
+Requires the ggHaul plugin installed.
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "appliances": [
+    {
+      "id": 12,
+      "type": "fridge",
+      "owner": "John Smith",
+      "steamId": "76561198000000001",
+      "x": -253574.0,
+      "y": 443844.0,
+      "z": 91506.7,
+      "yaw": 135.0,
+      "entityId": 71805135,
+      "status": "completed"
+    },
+    {
+      "id": 11,
+      "type": "fridge",
+      "owner": "",
+      "steamId": "76561198000000002",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "yaw": 0.0,
+      "entityId": 0,
+      "status": "in-progress"
+    }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `appliances[].id` | number | Registry ID of the appliance |
+| `appliances[].type` | string | Appliance type (e.g. `"fridge"`) |
+| `appliances[].owner` | string | Name of the player the appliance belongs to, or empty if unset |
+| `appliances[].steamId` | string | Steam ID of the player the appliance is anchored to |
+| `appliances[].x` | number | World X position in Unreal units (`0` until placed) |
+| `appliances[].y` | number | World Y position in Unreal units (`0` until placed) |
+| `appliances[].z` | number | World Z position in Unreal units (`0` until placed) |
+| `appliances[].yaw` | number | Facing rotation in degrees |
+| `appliances[].entityId` | number | In-game entity ID once the appliance is placed (`0` while still being placed) |
+| `appliances[].status` | string | Placement state: `"in-progress"`, `"completed"`, or `"failed"` |
