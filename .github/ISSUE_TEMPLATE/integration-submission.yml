@@ -1,0 +1,62 @@
+name: Integration Submission
+description: Submit a community-built tool or integration to be listed in the ggCON panel's Integrations directory
+labels: ["integration"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Built a tool, bot, or dashboard that works with ggCON? Submit it here to be listed in the in-panel **Integrations** directory. We review each submission before it appears.
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: The name of your integration
+    validations:
+      required: true
+  - type: input
+    id: author
+    attributes:
+      label: Author / Creator
+      description: Your name or handle (shown on the listing)
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Link
+      description: Where can people get it? (website, GitHub repo, download page, etc.)
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Admin Tools
+        - Discord Bots
+        - Monitoring
+        - Web Dashboards
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A short description of what it does (1-2 sentences)
+    validations:
+      required: true
+  - type: textarea
+    id: uses
+    attributes:
+      label: Which ggCON features does it use?
+      description: "e.g. /players.json, /command, /message — helps others understand what it needs"
+    validations:
+      required: false
+  - type: input
+    id: icon
+    attributes:
+      label: Icon URL (optional)
+      description: A square icon/logo URL for the listing card
+    validations:
+      required: false
