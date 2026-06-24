@@ -60,10 +60,10 @@ See [Web Panel](web-panel.md) for full documentation.
 
 ## Verify the mod is running
 
-You can also test the health endpoint directly. Replace `<server-ip>` with your server's IP address and `<port>` with the HTTP port (default: `8081`):
+You can also test the health endpoint directly. Replace `<serviceId>` with your service ID (the same value as in your panel URL above):
 
 ```bash
-curl http://<server-ip>:<port>/health
+curl https://ggcon.gghost.games/s/<serviceId>/health
 ```
 
 Expected response:
@@ -86,7 +86,7 @@ Expected response:
 Fetch the current player list:
 
 ```bash
-curl -H "X-Password: yourpassword" http://<server-ip>:<port>/players.json
+curl -H "X-Password: yourpassword" https://ggcon.gghost.games/s/<serviceId>/players.json
 ```
 
 Run an admin command:
@@ -96,7 +96,7 @@ curl -X POST \
      -H "X-Password: yourpassword" \
      -H "Content-Type: application/json" \
      -d '{"command": "#ListPlayers"}' \
-     http://<server-ip>:<port>/command
+     https://ggcon.gghost.games/s/<serviceId>/command
 ```
 
 ## Enabling RCON
@@ -109,6 +109,6 @@ RconPort    = 27020
 ```
 
 !!! note "Two separate ports"
-    ggCON uses two different ports: `Port` (HTTP, default `8081`) for the web panel and API, and `RconPort` (default `27020`) for RCON clients. Make sure you're using the right one for each use case.
+    ggCON uses two different ports: the HTTP port for the web panel and API, and `RconPort` for RCON clients. The panel and API are reached through `https://ggcon.gghost.games/s/<serviceId>/`, while RCON connects directly to your server's IP and RCON port (it does not go through the proxy). On GG Host servers the RCON port is usually your HTTP/panel port + 1.
 
 See the [RCON](rcon.md) page for client setup instructions.

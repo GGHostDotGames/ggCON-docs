@@ -11,6 +11,9 @@ RconEnabled = true
 RconPort    = 27020
 ```
 
+!!! note "GG Host servers"
+    On a GG Host server the RCON port is usually preset to your **HTTP/panel port + 1** (for example panel `5381` → RCON `5382`), so check your panel or `ggCON.ini` for the actual value rather than assuming `27020`.
+
 By default, RCON binds to the same address as `BindAddress`. To bind RCON to a different address:
 
 ```ini
@@ -36,16 +39,21 @@ Rejected connections receive an auth failure response (`id = -1`) and are immedi
 
 [mcrcon](https://github.com/Tiiffi/mcrcon) is a command-line RCON client that works with ggCON.
 
+RCON is a raw TCP protocol, so the client connects **directly to your server's IP and RCON port**. It does not go through the `ggcon.gghost.games` web proxy (that handles only the HTTP API and web panel).
+
+!!! note "GG Host RCON port"
+    On GG Host servers, the RCON port is usually your **HTTP/panel port + 1**. For example, if your panel/HTTP port is `5381`, your RCON port is `5382`. Check your panel or `ggCON.ini` for the exact value rather than assuming `27020`.
+
 **Interactive session:**
 
 ```bash
-mcrcon -H 127.0.0.1 -P 27020 -p change_me_now
+mcrcon -H <server-ip> -P <rcon-port> -p <your-password>
 ```
 
 **Single command:**
 
 ```bash
-mcrcon -H 127.0.0.1 -P 27020 -p change_me_now "#ListPlayers"
+mcrcon -H <server-ip> -P <rcon-port> -p <your-password> "#ListPlayers"
 ```
 
 ## Protocol details
