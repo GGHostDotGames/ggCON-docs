@@ -7,6 +7,23 @@ Release notes for ggCON, newest first.
 
 ---
 
+## 0.13.14 — June 24, 2026
+
+### New Features
+- New **Integrations** tab: a directory of community-built tools and integrations that work with ggCON — browse them by category, search, and submit your own
+- New **API Explorer** tab: a built-in, searchable reference for the ggCON HTTP API with a live "Try it" console — run read-only calls right from the panel, copy ready-made code snippets (curl / JavaScript / Python), and a confirmation step guards any action that changes your server
+
+### Improvements
+- Stability and performance: fewer crashes, and reduced rubberbanding/lag on busy servers — most noticeable around players joining
+
+### Fixes
+- Admin command output (for example the confirmation from kicking a player through the API) is no longer shown to a random online player when "Suppress Command Output" is enabled — it's now properly hidden
+- Kill Feed: the scheduled leaderboard webhook no longer shows a literal "\n" between rows — the board now formats with proper line breaks
+- Loot Drops: the Claim list now loads far more history (previously only the most recent 100 claims), so older claims can be searched and filtered from the panel
+- Player Spawn Plus: players who die and respawn during an in-game event (Tab 8) are no longer teleported out to the respawn point and re-kitted — they stay in the event where they respawned
+
+---
+
 ## 0.13.13 — June 17, 2026
 
 ### Plugin Published!
