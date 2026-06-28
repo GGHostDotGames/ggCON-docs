@@ -21,7 +21,7 @@
 - **Appliance Placement** — the ggHaul plugin lets admins place appliances (starting with fridges) right in front of any online player from the panel, then keep them permanently — they survive server restarts — or remove them
 - **AI NPCs** *(coming soon)* — AI-powered characters that interact with players in chat and execute admin commands
 - **Slash Commands** — players type `/help`, `/unstuck`, `/shop`, `/taxi`, and more in chat for instant responses; admins and plugins can register custom commands
-- **Plugin System** — extend ggCON with plugins for the in-game shop, kill feed, loot drops, NPC tracking, paid taxi, respawn loadouts (Player Spawn Plus), appliance placement (ggHaul), analytics (Log Analyzer), and more — with a built-in marketplace
+- **Plugin System** — extend ggCON with plugins for the in-game shop, kill feed, loot drops, NPC tracking, paid taxi, respawn loadouts (Player Spawn Plus), appliance placement (ggHaul), analytics (Log Analyzer), a dead-drop contraband race (Stash 'n Dash), and more — with a built-in marketplace
 - **Auto-Update** — check for and stage updates directly from the panel, applied on next server restart
 - **SSL Access** — access the panel securely over HTTPS via GG Host's built-in SSL proxy
 - **Server Controls** — set time of day and weather directly from the panel

@@ -85,6 +85,10 @@ The command name is configurable per pack.
 
 - `/taxi` — lists destinations and fares; `/taxi <name>` books a ride; `/taxi <group>` books a ride to a random destination in that group; `/taxi cancel` cancels a pending ride and refunds the fare
 
+[Stash 'n Dash](plugins.md#stash-n-dash) registers:
+
+- `/stash` — shows the current dead-drop: the items wanted, the time remaining, and where the drop cabinets are (or tells the player when there's no active drop)
+
 See each plugin's documentation for details on its commands.
 
 !!! note "Panel-driven plugins"

@@ -70,6 +70,14 @@ No desktop tools, no manual database edits, no fragile scripts. Install it, set 
 
     [Slash commands →](slash-commands.md)
 
+-   📦 __Stash 'n Dash__
+
+    ---
+
+    A contraband dead-drop race: players round up a required item list and race to deposit it into a hidden drop cabinet first. Define the drops, place the cabinet sites, set the rules, and reward the winner — all from the panel or the API.
+
+    [Stash 'n Dash →](plugins.md#stash-n-dash)
+
 -   🎽 __Spawn Loadouts__
 
     ---
