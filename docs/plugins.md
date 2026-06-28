@@ -258,6 +258,27 @@ Ships disabled by default — turn it on once your loadouts are ready.
 
 ---
 
+### Stash 'n Dash
+
+A contraband dead-drop race — players compete to round up a required item list and deposit it into a hidden drop cabinet before anyone else does.
+
+- **Drops (the "quests")** — define the item lists players must collect and deposit (e.g. 10× Spliff), each with its own time limit, reward, and weight; enable or disable them individually
+- **Cabinet sites** — place the map locations where drop cabinets can appear; the server rotates cabinets through your enabled sites
+- **Selection mode** — pick the next drop by **weighted random** or **sequential** order
+- **Tunable game** — set how many cabinets are live at once, the rotation interval, the deposit range, and the gap between rounds
+- **First to finish wins** — the first player to deposit the full required list into a cabinet wins your configured reward
+- **In-character whispers** — players get status messages in-game, and a `/stash` chat command points them toward the current drop
+- **Active Cabinets map view** — see every live cabinet on the panel map with one-click teleport
+- **Panel management** — create drops, place sites, and tune settings from the Stash 'n Dash tab; comes pre-loaded with example drops and locations you can edit or replace
+
+**Automation:** the full game lifecycle — drops, cabinet sites, settings, and start/stop — is also available over the [HTTP API](http-api.md), so you can script it from a bot or scheduler.
+
+Ships off until you switch it on.
+
+**Requires:** ggCON v0.13.15+
+
+---
+
 ## Coming Soon
 
 ### AI NPCs
