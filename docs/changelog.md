@@ -7,6 +7,28 @@ Release notes for ggCON, newest first.
 
 ---
 
+## 0.13.15 — June 28, 2026
+
+### Plugin Published!
+- **Stash 'n Dash** — a contraband dead-drop race for your players. From the new **Stash 'n Dash** panel tab, define "drops" (the items players must round up) and the map locations where drop cabinets appear, then flip it on. The server hides rotating drop cabinets around the map; players race to deposit the full required item list into a cabinet, and the first to complete it wins your configured reward. Includes weighted-random or sequential drop selection, configurable cabinet count, rotation and time limits, in-character status whispers, an **Active Cabinets** map view with one-click teleport, and a player `/stash` command to find the current drop. Ships off until you switch it on, and comes pre-loaded with example drops and locations you can edit or replace
+
+### Improvements
+- Web panel: faster, steadier live updates — the panel no longer gets stuck in a slower refresh mode after a brief connection hiccup (it now recovers on its own), and more admins can keep the panel open at the same time without it bogging down
+- Player conditions now show real severities: the player-card Conditions panel reads true values for hunger, thirst, radiation sickness, hypothermia and other afflictions (many previously read 0%), and is redesigned to mirror the in-game medical monitor — symptoms listed on their own, conditions grouped by treatment stage (Untreated / Stabilization / Recovery) with severity classes and bars. Players carrying many conditions at once (more than 20) previously showed an empty Conditions panel — now fixed
+- Friendly item names: the item API now includes a readable display name for each item (e.g. "Painkillers - Blister"), used across the Stash 'n Dash pickers and item lists
+- The player data API now reports each player's facing direction (yaw)
+- Loot Drops: the Claim list now pages through your **full** claim history (older claims are no longer hidden behind the most-recent cap), and a new "Clear older than N days" button lets you bulk-remove old one-time claim records
+- NPC Tracker: puppets now show their combat state, the kill log records where the fatal hit landed, and sentry health bars read correctly
+- Web panel: the Status tab now surfaces more world and performance detail (time-of-day period, day-length speed, sun intensity, fog, and a worst-frame timing card), the Flags tab shows your server's flag rules at a glance (element capacity, influence radius, overtake/decay periods, multiple-flags), and a player's card shows their squad capacity and a leader badge
+
+### Fixes
+- Flags: element counts now show each flag's real capacity instead of an inflated server-wide maximum
+- Vehicles: cars owned by players with very large account IDs now show the correct owner instead of "Unknown"
+- Loot Drops: you no longer lose a claim if you disconnect before the items are delivered
+- Player Spawn Plus: the "spawn on ground" setting is now read correctly even when written with a space (e.g. `= True`)
+
+---
+
 ## 0.13.14 — June 24, 2026
 
 ### New Features
