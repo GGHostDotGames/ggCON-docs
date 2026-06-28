@@ -85,9 +85,10 @@ Returns the current player list. Auth required.
       "gender": "male",
       "itemInHands": "1H_KitchenKnife_02_Deluxe",
       "velocity": { "x": 293.6, "y": -196.1, "z": 0 },
+      "yaw": 87.4,
       "health": 1.0,
       "bodyEffects": [
-        { "name": "Exhaustion", "severity": 0, "maxSeverity": 2 }
+        { "name": "Hypothermia", "severity": 1.5, "maxSeverity": 3, "kind": "condition", "stage": "untreated" }
       ],
       "squad": { "name": "Alpha Squad", "members": 4 },
       "attributes": {
@@ -131,8 +132,9 @@ Returns the current player list. Auth required.
 | `gender` | string \| null | `"male"`, `"female"`, or `"unknown"` |
 | `itemInHands` | string \| null | Class name of the item currently held, or `null` if empty hands |
 | `velocity` | object \| null | Movement velocity `{x, y, z}` in cm/s. Divide by 100 for m/s |
+| `yaw` | number \| null | Body facing direction in degrees (0–360) |
 | `health` | number \| null | Health as a fraction (0.0 = dead, 1.0 = full health) |
-| `bodyEffects` | array | Active body conditions. Each entry has `name` (string), `severity` (number), and `maxSeverity` (number) |
+| `bodyEffects` | array | Active body conditions and symptoms. Each entry has `name` (string), `severity` (number), `maxSeverity` (number), `kind` (`"condition"` or `"symptom"`), and `stage` (`"none"`, `"untreated"`, `"stabilization"`, or `"recovery"` — treatment progress for conditions; `"none"` for symptoms) |
 | `squad` | object \| null | Squad info `{name, members}`, or `null` if not in a squad |
 | `attributes` | object \| null | Physical attributes `{strength, constitution, dexterity, intelligence}` as decimal values |
 | `skills` | array | Character skills. Each entry has `id`, `name`, `xp`, `level` (0–4), and `levelName` |
@@ -284,7 +286,11 @@ Returns live weather and environment data. Auth required.
   "nighttimeDarkness": 0,
   "cirrostratusCoverage": 0,
   "cumulonimbusCoverage": 0.12,
-  "nimbostratusCoverage": 0
+  "nimbostratusCoverage": 0,
+  "timeOfDaySpeed": 3.84,
+  "sunIntensity": 10,
+  "fogEnabled": false,
+  "dayPeriod": "Day"
 }
 ```
 
@@ -309,6 +315,10 @@ Fields that cannot be read from the game return `null`.
 | `cirrostratusCoverage` | number \| null | Cirrostratus cloud coverage (0–1) |
 | `cumulonimbusCoverage` | number \| null | Cumulonimbus cloud coverage (0–1) |
 | `nimbostratusCoverage` | number \| null | Nimbostratus cloud coverage (0–1) |
+| `timeOfDaySpeed` | number \| null | In-game day-length multiplier vs real time (e.g. `3.84`×) |
+| `sunIntensity` | number \| null | Sun brightness intensity |
+| `fogEnabled` | bool \| null | Whether fog is enabled on the server |
+| `dayPeriod` | string \| null | Derived part of day: `"Dawn"`, `"Day"`, `"Dusk"`, or `"Night"` |
 
 ---
 
@@ -426,7 +436,7 @@ Squad data is loaded from the server database and enriched with live online stat
 
 ## GET /flags.json
 
-Returns all base building flags with owner info, location, and element counts. Auth required.
+Returns all base building flags with owner info, location, and element counts, plus the server's flag rules (element caps, influence radius, overtake/decay periods). Auth required. The server flag-rule fields are omitted if that configuration could not be read from the game.
 
 Flag data auto-refreshes every 30 seconds. Read-only database access — does not block the game server.
 
@@ -436,6 +446,14 @@ Flag data auto-refreshes every 30 seconds. Read-only database access — does no
 {
   "ok": true,
   "count": 2,
+  "maxElementsPerFlag": 555,
+  "maxExpandedPerFlag": 580,
+  "extraElementsPerSquadMember": 25,
+  "flagInfluenceRadius": 5000,
+  "flagOvertakeDuration": 28800,
+  "flagOvertakePeriod": 1,
+  "decayProcessingPeriod": 120,
+  "allowMultipleFlagsPerPlayer": false,
   "flags": [
     {
       "flagId": 1,
@@ -456,6 +474,14 @@ Flag data auto-refreshes every 30 seconds. Read-only database access — does no
 | Field | Type | Description |
 |---|---|---|
 | `count` | number | Total number of flags |
+| `maxElementsPerFlag` | number | Server cap on building elements per flag |
+| `maxExpandedPerFlag` | number | Server cap on elements when a flag is fully expanded |
+| `extraElementsPerSquadMember` | number | Extra elements granted per additional squad member |
+| `flagInfluenceRadius` | number | Flag influence radius in Unreal units |
+| `flagOvertakeDuration` | number | Flag overtake duration (seconds) |
+| `flagOvertakePeriod` | number | Flag overtake processing period |
+| `decayProcessingPeriod` | number | Flag decay processing period |
+| `allowMultipleFlagsPerPlayer` | bool | Whether a player may own multiple flags |
 | `flags[].flagId` | number | Flag ID |
 | `flags[].baseId` | number | Base ID |
 | `flags[].baseName` | string | Base name |
@@ -486,7 +512,8 @@ This is the same catalog used by the panel's Give Item feature.
     {
       "i": "Backpack_02_01",
       "ico": "ICO_Backpack_02_01",
-      "c": "Equipment"
+      "c": "Equipment",
+      "dn": "Hiking Backpack"
     },
     {
       "i": "Knife_Hunting",
@@ -504,6 +531,7 @@ This is the same catalog used by the panel's Give Item feature.
 | `items[].i` | string | Item class name (use with `POST /spawn`) |
 | `items[].ico` | string \| absent | Icon asset name (present when an icon mapping exists). Turn it into an image URL — see [Icon images](#icon-images) below |
 | `items[].c` | string \| absent | Item category (e.g., `"Weapons"`, `"Ammunition"`, `"Food"`, `"Equipment"`) |
+| `items[].dn` | string \| absent | Friendly display name (present when a name mapping exists) |
 
 ### Icon images
 
@@ -1484,6 +1512,8 @@ Requires the **NPC Tracker** plugin installed.
       "x": -185420.5,
       "y": 372110.0,
       "z": 21805.3,
+      "foe": "PlayerName",
+      "target": "PlayerName",
       "killerSteamId": "",
       "killerName": ""
     },
@@ -1528,6 +1558,8 @@ Requires the **NPC Tracker** plugin installed.
 | `npcs[].x` | number | World X position in Unreal units |
 | `npcs[].y` | number | World Y position in Unreal units |
 | `npcs[].z` | number | World Z position in Unreal units |
+| `npcs[].foe` | string \| null | Display name of the NPC's current target, or `null` when not targeting or unresolved |
+| `npcs[].target` | string \| null | Alias of `foe` |
 | `npcs[].killerSteamId` | string | Steam ID of the killer (empty while the NPC is alive or if the killer is unknown) |
 | `npcs[].killerName` | string | Character name of the killer (empty while the NPC is alive or if the killer is unknown) |
 | `kills` | array | Kill log for this session, most recent first |
@@ -2472,3 +2504,240 @@ Requires the ggHaul plugin installed.
 | `appliances[].yaw` | number | Facing rotation in degrees |
 | `appliances[].entityId` | number | In-game entity ID once the appliance is placed (`0` while still being placed) |
 | `appliances[].status` | string | Placement state: `"in-progress"`, `"completed"`, or `"failed"` |
+
+### Stash 'n Dash
+
+Endpoints provided by the Stash 'n Dash plugin — a contraband dead-drop race. You define **drops** (the item lists players must collect), the **sites** where drop cabinets spawn, and the game **settings**, then start and stop the game. Every endpoint requires auth and the Stash 'n Dash plugin installed.
+
+Together these let you automate the whole game lifecycle from your own tooling (a bot, a Discord command, a scheduler) without opening the ggCON panel.
+
+#### GET /stash-n-dash/status.json
+
+Live game status: whether the game is active, how many cabinets are live, and the current drop's progress.
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "active": true,
+  "cabinets": 3,
+  "drop": {
+    "active": true,
+    "name": "Up 'n smoke",
+    "won": false,
+    "winner": "",
+    "required": "10x Spliff",
+    "secondsLeft": 3240,
+    "players": 0
+  }
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `active` | bool | Whether the game machinery is running |
+| `cabinets` | number | Count of live drop cabinets currently spawned |
+| `drop.active` | bool | Whether a drop round is currently running |
+| `drop.name` | string | Name of the active drop |
+| `drop.won` | bool | Whether the active drop has been completed by someone |
+| `drop.winner` | string | Name of the winning player (empty until won) |
+| `drop.required` | string | Human-readable summary of the required items (e.g. `"10x Spliff"`) |
+| `drop.secondsLeft` | number | Seconds remaining in the current round |
+| `drop.players` | number | Players with progress toward the current drop |
+
+#### GET /stash-n-dash/drops.json
+
+Lists every drop definition (the "quests"), including disabled ones.
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "drops": [
+    {
+      "id": 1,
+      "name": "Up 'n smoke",
+      "enabled": true,
+      "durationSec": 3600,
+      "weight": 1,
+      "required": [
+        { "itemClass": "Spliff", "count": 10, "singleRow": true }
+      ],
+      "rewards": [
+        { "kind": "item", "itemClass": "1H_KitchenKnife", "quantity": 1, "stackCount": 1, "amount": 0 }
+      ]
+    }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `drops[].id` | number | Drop ID (use it in update / delete / toggle) |
+| `drops[].name` | string | Display name of the drop |
+| `drops[].enabled` | bool | Whether the drop is eligible for selection |
+| `drops[].durationSec` | number | Round length in seconds |
+| `drops[].weight` | number | Relative weight for weighted-random selection |
+| `drops[].required[].itemClass` | string | Item class players must deposit |
+| `drops[].required[].count` | number | Quantity required of that item |
+| `drops[].required[].singleRow` | bool | Whether the count must fit in a single inventory stack |
+| `drops[].rewards[].kind` | string | Reward kind (`"item"` in v1) |
+| `drops[].rewards[].itemClass` | string | Item class granted as a reward |
+| `drops[].rewards[].quantity` | number | Number of reward items |
+| `drops[].rewards[].stackCount` | number | Stack size per reward item |
+
+#### POST /stash-n-dash/drops
+
+Create a new drop (omit `id` or send `0`) or update an existing one (send its `id`).
+
+**Request body**
+
+```json
+{
+  "name": "Up 'n smoke",
+  "enabled": true,
+  "weight": 1,
+  "durationMin": 60,
+  "required": [
+    { "itemClass": "Spliff", "count": 10 }
+  ],
+  "rewards": [
+    { "kind": "item", "itemClass": "1H_KitchenKnife", "quantity": 1, "stackCount": 1 }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `id` | number | Omit or `0` to create; supply it to update |
+| `name` | string | Required. Display name |
+| `enabled` | bool | Whether the drop is eligible for selection |
+| `weight` | number | Weighted-random weight (min 1) |
+| `durationMin` | number | Round length in minutes (1–1440). Or send `durationSec` instead |
+| `required[]` | array | At least one item, each with `itemClass` + `count`. Required item classes may not be substrings of one another |
+| `rewards[]` | array | Item rewards: `kind` (`"item"`), `itemClass`, `quantity`, `stackCount` |
+
+**Response**
+
+```json
+{ "ok": true, "id": 1 }
+```
+
+#### POST /stash-n-dash/drops/delete
+
+Delete a drop by ID.
+
+**Request body** — `{ "id": 1 }`
+
+**Response** — `{ "ok": true }`
+
+#### POST /stash-n-dash/drops/toggle
+
+Enable or disable a drop by ID.
+
+**Request body** — `{ "id": 1, "enabled": false }`
+
+**Response** — `{ "ok": true }`
+
+#### GET /stash-n-dash/sites.json
+
+Lists the cabinet spawn locations.
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "sites": [
+    { "id": 1, "name": "The Lockup", "x": -1834.2, "y": 9921.7, "z": 312.0, "yaw": 90.0, "enabled": true }
+  ]
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `sites[].id` | number | Site ID (preserve it when updating to keep cabinet keying stable) |
+| `sites[].name` | string | Site label |
+| `sites[].x` / `.y` / `.z` | number | World position in Unreal units |
+| `sites[].yaw` | number | Facing rotation in degrees |
+| `sites[].enabled` | bool | Whether cabinets may spawn at this site |
+
+#### POST /stash-n-dash/sites
+
+Replace the **full** set of cabinet spawn locations — send every site you want to keep (omitted sites are removed). Two enabled sites cannot sit within the cabinet recovery radius of each other.
+
+**Request body**
+
+```json
+{
+  "sites": [
+    { "id": 1, "name": "The Lockup", "x": -1834.2, "y": 9921.7, "z": 312.0, "yaw": 90.0, "enabled": true }
+  ]
+}
+```
+
+**Response**
+
+```json
+{ "ok": true, "count": 1 }
+```
+
+#### GET /stash-n-dash/settings.json
+
+Returns the game tunables.
+
+**Response**
+
+```json
+{
+  "ok": true,
+  "settings": {
+    "masterEnabled": false,
+    "liveCabinets": 3,
+    "rotationSec": 1800,
+    "dropGapSec": 0,
+    "depositRangeCm": 300,
+    "selectionMode": "random"
+  }
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `masterEnabled` | bool | Whether the game is currently running |
+| `liveCabinets` | number | How many cabinets are live at once (1–50) |
+| `rotationSec` | number | Seconds between cabinet rotations (min 60) |
+| `dropGapSec` | number | Idle gap between drop rounds, in seconds |
+| `depositRangeCm` | number | How close a player must be to deposit, in centimetres (min 100) |
+| `selectionMode` | string | `"random"` (weighted) or `"sequential"` |
+
+#### POST /stash-n-dash/settings
+
+Update any subset of the tunables. Sending `masterEnabled` starts or stops the game.
+
+**Request body**
+
+```json
+{
+  "liveCabinets": 3,
+  "rotationSec": 1800,
+  "selectionMode": "random",
+  "masterEnabled": true
+}
+```
+
+**Response** — `{ "ok": true }`
+
+#### POST /stash-n-dash/start
+
+Activate the game: spawn cabinets and begin a drop.
+
+**Response** — `{ "ok": true, "queued": true }`
+
+#### POST /stash-n-dash/stop
+
+Deactivate the game: despawn cabinets and end the round.
+
+**Response** — `{ "ok": true, "queued": true }`
