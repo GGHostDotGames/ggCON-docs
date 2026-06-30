@@ -7,6 +7,20 @@ Release notes for ggCON, newest first.
 
 ---
 
+## 0.13.16 — June 30, 2026
+
+### Improvements
+- Stash 'n Dash: the `/stash` command now shows each cabinet's site name (e.g. "A2 Church Ruins") next to its coordinates, so players can find drops without reading grid coordinates
+
+### Fixes
+- Restored the admin command list and API Explorer autocomplete in the panel after the latest SCUM game update (the update had left the command list empty on updated servers — command execution itself was unaffected)
+- Stash 'n Dash: depositing items into drop cabinets no longer freezes or stutters the server, and the items you deposit are now reliably counted toward the drop — fixes a stall (and missed rewards) that could hit busy or long-running servers when several items were deposited in quick succession
+- Fixed a server freeze (and the resulting automatic restart) that could affect servers with a large number of vehicles — the vehicle tracker no longer stalls the server while refreshing live vehicle data
+- `/unstuck` now drops you at ground level instead of keeping your current height — no more landing in mid-air and taking fall damage when the ground is lower where you're teleported
+- Stash 'n Dash: drop cabinets now spread randomly across your enabled sites and change location each rotation, instead of always appearing at the first site in your list
+
+---
+
 ## 0.13.15 — June 28, 2026
 
 ### Plugin Published!
