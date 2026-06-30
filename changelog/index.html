@@ -1,0 +1,2833 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Remote administration mod for SCUM dedicated servers">
+      
+      
+      
+        <link rel="canonical" href="https://ggcon.gghost.games/docs/changelog/">
+      
+      
+        <link rel="prev" href="../disclaimer/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Changelog - ggCON</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#changelog" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ggCON" class="md-header__button md-logo" aria-label="ggCON" data-md-component="logo">
+      
+  <img src="../assets/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ggCON
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Changelog
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GGHostDotGames/ggCON-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GGHostDotGames/ggCON-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../getting-started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../features/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Features
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../http-api/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Integration
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../config-reference/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ggCON" class="md-nav__button md-logo" aria-label="ggCON" data-md-component="logo">
+      
+  <img src="../assets/images/logo.png" alt="logo">
+
+    </a>
+    ggCON
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GGHostDotGames/ggCON-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GGHostDotGames/ggCON-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Features
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../web-panel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Panel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../slash-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slash Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../npc-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NPC System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../auto-update/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auto-Update
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Integration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../http-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rcon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RCON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../log-watcher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Log Watcher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../disclaimer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Disclaimer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#01316-june-30-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.16 — June 30, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.16 — June 30, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#01315-june-28-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.15 — June 28, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.15 — June 28, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plugin-published" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Published!
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#01314-june-24-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.14 — June 24, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.14 — June 24, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#01313-june-17-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.13 — June 17, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.13 — June 17, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plugin-published_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Published!
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-features_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#01312-june-15-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.12 — June 15, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.12 — June 15, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plugin-published_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Published!
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-features_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#01311-june-9-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.11 — June 9, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.11 — June 9, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#01310-june-5-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.10 — June 5, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.10 — June 5, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#improvements_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0138-june-4-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.8 — June 4, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.8 — June 4, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#improvements_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0137-june-3-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.7 — June 3, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.7 — June 3, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0136-june-2-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.6 — June 2, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.6 — June 2, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0135-june-2-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.5 — June 2, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.5 — June 2, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0134-june-1-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.4 — June 1, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.4 — June 1, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixes_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0133-may-26-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.3 — May 26, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.3 — May 26, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0132-may-26-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.2 — May 26, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.2 — May 26, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixes_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0131-may-25-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.1 — May 25, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.1 — May 25, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixes_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0130-may-24-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.0 — May 24, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.0 — May 24, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plugin-published_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Published!
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-features_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#01316-june-30-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.16 — June 30, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.16 — June 30, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#01315-june-28-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.15 — June 28, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.15 — June 28, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plugin-published" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Published!
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#01314-june-24-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.14 — June 24, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.14 — June 24, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#01313-june-17-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.13 — June 17, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.13 — June 17, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plugin-published_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Published!
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-features_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#01312-june-15-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.12 — June 15, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.12 — June 15, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plugin-published_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Published!
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-features_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#01311-june-9-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.11 — June 9, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.11 — June 9, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#01310-june-5-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.10 — June 5, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.10 — June 5, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#improvements_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0138-june-4-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.8 — June 4, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.8 — June 4, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#improvements_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0137-june-3-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.7 — June 3, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.7 — June 3, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0136-june-2-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.6 — June 2, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.6 — June 2, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0135-june-2-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.5 — June 2, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.5 — June 2, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0134-june-1-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.4 — June 1, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.4 — June 1, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixes_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0133-may-26-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.3 — May 26, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.3 — May 26, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0132-may-26-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.2 — May 26, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.2 — May 26, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixes_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0131-may-25-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.1 — May 25, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.1 — May 25, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixes_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0130-may-24-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.13.0 — May 24, 2026
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.13.0 — May 24, 2026">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plugin-published_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Published!
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-features_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improvements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixes_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h1>
+<p>Release notes for ggCON, newest first.</p>
+<div class="admonition tip">
+<p class="admonition-title">Staying up to date</p>
+<p>ggCON checks for updates automatically and can stage them for the next server restart — see <a href="../auto-update/">Auto-Update</a>. Critical updates stage themselves.</p>
+</div>
+<hr />
+<h2 id="01316-june-30-2026">0.13.16 — June 30, 2026<a class="headerlink" href="#01316-june-30-2026" title="Permanent link">&para;</a></h2>
+<h3 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Stash 'n Dash: the <code>/stash</code> command now shows each cabinet's site name (e.g. "A2 Church Ruins") next to its coordinates, so players can find drops without reading grid coordinates</li>
+</ul>
+<h3 id="fixes">Fixes<a class="headerlink" href="#fixes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Restored the admin command list and API Explorer autocomplete in the panel after the latest SCUM game update (the update had left the command list empty on updated servers — command execution itself was unaffected)</li>
+<li>Stash 'n Dash: depositing items into drop cabinets no longer freezes or stutters the server, and the items you deposit are now reliably counted toward the drop — fixes a stall (and missed rewards) that could hit busy or long-running servers when several items were deposited in quick succession</li>
+<li>Fixed a server freeze (and the resulting automatic restart) that could affect servers with a large number of vehicles — the vehicle tracker no longer stalls the server while refreshing live vehicle data</li>
+<li><code>/unstuck</code> now drops you at ground level instead of keeping your current height — no more landing in mid-air and taking fall damage when the ground is lower where you're teleported</li>
+<li>Stash 'n Dash: drop cabinets now spread randomly across your enabled sites and change location each rotation, instead of always appearing at the first site in your list</li>
+</ul>
+<hr />
+<h2 id="01315-june-28-2026">0.13.15 — June 28, 2026<a class="headerlink" href="#01315-june-28-2026" title="Permanent link">&para;</a></h2>
+<h3 id="plugin-published">Plugin Published!<a class="headerlink" href="#plugin-published" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Stash 'n Dash</strong> — a contraband dead-drop race for your players. From the new <strong>Stash 'n Dash</strong> panel tab, define "drops" (the items players must round up) and the map locations where drop cabinets appear, then flip it on. The server hides rotating drop cabinets around the map; players race to deposit the full required item list into a cabinet, and the first to complete it wins your configured reward. Includes weighted-random or sequential drop selection, configurable cabinet count, rotation and time limits, in-character status whispers, an <strong>Active Cabinets</strong> map view with one-click teleport, and a player <code>/stash</code> command to find the current drop. Ships off until you switch it on, and comes pre-loaded with example drops and locations you can edit or replace</li>
+</ul>
+<h3 id="improvements_1">Improvements<a class="headerlink" href="#improvements_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Web panel: faster, steadier live updates — the panel no longer gets stuck in a slower refresh mode after a brief connection hiccup (it now recovers on its own), and more admins can keep the panel open at the same time without it bogging down</li>
+<li>Player conditions now show real severities: the player-card Conditions panel reads true values for hunger, thirst, radiation sickness, hypothermia and other afflictions (many previously read 0%), and is redesigned to mirror the in-game medical monitor — symptoms listed on their own, conditions grouped by treatment stage (Untreated / Stabilization / Recovery) with severity classes and bars. Players carrying many conditions at once (more than 20) previously showed an empty Conditions panel — now fixed</li>
+<li>Friendly item names: the item API now includes a readable display name for each item (e.g. "Painkillers - Blister"), used across the Stash 'n Dash pickers and item lists</li>
+<li>The player data API now reports each player's facing direction (yaw)</li>
+<li>Loot Drops: the Claim list now pages through your <strong>full</strong> claim history (older claims are no longer hidden behind the most-recent cap), and a new "Clear older than N days" button lets you bulk-remove old one-time claim records</li>
+<li>NPC Tracker: puppets now show their combat state, the kill log records where the fatal hit landed, and sentry health bars read correctly</li>
+<li>Web panel: the Status tab now surfaces more world and performance detail (time-of-day period, day-length speed, sun intensity, fog, and a worst-frame timing card), the Flags tab shows your server's flag rules at a glance (element capacity, influence radius, overtake/decay periods, multiple-flags), and a player's card shows their squad capacity and a leader badge</li>
+</ul>
+<h3 id="fixes_1">Fixes<a class="headerlink" href="#fixes_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Flags: element counts now show each flag's real capacity instead of an inflated server-wide maximum</li>
+<li>Vehicles: cars owned by players with very large account IDs now show the correct owner instead of "Unknown"</li>
+<li>Loot Drops: you no longer lose a claim if you disconnect before the items are delivered</li>
+<li>Player Spawn Plus: the "spawn on ground" setting is now read correctly even when written with a space (e.g. <code>= True</code>)</li>
+</ul>
+<hr />
+<h2 id="01314-june-24-2026">0.13.14 — June 24, 2026<a class="headerlink" href="#01314-june-24-2026" title="Permanent link">&para;</a></h2>
+<h3 id="new-features">New Features<a class="headerlink" href="#new-features" title="Permanent link">&para;</a></h3>
+<ul>
+<li>New <strong>Integrations</strong> tab: a directory of community-built tools and integrations that work with ggCON — browse them by category, search, and submit your own</li>
+<li>New <strong>API Explorer</strong> tab: a built-in, searchable reference for the ggCON HTTP API with a live "Try it" console — run read-only calls right from the panel, copy ready-made code snippets (curl / JavaScript / Python), and a confirmation step guards any action that changes your server</li>
+</ul>
+<h3 id="improvements_2">Improvements<a class="headerlink" href="#improvements_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Stability and performance: fewer crashes, and reduced rubberbanding/lag on busy servers — most noticeable around players joining</li>
+</ul>
+<h3 id="fixes_2">Fixes<a class="headerlink" href="#fixes_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Admin command output (for example the confirmation from kicking a player through the API) is no longer shown to a random online player when "Suppress Command Output" is enabled — it's now properly hidden</li>
+<li>Kill Feed: the scheduled leaderboard webhook no longer shows a literal "\n" between rows — the board now formats with proper line breaks</li>
+<li>Loot Drops: the Claim list now loads far more history (previously only the most recent 100 claims), so older claims can be searched and filtered from the panel</li>
+<li>Player Spawn Plus: players who die and respawn during an in-game event (Tab 8) are no longer teleported out to the respawn point and re-kitted — they stay in the event where they respawned</li>
+</ul>
+<hr />
+<h2 id="01313-june-17-2026">0.13.13 — June 17, 2026<a class="headerlink" href="#01313-june-17-2026" title="Permanent link">&para;</a></h2>
+<h3 id="plugin-published_1">Plugin Published!<a class="headerlink" href="#plugin-published_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>ggHaul</strong> — a new admin tool for placing appliances in the world. From the new <strong>Appliances</strong> panel tab, spawn a fridge right in front of any online player (it lands on the ground, facing them), then <strong>Complete</strong> it to keep it permanently — it survives server restarts — or <strong>Delete</strong> it. To move one, delete it and add it again from a better spot. Fridges to start, with more appliance types to come</li>
+</ul>
+<h3 id="new-features_1">New Features<a class="headerlink" href="#new-features_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Taxi: you can now hide a destination from the <code>/taxi</code> list while keeping it bookable by its exact name — handy for secret or reward destinations</li>
+<li>Taxi: each destination can show a short description on the <code>/taxi</code> list (for example <code>Novice Bay ($0): Safe spawn for newcomers</code>)</li>
+<li>Taxi: optional per-player lifetime trip limit per destination (for example one free trip to a reward spot); admins can reset trip counts from the panel</li>
+<li>Quarter Master: players can cancel a purchased package from their stash as long as it hasn't been claimed yet, and get refunded automatically — the refund goes back in whatever currency they paid. A new admin "Cancellation refund %" setting controls how much is returned (default is a full refund)</li>
+<li>Loot Drops: the Claim list now has a search box, sortable columns, and filtering by pack, Steam ID, or name</li>
+<li>Kill Feed: the scheduled leaderboard webhook can now post the Armed NPC, Animal, and Puppet boards as well — pick any combination in the schedule settings, each posted as its own message</li>
+<li>Taxi: group destinations into clusters — <code>/taxi &lt;group&gt;</code> sends the player to a random spot in that group, you can enable or disable a whole group in one click (great for event drop-offs), and a group can share a single trip limit</li>
+<li>Kill Feed: Animal kills now have their own filter button in the live feed, separate from the NPC filter</li>
+<li>Player Spawn Plus: the respawn loadout no longer replaces a player's gear when they are revived on the spot (for example with Phoenix Tears) — it now only fires on a real respawn. This is on by default; you can turn the distinction off, and set how far a player must move for it to count as a respawn</li>
+</ul>
+<h3 id="improvements_3">Improvements<a class="headerlink" href="#improvements_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Panel: Save buttons now show a clear "Saved" confirmation in the corner, with a red message if a save fails</li>
+</ul>
+<h3 id="fixes_3">Fixes<a class="headerlink" href="#fixes_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Kill Feed: kills of NPCs, animals, and puppets no longer show a misleading weapon (you could see things like "killed with a banana" — the held item at the time, not the actual weapon). These kills now simply show who made the kill, with no weapon. Player-vs-player weapons are unchanged.</li>
+<li>NPC Tracker: animal and bird kills now register correctly, and live animals (crows in particular) no longer show as "dead" while they're still alive. Animal health bars are also more accurate.</li>
+<li>Fixed players sometimes vanishing from the live player list and map — and shop deliveries, loot packs, teleports, and Give Item failing with "player not online" even though the player was actually online</li>
+<li>Fixed certain weapons (the MP5 family and other load-on-demand items) failing to spawn at a map location via the bot/API — they now spawn at the requested coordinates</li>
+<li>Loot Drops: allow-list player names now stay visible when you reopen a pack's editor (they were showing up blank)</li>
+<li>Fixed some panel inputs and helper text that could appear blank or invisible</li>
+<li>Fixed the panel, storefront, or API sometimes staying locked out ("too many attempts") even once you started entering the correct password — the lockout now counts down and clears on its own</li>
+<li>Reduced crashes on servers that have a corrupted vehicle: ggCON now detects the bad vehicle, stops re-reading it, and flags it in the dashboard so it can be removed</li>
+</ul>
+<hr />
+<h2 id="01312-june-15-2026">0.13.12 — June 15, 2026<a class="headerlink" href="#01312-june-15-2026" title="Permanent link">&para;</a></h2>
+<h3 id="plugin-published_2">Plugin Published!<a class="headerlink" href="#plugin-published_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Player Spawn Plus — give players a configurable gear loadout automatically: on a new player's first deploy, after a character re-roll, on every respawn, or on demand from a player's detail card. First-deploy and respawn kits can teleport the player to a location you choose first. Build multiple named loadouts with worn clothing and inventory items (weapons included — they're delivered to the player's inventory, so make sure the kit includes enough storage). Separate configurable cooldowns keep respawn and re-roll kits from being farmed. Automatic loadouts require <code>scum.EnableSpawnOnGround=True</code> in your server settings (the Rules page checks this for you and explains if it isn't set). When you first turn it on, players who have already played on your server are treated as existing players — only brand-new arrivals get the new-player kit. Ships disabled by default</li>
+</ul>
+<h3 id="new-features_2">New Features<a class="headerlink" href="#new-features_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Quarter Master: new "Clear All" button in Economy → Player Balances sets every player's ration balance to zero — for resetting the shop economy after a server wipe. Requires typing CLEAR to confirm; GG Coins are not affected</li>
+</ul>
+<h3 id="fixes_4">Fixes<a class="headerlink" href="#fixes_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fixed a rare timing issue where an item delivery could freeze the server for about 15 seconds and disconnect players</li>
+<li>Fixed a rare issue where recording a crash report could freeze the server for several minutes before it restarted — crash details are now saved instantly</li>
+<li>Quarter Master: renaming a claim/delivery zone no longer clears that zone from your packages — package zone assignments now follow the renamed zone automatically</li>
+<li>Item thumbnails: Military Masks / Balaclavas now show their real mask icons instead of a beanie picture. The same fix corrects about 30 other items whose thumbnail showed a lookalike item — including some ammo piles (7.62x39 vs 7.62x54R), fish fillets, harvested animal parts, and the red RK beanie</li>
+</ul>
+<hr />
+<h2 id="01311-june-9-2026">0.13.11 — June 9, 2026<a class="headerlink" href="#01311-june-9-2026" title="Permanent link">&para;</a></h2>
+<h3 id="new-features_3">New Features<a class="headerlink" href="#new-features_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Warning messages can now use a custom prefix / sender template (for example <code>Server Botcast: {message}</code>) so they read like an official announcement. Set it in Settings → General → Warning Prefix; leave it blank to keep sending warnings with no prefix</li>
+<li>Save named colour presets for warning messages in Settings → General → Saved Warning Colours, then pick one from a dropdown when sending a Warning — no more re-choosing the colour each time</li>
+</ul>
+<h3 id="fixes_5">Fixes<a class="headerlink" href="#fixes_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Further reduced server crashes that can occur when items, vehicles, or NPCs are spawned for players — for example shop deliveries, loot packs, or several players claiming at once on a busy server</li>
+<li>Kill Feed leaderboard: the <strong>All</strong> time window now loads quickly on servers with a long kill history, instead of being slow or timing out</li>
+</ul>
+<hr />
+<h2 id="01310-june-5-2026">0.13.10 — June 5, 2026<a class="headerlink" href="#01310-june-5-2026" title="Permanent link">&para;</a></h2>
+<h3 id="improvements_4">Improvements<a class="headerlink" href="#improvements_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Admin chat/whisper templates now support a <code>{playerDisplayName}</code> placeholder that inserts the recipient's fake IGN (their <code>#setfakename</code> alias) when they have one, and otherwise their normal character name — so one template can address VIPs by their alias and everyone else by their real name. (The existing <code>{playerName}</code> still always shows the real character name.)</li>
+</ul>
+<h3 id="fixes_6">Fixes<a class="headerlink" href="#fixes_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fixed a server crash that could happen when a large batch of items was delivered at once — for example a big shop package or loot pack, or several players claiming at the same time on a busy server. Large item deliveries are now paced out smoothly instead of spawning everything in a single instant</li>
+<li>The panel's Send Message and Warning fields no longer trigger your browser's saved-login autofill popup</li>
+<li>Fixed repeated panel Settings saves slowly corrupting text fields that contain backslashes (e.g. file paths or message templates) — backslashes were duplicated on each save, which over time could bloat the settings file and mangle the log watcher source list</li>
+<li><code>/unstuck</code> now posts to its Discord webhook every time a player uses it (previously only when admin-approval mode was enabled). Also, the saved Discord webhook fields in Settings now clearly show "✓ Saved" instead of appearing blank, so it's obvious the URL is still stored</li>
+</ul>
+<hr />
+<h2 id="0138-june-4-2026">0.13.8 — June 4, 2026<a class="headerlink" href="#0138-june-4-2026" title="Permanent link">&para;</a></h2>
+<h3 id="improvements_5">Improvements<a class="headerlink" href="#improvements_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Kill Feed leaderboard: the <strong>NPC</strong> column (and <code>/leaderboard npc</code>) is now <strong>Armed NPC</strong> — it counts only armed human enemies (Drifters, Guards), so animals and puppets are no longer double-counted there (they keep their own columns). Drones and sentries aren't counted. <code>/leaderboard armed</code> also works</li>
+</ul>
+<h3 id="fixes_7">Fixes<a class="headerlink" href="#fixes_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Stability: fixed a rare server crash that could happen when items, vehicles, or NPCs were spawned for a player on a busy server — for example claiming a loot pack or completing a shop purchase right as that player's session was changing. The server now delivers against the player's current session instead of crashing (and if the player has just left, the items stay claimable instead of being lost)</li>
+<li>Kill Feed leaderboard: the in-game <code>/leaderboard</code> (alias <code>/top</code>) and the scheduled Discord leaderboard now match the panel — previously they could come back empty or wrong for time-windowed views while the panel showed the right standings. Usage: <code>/leaderboard [type] [window]</code> — <strong>type</strong> = <code>pvp</code> (default), <code>armed</code>, <code>animal</code>, or <code>puppet</code>; <strong>window</strong> = <code>24h</code>, <code>7d</code> (default), <code>30d</code>, or <code>all</code> (e.g. <code>/leaderboard armed 30d</code>)</li>
+</ul>
+<hr />
+<h2 id="0137-june-3-2026">0.13.7 — June 3, 2026<a class="headerlink" href="#0137-june-3-2026" title="Permanent link">&para;</a></h2>
+<h3 id="new-features_4">New Features<a class="headerlink" href="#new-features_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Quarter Master: each shop package can now be assigned its own delivery zone, so players claim that package only inside the chosen zone (e.g. boats at the docks, planes at the airfield). Packages left on "Any zone" behave as before. Applies when "Require delivery zone" is enabled</li>
+</ul>
+<h3 id="improvements_6">Improvements<a class="headerlink" href="#improvements_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The Copy SteamID button now also appears on offline players' detail cards (previously it was only on online players)</li>
+</ul>
+<h3 id="fixes_8">Fixes<a class="headerlink" href="#fixes_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Taxi rides, shop purchases, and panel currency adjustments no longer occasionally fail with "Fare deduction failed" (or a similar error) on busy servers</li>
+</ul>
+<hr />
+<h2 id="0136-june-2-2026">0.13.6 — June 2, 2026<a class="headerlink" href="#0136-june-2-2026" title="Permanent link">&para;</a></h2>
+<h3 id="new-features_5">New Features<a class="headerlink" href="#new-features_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Kill Feed leaderboard now ranks NPC, Animal, and Puppet kills too — new Animal and Puppet columns on the Leaderboard tab, and <code>/leaderboard</code> (and <code>/top</code>) accept a type, e.g. <code>/leaderboard npc</code>, <code>/leaderboard animal 30d</code>, or <code>/leaderboard puppet</code></li>
+<li>The events feed now shows NPC and animal kills when the NPC Tracker plugin is installed</li>
+</ul>
+<h3 id="improvements_7">Improvements<a class="headerlink" href="#improvements_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Player detail window now has a one-click Copy SteamID button next to the Steam profile link</li>
+</ul>
+<h3 id="fixes_9">Fixes<a class="headerlink" href="#fixes_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Taxi: free rides (fare set to 0) now work instead of failing with "Fare deduction failed. No charge, no ride."</li>
+<li>Kill Feed leaderboard no longer shows NPCs (like Drifters) as top players — only player kills are ranked</li>
+</ul>
+<hr />
+<h2 id="0135-june-2-2026">0.13.5 — June 2, 2026<a class="headerlink" href="#0135-june-2-2026" title="Permanent link">&para;</a></h2>
+<h3 id="new-features_6">New Features<a class="headerlink" href="#new-features_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>After a ggCON update, the panel now shows a quick "What's New" popup with a link to the changelog, plus a reminder of where to send feedback and feature requests. Appears once per version</li>
+</ul>
+<h3 id="fixes_10">Fixes<a class="headerlink" href="#fixes_10" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Squads panel now shows each member's correct online and alive status — a living, online squad member could previously show as dead</li>
+</ul>
+<hr />
+<h2 id="0134-june-1-2026">0.13.4 — June 1, 2026<a class="headerlink" href="#0134-june-1-2026" title="Permanent link">&para;</a></h2>
+<h3 id="fixes_11">Fixes<a class="headerlink" href="#fixes_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Stability: fixed a rare server crash that could happen when a player disconnected at the exact moment the server was processing an action for them (admin commands, chat or kill notifications, shop currency changes, squad edits) — the server now safely skips the stale action instead of crashing</li>
+<li>Item deliveries no longer crawl on busy servers — loot-drop packs, shop claims, and bulk grants that could dribble out one item every several seconds now deliver at full speed again; in-game chat and live panel updates are no longer held up either</li>
+<li>Panel update checks and Plugin Manager are now much faster — fixed a Windows-side delay that could add up to 10 seconds per check on certain server configurations</li>
+<li>Kill Feed: turning off "Include map image" in the public webhook settings now stays off after a reload</li>
+</ul>
+<hr />
+<h2 id="0133-may-26-2026">0.13.3 — May 26, 2026<a class="headerlink" href="#0133-may-26-2026" title="Permanent link">&para;</a></h2>
+<h3 id="new-features_7">New Features<a class="headerlink" href="#new-features_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Suppress "Spawned X" confirmations</strong> — a new toggle in Settings → General hides spawn confirmations from the executor's in-game chat when items are handed out from the panel, RCON, or a plugin (off by default).</li>
+</ul>
+<h3 id="improvements_8">Improvements<a class="headerlink" href="#improvements_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Map sector grid lines and labels are now easy to read against any tile background.</li>
+</ul>
+<h3 id="fixes_12">Fixes<a class="headerlink" href="#fixes_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Panel login now shows a specific message (wrong password, lockout countdown, IP blocked, or network error) instead of silently bouncing back to a blank screen.</li>
+<li>The panel password now displays correctly in TCAdmin's Configuration Files editor.</li>
+<li><code>#SetCurrencyBalance</code>, <code>#ChangeCurrencyBalance</code>, <code>#SetFamePoints</code>, and <code>#ChangeFamePoints</code> typed in the panel console now respond instantly and accept unquoted Steam IDs.</li>
+<li>"Loading…" item-load messages no longer spam the executor's chat when items are dispatched from the panel, RCON, or a plugin.</li>
+<li>"Yellow" chat is yellow again after the SCUM update, and a new "Orange" color option was added for the bright MOTD style.</li>
+<li>Edits to the Admin Chat Sender Prefix now save correctly.</li>
+</ul>
+<hr />
+<h2 id="0132-may-26-2026">0.13.2 — May 26, 2026<a class="headerlink" href="#0132-may-26-2026" title="Permanent link">&para;</a></h2>
+<h3 id="fixes_13">Fixes<a class="headerlink" href="#fixes_13" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>In-game chat restored after the SCUM update</strong> — after the game's update, some servers stopped seeing chat in-game: panel broadcasts and <code>#MessagePlayer</code> reported success but nothing appeared, <code>/shop</code> no longer showed the login and password, and slash commands like <code>/taxi</code> teleported the player but skipped the chat confirmation. Once a player hit this, even SCUM's own admin replies stopped displaying until they reconnected. ggCON now matches the new chat format, so chat reaches players normally again — no admin action required.</li>
+</ul>
+<hr />
+<h2 id="0131-may-25-2026">0.13.1 — May 25, 2026<a class="headerlink" href="#0131-may-25-2026" title="Permanent link">&para;</a></h2>
+<h3 id="fixes_14">Fixes<a class="headerlink" href="#fixes_14" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Updated for the latest SCUM build</strong> — the admin-command system stopped responding after the SCUM update (panel admin commands, <code>#ExecAs</code>, and slash commands that run admin commands would silently do nothing). Fixed, with all other systems verified working.</li>
+<li><strong>Plugin Manager</strong> — the "Check for Plugins" button no longer errors on certain manifest text.</li>
+</ul>
+<hr />
+<h2 id="0130-may-24-2026">0.13.0 — May 24, 2026<a class="headerlink" href="#0130-may-24-2026" title="Permanent link">&para;</a></h2>
+<h3 id="plugin-published_3">Plugin Published!<a class="headerlink" href="#plugin-published_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Taxi Service</strong> — a paid teleport service. Players use <code>/taxi &lt;name&gt;</code> to travel to destinations you configure, paying in in-game cash. A configurable countdown (default 120s) cancels and refunds the ride if the player takes damage, dies, or logs out, so it can't be used to escape a fight. Includes per-player cooldowns. Off by default — enable it from the plugin marketplace when you're ready.</li>
+</ul>
+<h3 id="new-features_8">New Features<a class="headerlink" href="#new-features_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Kill Feed: leaderboard</strong> — a new Leaderboard sub-tab ranks players by PvP kills, deaths, K/D, NPC kills, trap kills, suicides, longest shot, and favorite weapon, with selectable time windows and top-3 medals. Players can run <code>/leaderboard</code> (alias <code>/top</code>) in chat, and you can schedule a leaderboard to post to Discord daily or weekly.</li>
+<li><strong>Kill Feed: per-type Discord webhooks + PvP delay</strong> — route PvP, NPC, Trap, and Suicide kills to separate Discord channels, and optionally delay player-kill posts by a set number of minutes. The delay queue survives a restart.</li>
+<li><strong>Kill Feed: in-game chat broadcasts</strong> — announce kills in chat, per type, with editable templates (<code>{killer}</code>, <code>{victim}</code>, <code>{weapon}</code>, <code>{distance}</code>, <code>{category}</code>) and a color. All off by default.</li>
+<li><strong>Quarter Master: export / import packages</strong> — back up your shop or share package templates as a JSON file. Categories are matched by name, so templates move cleanly between servers.</li>
+<li><strong>Quarter Master: delivery zones</strong> — optionally require players to stand in a configured zone (shop counter, safe room, event point) to claim their stash.</li>
+<li><strong>Quarter Master: squad-kill penalty</strong> — when killer and victim are in the same squad, replace the PvP reward with a configurable deduction to discourage friendly fire.</li>
+<li><strong>Quarter Master: per-class kill rewards</strong> — set a custom reward for a specific NPC type (e.g. Razor) that overrides the broad category default.</li>
+<li><strong>Quarter Master: bundle thumbnails</strong> — multi-item packages show a representative item icon (you choose the "lead" item) and a Bundle badge.</li>
+<li><strong>Quarter Master: open / close controls</strong> — open or close the shop and deliveries independently, plus a per-category enable toggle.</li>
+<li><strong>Quarter Master: Grant Rations to All</strong> — bulk-grant rations to every online player, optionally including offline players who have used the shop before.</li>
+<li><strong>Loot Drops: vehicles</strong> — packs can now include assembled vehicles alongside items.</li>
+<li><strong>Admin chat sender prefix</strong> — chat sent from the panel shows a configurable prefix (default <code>[ADMIN]</code> / <code>[WHISPER from ADMIN]</code>) so players know an admin is talking. Supports placeholders and per-message overrides.</li>
+<li><strong>Identity columns</strong> — the Players and All Players lists now show Account ID, Real IGN, and Fake IGN, and the search box matches all of them.</li>
+<li><strong><code>/unstuck</code> command</strong> — players type <code>/unstuck</code> to free themselves from terrain glitches. Admin-configurable distance, cooldown, optional approval queue, and Discord alert.</li>
+<li><strong>Teleport: paste coordinates + saved destinations</strong> — teleport by pasting <code>X Y Z</code>, choosing a saved destination, or clicking the map, with an optional facing direction.</li>
+<li><strong>Stack count</strong> — Loot Drops and Quarter Master package items get a stack-size field (great for ammo and cash).</li>
+<li><strong><code>#GiveItem</code> keyword syntax</strong> — <code>#GiveItem</code> now accepts SCUM's native <code>StackCount</code> keyword form.</li>
+</ul>
+<h3 id="improvements_9">Improvements<a class="headerlink" href="#improvements_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Quantity safety cap</strong> — pack and package items are capped at 999 per slot to prevent server-crashing configurations; use the Stack field for high amounts.</li>
+</ul>
+<h3 id="fixes_15">Fixes<a class="headerlink" href="#fixes_15" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Quarter Master: in-game cash now deducts immediately on purchase</strong> — previously it waited until the player's next login.</li>
+<li><strong>No more false "player left" events on single-player servers.</strong></li>
+<li><strong><code>#Teleport</code> from the panel, RCON, or API is now under a second</strong> and handles unquoted Steam IDs.</li>
+<li><strong>Panel FPS card no longer stuck at 0.0</strong> if SCUM was accidentally removed from the watched log sources.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Made by <a href="https://www.gghost.games" target="_blank">GG Host</a>
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1989 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Remote administration mod for SCUM dedicated servers">
+      
+      
+      
+        <link rel="canonical" href="https://ggcon.gghost.games/docs/plugins/">
+      
+      
+        <link rel="prev" href="../web-panel/">
+      
+      
+        <link rel="next" href="../slash-commands/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Plugins - ggCON</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#plugins" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ggCON" class="md-header__button md-logo" aria-label="ggCON" data-md-component="logo">
+      
+  <img src="../assets/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ggCON
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Plugins
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GGHostDotGames/ggCON-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GGHostDotGames/ggCON-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../getting-started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../features/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Features
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../http-api/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Integration
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../config-reference/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../changelog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ggCON" class="md-nav__button md-logo" aria-label="ggCON" data-md-component="logo">
+      
+  <img src="../assets/images/logo.png" alt="logo">
+
+    </a>
+    ggCON
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GGHostDotGames/ggCON-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GGHostDotGames/ggCON-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Features
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../web-panel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Panel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-plugins-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Plugins Work
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version Compatibility
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#available-plugins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available Plugins
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Available Plugins">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loot-drops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loot Drops
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log-analyzer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log Analyzer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kill-feed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kill Feed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trap-feed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trap Feed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#npc-tracker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NPC Tracker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quarter-master" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quarter Master
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quarter Master">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#admin-panel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Admin Panel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#player-storefront" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Player Storefront
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gg-coins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GG Coins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delivery-safety" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delivery Safety
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server Directory
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#taxi-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Taxi Service
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gghaul" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ggHaul
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#player-spawn-plus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Player Spawn Plus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stash-n-dash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stash 'n Dash
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coming-soon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coming Soon
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Coming Soon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ai-npcs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AI NPCs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#marketplace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Marketplace
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Marketplace">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accessing-the-marketplace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing the Marketplace
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plugin-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../slash-commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slash Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../npc-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NPC System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../auto-update/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auto-Update
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Integration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../http-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rcon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RCON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../log-watcher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Log Watcher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../disclaimer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Disclaimer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-plugins-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Plugins Work
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version Compatibility
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#available-plugins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available Plugins
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Available Plugins">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loot-drops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loot Drops
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log-analyzer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log Analyzer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kill-feed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kill Feed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trap-feed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trap Feed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#npc-tracker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NPC Tracker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quarter-master" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quarter Master
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quarter Master">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#admin-panel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Admin Panel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#player-storefront" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Player Storefront
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gg-coins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GG Coins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delivery-safety" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delivery Safety
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server Directory
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#taxi-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Taxi Service
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gghaul" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ggHaul
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#player-spawn-plus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Player Spawn Plus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stash-n-dash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stash 'n Dash
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coming-soon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coming Soon
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Coming Soon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ai-npcs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AI NPCs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#marketplace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Marketplace
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Marketplace">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accessing-the-marketplace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing the Marketplace
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plugin-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="plugins">Plugins<a class="headerlink" href="#plugins" title="Permanent link">&para;</a></h1>
+<p>ggCON supports a plugin system that lets you extend the mod with additional features. Plugins are standalone modules that live in a <code>plugins/</code> folder alongside the main ggCON DLL and are loaded automatically on startup.</p>
+<h2 id="how-plugins-work">How Plugins Work<a class="headerlink" href="#how-plugins-work" title="Permanent link">&para;</a></h2>
+<p>Each plugin can:</p>
+<ul>
+<li><strong>Add a panel tab</strong> — custom HTML UI that appears as a new tab in the web panel</li>
+<li><strong>Register HTTP routes</strong> — add new API endpoints accessible via the ggCON HTTP API</li>
+<li><strong>Register slash commands</strong> — add in-game chat commands (e.g. <code>/starter</code>) that players can use</li>
+<li><strong>React to events</strong> — respond when players join, leave, or send chat messages</li>
+<li><strong>Execute commands</strong> — run admin commands and spawn items through the host API</li>
+<li><strong>Send notifications</strong> — deliver chat messages, warnings, and HUD overlays to players</li>
+</ul>
+<h2 id="version-compatibility">Version Compatibility<a class="headerlink" href="#version-compatibility" title="Permanent link">&para;</a></h2>
+<p>Plugins can declare a minimum ggCON version in their metadata. If your installed ggCON version is older than what a plugin requires, the Plugin Manager will show a <strong>"Requires vX.Y.Z+"</strong> notice and block installation until you update ggCON.</p>
+<hr />
+<h2 id="available-plugins">Available Plugins<a class="headerlink" href="#available-plugins" title="Permanent link">&para;</a></h2>
+<h3 id="loot-drops">Loot Drops<a class="headerlink" href="#loot-drops" title="Permanent link">&para;</a></h3>
+<p>Configurable item drop packs with slash commands, per-player allowlists, and claim limits.</p>
+<ul>
+<li><strong>Drop packs</strong> — create bundles of items that players can claim with a slash command (e.g. <code>/starter</code>, <code>/event-drop</code>)</li>
+<li><strong>Vehicles in packs</strong> — packs can include assembled vehicles alongside items; click <strong>+ Vehicle</strong> in the pack editor to pick from the live vehicle catalog. Vehicle rows show a 🚗 icon and a <strong>VEHICLE</strong> badge. A quantity above 1 spawns that many separate vehicles</li>
+<li><strong>Stack count</strong> — each item has a stack-size field next to quantity. Use it for ammo, cash, and other stackable items so players receive one stack instead of many separate piles</li>
+<li><strong>Per-player limits</strong> — set how many times each player can claim a pack (e.g. once per wipe)</li>
+<li><strong>Allowlists</strong> — optionally restrict packs to specific Steam IDs</li>
+<li><strong>Expiry dates</strong> — set an expiry time after which the pack is no longer claimable</li>
+<li><strong>Panel management</strong> — create, edit, enable/disable, and delete packs from the Loot Drops tab in the web panel</li>
+<li><strong>Claim tracking</strong> — view all player claims with timestamps; clear claims in bulk (e.g. after a server wipe)</li>
+<li><strong>Category filter</strong> — item picker includes a category dropdown to quickly find items by type (Weapons, Ammunition, Food, etc.)</li>
+<li><strong>Smart delivery</strong> — items are queued and spawned one per tick to prevent server overload</li>
+</ul>
+<p><img alt="Loot Drops Panel Tab" src="../assets/images/panel/panel-drops.jpg" /></p>
+<p><strong>Slash commands:</strong> Each pack registers its own command (configurable). Players type the command in chat to claim.</p>
+<p><strong>Requires:</strong> ggCON v0.11.0+</p>
+<hr />
+<h3 id="log-analyzer">Log Analyzer<a class="headerlink" href="#log-analyzer" title="Permanent link">&para;</a></h3>
+<p>Server performance analytics — replaces the standalone ServerLogAnalyzer desktop tool.</p>
+<ul>
+<li><strong>Analytics tab</strong> — 10 interactive time-series charts: FPS, frame time, character count, prisoner count, zombie count, animal count, vehicle count, and more</li>
+<li><strong>Summary cards</strong> — at-a-glance stats including average FPS, minimum FPS, peak zombies, peak animals, and sample count</li>
+<li><strong>Time range selector</strong> — view data over the last 1 hour, 6 hours, 24 hours, or 7 days</li>
+<li><strong>Load Log button</strong> — triggers incremental log read on demand</li>
+<li><strong>Persistent history</strong> — up to 7 days of minute-resolution data retained across restarts</li>
+</ul>
+<p>It surfaces server performance and entity metrics from SCUM's Global Stats logs on the Analytics panel tab — server FPS history, uptime, entity and vehicle counts, and similar — and replaces the old desktop ServerLogAnalyzer tool. It is read-only monitoring; it makes no changes to your server.</p>
+<p><strong>Requires:</strong> a recent ggCON build</p>
+<hr />
+<h3 id="kill-feed">Kill Feed<a class="headerlink" href="#kill-feed" title="Permanent link">&para;</a></h3>
+<p>Real-time kill event feed for PvP, NPC, trap, and suicide kills, with history, Discord integration, in-game broadcasts, and a leaderboard.</p>
+<ul>
+<li><strong>Kill list</strong> — scrollable feed showing killer, victim, weapon, distance, and kill type (PvP, NPC, Trap, Suicide)</li>
+<li><strong>Weapon icons</strong> — dynamic icon lookup from the item catalog with a manual fallback table for common weapons</li>
+<li><strong>Detail strip</strong> — expanded view of the selected kill event with full player info</li>
+<li><strong>Interactive map</strong> — shows killer and victim positions with markers</li>
+<li><strong>LIVE / PAUSED mode</strong> — auto-follow new events in LIVE mode, or freeze the list to inspect past events</li>
+<li><strong>History</strong> — review past events with a time-window dropdown (Current Session / 24h / 48h / All)</li>
+<li><strong>Multi-select type filters</strong> — toggle PvP / NPC / Trap / Suicide independently (e.g. show PvP + Trap, hide NPC); the <strong>All</strong> chip resets to everything. Your choice is remembered across reloads</li>
+<li><strong>NPC kills</strong> — player-vs-NPC kills appear in the feed when the <a href="#npc-tracker">NPC Tracker</a> plugin is installed, with weapon icons and map markers</li>
+</ul>
+<p><strong>Discord webhooks</strong></p>
+<ul>
+<li>Post kills to a Discord channel with weapon icons and full kill detail</li>
+<li><strong>Per-type webhooks</strong> — route PvP / NPC / Trap / Suicide to separate channels (each falls back to a default URL if left blank), so a PvP-monitoring channel isn't flooded with NPC kills</li>
+<li><strong>PvP delay</strong> — optionally hold player-kill posts for a configurable number of minutes (for OPSEC during competitive events); the delay queue survives a server restart</li>
+<li><strong>Map snapshot</strong> — optionally include a map image of where the kill happened in the public embed</li>
+</ul>
+<p><strong>In-game chat broadcasts</strong></p>
+<ul>
+<li>Announce kills in in-game chat, configured per type (PvP / NPC / Trap / Suicide)</li>
+<li>Editable templates with placeholders <code>{killer}</code>, <code>{victim}</code>, <code>{weapon}</code>, <code>{distance}</code>, and <code>{category}</code>, plus a color picker</li>
+<li>All types disabled by default — opt in per type</li>
+</ul>
+<p><strong>Leaderboard</strong></p>
+<ul>
+<li><strong>Leaderboard sub-tab</strong> — rank players by PvP kills, PvP deaths, K/D ratio, Armed NPC kills (armed human enemies only — Drifters, Guards; animals, puppets, drones, and sentries are excluded), Animal kills, Puppet kills, trap kills, suicides, longest shot, and favorite weapon. Filter by time window (Current Session / 24h / 7 days / 30 days / All); the top 3 get gold/silver/bronze medals</li>
+<li><strong><code>/leaderboard</code> slash command</strong> (alias <code>/top</code>) — players see a quick top-10 in chat. Optional type and window, in any order: <code>/leaderboard [type] [window]</code>, where <strong>type</strong> = <code>pvp</code> (default), <code>armed</code> (Armed NPC; <code>npc</code> also works), <code>animal</code>, or <code>puppet</code>, and <strong>window</strong> = <code>24h</code>, <code>7d</code> (default), <code>30d</code>, or <code>all</code> — e.g. <code>/leaderboard armed 30d</code> or <code>/top animal</code></li>
+<li><strong>Scheduled Discord leaderboard</strong> — post a leaderboard to Discord on a schedule. You can pick any combination of the PvP, Armed NPC, Animal, and Puppet boards, and each is posted as its own message</li>
+</ul>
+<p>The live feed also has a dedicated <strong>Animal</strong> filter chip, separate from the NPC chip, so animal kills can be shown or hidden on their own.</p>
+<p><strong>Requires:</strong> ggCON v0.12.8+ (NPC kills require the NPC Tracker plugin)</p>
+<hr />
+<h3 id="trap-feed">Trap Feed<a class="headerlink" href="#trap-feed" title="Permanent link">&para;</a></h3>
+<p>Real-time trap event feed showing crafting, arming, disarming, and triggering of traps.</p>
+<ul>
+<li><strong>Event list</strong> — scrollable feed of trap events with player name, trap type, and action (Crafted, Armed, Disarmed, Triggered)</li>
+<li><strong>Trap icons</strong> — trap-specific icons for each trap type</li>
+<li><strong>Detail strip</strong> — expanded view of the selected event</li>
+<li><strong>Interactive map</strong> — shows trap locations with markers</li>
+<li><strong>LIVE / PAUSED mode</strong> — auto-follow new events or freeze the list</li>
+</ul>
+<p><strong>Requires:</strong> ggCON v0.12.8+</p>
+<hr />
+<h3 id="npc-tracker">NPC Tracker<a class="headerlink" href="#npc-tracker" title="Permanent link">&para;</a></h3>
+<p>Real-time tracking of every AI character on your server — guards, drifters, zombies, animals, sentries, drones, and Razor.</p>
+<ul>
+<li><strong>Tracked types</strong> — guards, drifters, zombies, animals, sentries, drones, and Razor, each shown with its own category color</li>
+<li><strong>Live status</strong> — health bars and alive/dead status, updated continuously</li>
+<li><strong>Kill log</strong> — records NPC kills, including the weapon used</li>
+<li><strong>Map markers</strong> — NPC positions shown on the live map</li>
+<li><strong>Feeds other plugins</strong> — NPC kills flow into the <a href="#kill-feed">Kill Feed</a>, and <a href="#quarter-master">Quarter Master</a> can award rations per NPC type (see Kill rewards below)</li>
+</ul>
+<p><strong>Requires:</strong> ggCON v0.12.9+</p>
+<hr />
+<h3 id="quarter-master">Quarter Master<a class="headerlink" href="#quarter-master" title="Permanent link">&para;</a></h3>
+<p>A complete in-game economy and player reward system with a web storefront — give your players something to work toward.</p>
+<p>Admins build item packages and set prices in Rations, in-game Cash, or both. Players browse and purchase from a web storefront, then claim their items in-game. Combined with GG Coins — a cross-server currency earned by playtime — Quarter Master turns your server's economy into a reason to keep playing.</p>
+<h4 id="admin-panel">Admin Panel<a class="headerlink" href="#admin-panel" title="Permanent link">&para;</a></h4>
+<p>The Quarter Master tab in the web panel is where you create and manage everything:</p>
+<ul>
+<li><strong>Packages</strong> — bundle any combination of items into purchasable packages; set a name, description, and price in Rations, Cash, or both</li>
+<li><strong>Stack count</strong> — each item in a package has a stack-size field, so a single package slot can deliver a full stack (ammo, cash, etc.) instead of many separate piles</li>
+<li><strong>Categories</strong> — organize packages into custom categories (e.g., Weapons, Supplies, Gear); categories appear as filter pills in the storefront. Each category has an enable toggle to hide its packages without deleting them</li>
+<li><strong>Discounts</strong> — set a percentage discount on any package with an optional expiry date; storefront shows the original price crossed out with a "X% OFF" badge</li>
+<li><strong>Stock limits</strong> — cap how many times a package can be purchased; storefront shows "3 left" or "Sold Out" automatically</li>
+<li><strong>Vehicle packages</strong> — sell vehicles through the shop; a permanent "Vehicles" category is auto-populated from the game engine's 19 vehicle types; enable individual vehicles and set prices</li>
+<li><strong>Bundle thumbnails</strong> — multi-item packages automatically show a representative item icon (you can pick which item is the "lead") and a <strong>Bundle</strong> badge in the storefront</li>
+<li><strong>Export / import packages</strong> — back up your shop or share package templates as a JSON file; import matches categories by name so templates are portable across servers, with auto-rename for conflicts and an import preview</li>
+<li><strong>Open / close controls</strong> — open or close the shop (new purchases) and deliveries (stash claims) independently; use them to freeze the shop during events without touching anyone's balances or stash</li>
+<li><strong>Example presets</strong> — new installs come with 3 example categories and 5 sample packages to get started quickly</li>
+<li><strong>Economy overview</strong> — a sales summary (totals, sales by category, top packages) plus a Player Lookup tool for reviewing transaction history, stash contents, and resolving disputes</li>
+<li><strong>Grant Rations to All</strong> — bulk-grant rations to every online player in one click, optionally including offline players who have used the shop before</li>
+<li><strong>Clear All balances</strong> — a button on the Economy → Player Balances view sets every player's ration balance to zero, for resetting the shop economy after a server wipe. It requires typing <code>CLEAR</code> to confirm, and GG Coins are never affected</li>
+</ul>
+<p><strong>Kill rewards</strong></p>
+<ul>
+<li>Award Rations for <strong>PvP kills</strong> and <strong>NPC kills</strong>, with separate amounts per NPC category (Guard, Drifter, Zombie, Animal, Sentry, Drone)</li>
+<li><strong>Per-class overrides</strong> — set a custom reward for a specific NPC type (e.g. Razor) that wins over the category default</li>
+<li><strong>Squad-kill penalty</strong> — optionally replace the PvP reward with a deduction when killer and victim are in the same squad, to discourage friendly fire (suicides are exempt)</li>
+<li>NPC kill rewards require the <a href="#npc-tracker">NPC Tracker</a> plugin</li>
+</ul>
+<h4 id="player-storefront">Player Storefront<a class="headerlink" href="#player-storefront" title="Permanent link">&para;</a></h4>
+<p>Players access their server's storefront at <code>shop.gghost.games</code>, log in with their Steam ID and a one-time PIN (generated by the <code>/shop</code> slash command in-game), and browse available packages.</p>
+<ul>
+<li><strong>Browse and filter</strong> — category pills, package cards with item icons, quantity badges, and descriptions</li>
+<li><strong>Purchase flow</strong> — select a package, confirm the price, items are added to the player's stash</li>
+<li><strong>Offline purchasing</strong> — players can buy packages even when not connected to the server; Ration deductions happen immediately, Cash deductions are queued for next login</li>
+<li><strong>Stash</strong> — purchased items are grouped by package in a persistent stash; players click "Claim All" in the storefront when in-game to receive their items</li>
+<li><strong>Cancel &amp; refund</strong> — players can cancel a purchased package from their stash while it is still unclaimed and are refunded automatically, in whatever currency they paid (Rations or Cash). An admin <strong>Cancellation refund %</strong> setting controls how much is returned — the default is a full refund, and you can lower it to charge a restocking fee</li>
+<li><strong>Delivery zones</strong> — optionally require players to stand in an admin-configured zone (shop counter, safe room, event point) to claim their stash; configure one or more zones in QM Settings</li>
+<li><strong>Bank Statement</strong> — full purchase history with timestamps</li>
+<li><strong>Multi-language</strong> — storefront available in English, Chinese, Thai, Russian, German, and Ukrainian; language picker on login and in the header</li>
+</ul>
+<h4 id="gg-coins">GG Coins<a class="headerlink" href="#gg-coins" title="Permanent link">&para;</a></h4>
+<p>A global currency earned through playtime across all GG Host servers. The earn rate is the same globally, with special events offering multipliers (e.g. 2x weekend).</p>
+<ul>
+<li><strong>Earn by playing</strong> — players automatically earn GG Coins based on time spent online; the rate is the same across all servers</li>
+<li><strong>Earn notifications</strong> — optionally show players an in-game notification each time they earn GG Coins from playtime</li>
+<li><strong>Cross-server wallet</strong> — GG Coins are stored in a global wallet, not tied to a single server; players who play on multiple GG Host servers accumulate coins across all of them</li>
+<li><strong>Withdraw to Rations</strong> — players can convert GG Coins into Rations at an admin-configured exchange rate via the storefront</li>
+<li><strong>Balance display</strong> — current GG Coin balance shown in the storefront header with a withdraw button</li>
+</ul>
+<h4 id="delivery-safety">Delivery Safety<a class="headerlink" href="#delivery-safety" title="Permanent link">&para;</a></h4>
+<p>Items never get lost:</p>
+<ul>
+<li>Purchased items go to a persistent stash, not spawned immediately</li>
+<li>If spawning fails (e.g., player logs out mid-delivery), items return to the stash for re-claiming</li>
+<li>Concurrent purchase protection prevents double-charges</li>
+<li>Admin dispute tools: full transaction audit trail and package re-delivery endpoint</li>
+</ul>
+<h4 id="server-directory">Server Directory<a class="headerlink" href="#server-directory" title="Permanent link">&para;</a></h4>
+<p>The <code>shop.gghost.games</code> landing page lists all servers running Quarter Master. Each card shows the server name, custom shop name, owner welcome message, and GG Coin exchange rate. Offline servers are shown with a status badge. Players can browse servers and jump directly to any storefront.</p>
+<p><strong>Slash command:</strong> Players type <code>/shop</code> in-game to receive their personal storefront URL with login PIN.</p>
+<p><strong>Requires:</strong> ggCON v0.12.3+</p>
+<hr />
+<h3 id="taxi-service">Taxi Service<a class="headerlink" href="#taxi-service" title="Permanent link">&para;</a></h3>
+<p>A paid teleport service — players spend in-game cash to travel to admin-configured destinations.</p>
+<ul>
+<li><strong><code>/taxi</code></strong> — lists available destinations and their fares; <code>/taxi &lt;name&gt;</code> books a ride; <code>/taxi cancel</code> aborts a pending ride and refunds the fare</li>
+<li><strong>Destinations</strong> — configure named locations (X/Y/Z) and a fare each, in the Taxi tab</li>
+<li><strong>Anti-escape countdown</strong> — a configurable delay runs before the teleport (default 120 seconds; 0–600). The ride <strong>cancels and refunds automatically if the player takes damage, dies, or logs out</strong> — so the taxi can't be used to escape a PvP fight</li>
+<li><strong>Per-player cooldown</strong> — a configurable wait between rides (default 5 minutes)</li>
+<li><strong>Descriptions</strong> — give a destination a short blurb that shows on the <code>/taxi</code> list (e.g. <code>Novice Bay ($0): Safe spawn for newcomers</code>)</li>
+<li><strong>Hidden destinations</strong> — hide a destination from the <code>/taxi</code> list while keeping it bookable by its exact name — handy for secret or reward spots</li>
+<li><strong>Per-player trip limits</strong> — optionally cap how many times each player can ride to a given destination over their lifetime (for example, one free trip to a reward spot); admins can reset trip counts from the panel</li>
+<li><strong>Destination groups</strong> — group destinations into clusters. <code>/taxi &lt;group&gt;</code> sends the player to a random spot in the group, you can enable or disable a whole group in one click (great for event drop-offs), and a group can share a single trip limit</li>
+<li><strong>Settings</strong> — enable/disable, countdown seconds, cooldown minutes, and a default fare</li>
+</ul>
+<p>Available in the plugin marketplace — install it when you're ready to offer paid teleports.</p>
+<p><strong>Requires:</strong> ggCON v0.12.19+</p>
+<hr />
+<h3 id="gghaul">ggHaul<a class="headerlink" href="#gghaul" title="Permanent link">&para;</a></h3>
+<p>An admin tool for placing appliances directly in the game world from the new <strong>Appliances</strong> panel tab.</p>
+<ul>
+<li><strong>Appliances tab</strong> — a panel tab that lists every appliance you've placed, with its type, the player it was placed in front of, and its location</li>
+<li><strong>Place in front of a player</strong> — pick an online player and the appliance spawns on the ground directly in front of them, facing the player, so you don't have to fiddle with coordinates. Stand where you want it placed, looking at the spot it should occupy, then spawn</li>
+<li><strong>Keep or remove</strong> — a freshly spawned appliance is provisional until you press <strong>Complete</strong>, which makes it permanent (it survives server restarts). Press <strong>Delete</strong> to remove one. There's no in-world dragging, so to reposition an appliance, delete it and add it again from a better spot</li>
+<li><strong>Persistent</strong> — completed appliances are saved and reappear after a server restart</li>
+<li><strong>Appliance types</strong> — fridges to start, with more types planned</li>
+</ul>
+<p>Use it to furnish trade hubs, safe rooms, and event areas without leaving the panel.</p>
+<p><strong>Requires:</strong> ggCON v0.13.13+</p>
+<hr />
+<h3 id="player-spawn-plus">Player Spawn Plus<a class="headerlink" href="#player-spawn-plus" title="Permanent link">&para;</a></h3>
+<p>Give players a custom gear loadout automatically when they spawn — or apply one by hand from their player card.</p>
+<ul>
+<li><strong>Named loadouts</strong> — build any number of loadouts, each with worn clothing/equipment, inventory items, and a held (hands) item. Weapons are delivered to the player's inventory, so make sure the loadout includes enough storage to hold everything</li>
+<li><strong>When loadouts apply</strong> — choose any combination of triggers per loadout:<ul>
+<li><strong>New player's first deploy</strong> — a fresh arrival's first time spawning on your server</li>
+<li><strong>After a character re-roll</strong> — re-apply the new-player kit when a player re-rolls their character</li>
+<li><strong>Every respawn</strong> — hand out a kit each time a player respawns</li>
+<li><strong>On demand</strong> — apply any loadout to a player from their detail card in the panel</li>
+</ul>
+</li>
+<li><strong>Teleport on spawn</strong> — first-deploy and respawn kits can teleport the player to a location you choose before handing over the gear (great for a new-player safe zone)</li>
+<li><strong>Respawn vs. revival</strong> — by default the respawn loadout fires only on a genuine respawn, not when a player is revived on the spot (for example with Phoenix Tears), so a revival no longer wipes and replaces their gear. You can turn this distinction off, and set how far a player must move for it to count as a respawn</li>
+<li><strong>Anti-farm cooldowns</strong> — separate cooldowns for the respawn and re-roll kits stop players from farming loadouts</li>
+<li><strong>Existing players are spared</strong> — when you first enable automatic loadouts, anyone who has already played on your server is treated as an existing player; only brand-new arrivals receive the new-player kit</li>
+</ul>
+<p><strong>Server requirement:</strong> automatic loadouts require <code>scum.EnableSpawnOnGround=True</code> in your server settings. The plugin's Rules page checks this for you and explains what to change if it isn't set.</p>
+<p>Ships disabled by default — turn it on once your loadouts are ready.</p>
+<p><strong>Requires:</strong> ggCON v0.13.12+</p>
+<hr />
+<h3 id="stash-n-dash">Stash 'n Dash<a class="headerlink" href="#stash-n-dash" title="Permanent link">&para;</a></h3>
+<p>A contraband dead-drop race — players compete to round up a required item list and deposit it into a hidden drop cabinet before anyone else does.</p>
+<ul>
+<li><strong>Drops (the "quests")</strong> — define the item lists players must collect and deposit (e.g. 10× Spliff), each with its own time limit, reward, and weight; enable or disable them individually</li>
+<li><strong>Cabinet sites</strong> — place the map locations where drop cabinets can appear; the server rotates cabinets through your enabled sites</li>
+<li><strong>Selection mode</strong> — pick the next drop by <strong>weighted random</strong> or <strong>sequential</strong> order</li>
+<li><strong>Tunable game</strong> — set how many cabinets are live at once, the rotation interval, the deposit range, and the gap between rounds</li>
+<li><strong>First to finish wins</strong> — the first player to deposit the full required list into a cabinet wins your configured reward</li>
+<li><strong>In-character whispers</strong> — players get status messages in-game, and a <code>/stash</code> chat command points them toward the current drop</li>
+<li><strong>Active Cabinets map view</strong> — see every live cabinet on the panel map with one-click teleport</li>
+<li><strong>Panel management</strong> — create drops, place sites, and tune settings from the Stash 'n Dash tab; comes pre-loaded with example drops and locations you can edit or replace</li>
+</ul>
+<p><strong>Automation:</strong> the full game lifecycle — drops, cabinet sites, settings, and start/stop — is also available over the <a href="../http-api/">HTTP API</a>, so you can script it from a bot or scheduler.</p>
+<p>Ships off until you switch it on.</p>
+<p><strong>Requires:</strong> ggCON v0.13.15+</p>
+<hr />
+<h2 id="coming-soon">Coming Soon<a class="headerlink" href="#coming-soon" title="Permanent link">&para;</a></h2>
+<h3 id="ai-npcs">AI NPCs<a class="headerlink" href="#ai-npcs" title="Permanent link">&para;</a></h3>
+<p>AI-powered NPC characters that interact with players in chat using an AI model. Replaces the built-in NPC system with a standalone plugin.</p>
+<ul>
+<li>Configure trigger words (e.g., <code>@warden</code>) and NPC personalities</li>
+<li>NPCs respond to player chat messages with context-aware replies</li>
+<li>NPCs can execute admin commands (with optional per-NPC command allowlists)</li>
+<li>Per-player conversation history</li>
+<li>Configurable model, token limits, and response cooldowns</li>
+</ul>
+<p>See <a href="../npc-system/">NPC System</a> for details on the current built-in version.</p>
+<hr />
+<h2 id="marketplace">Marketplace<a class="headerlink" href="#marketplace" title="Permanent link">&para;</a></h2>
+<p>The plugin marketplace lets you install, update, and uninstall plugins directly from the web panel — no manual file management needed.</p>
+<h3 id="accessing-the-marketplace">Accessing the Marketplace<a class="headerlink" href="#accessing-the-marketplace" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Open the web panel</li>
+<li>Click the <strong>gear icon</strong> in the navigation bar</li>
+<li>Select <strong>Plugins</strong></li>
+</ol>
+<p>The marketplace shows all available plugins with their current status:</p>
+<ul>
+<li><strong>Install</strong> — download and install a plugin</li>
+<li><strong>Update</strong> — update an installed plugin to the latest version (shown when an update is available)</li>
+<li><strong>Uninstall</strong> — remove an installed plugin</li>
+<li><strong>Requires vX.Y.Z+</strong> — shown when a plugin needs a newer ggCON version; update ggCON first</li>
+</ul>
+<p>Plugin changes take effect on the next server restart.</p>
+<hr />
+<h2 id="plugin-configuration">Plugin Configuration<a class="headerlink" href="#plugin-configuration" title="Permanent link">&para;</a></h2>
+<p>Plugins can read configuration from <code>ggCON.ini</code> using section headers in the format <code>[Plugin:&lt;id&gt;]</code> (requires a server restart):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">[Plugin:log-analyzer]</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="na">SomeKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">SomeValue</span>
+</code></pre></div>
+<p>Refer to each plugin's documentation for its specific configuration options.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Made by <a href="https://www.gghost.games" target="_blank">GG Host</a>
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
