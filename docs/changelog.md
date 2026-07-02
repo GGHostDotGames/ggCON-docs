@@ -7,6 +7,19 @@ Release notes for ggCON, newest first.
 
 ---
 
+## 0.13.17 — July 2, 2026
+
+### Improvements
+- Startup stability: after a server restart, ggCON now waits for the game to finish loading before it starts reading live server data — so player, vehicle and squad info may take a few extra seconds to appear on boot, and the panel briefly shows a "starting" state during that window
+- Appliances: you can now place a Kitchen Stove, Lathe Machine or Drill Press as well as a Fridge — pick the appliance type when adding a placement
+
+### Fixes
+- Web panel: the Squads tab now loads and refreshes on its own — no more needing to press Refresh to see your squads after opening the panel
+- Kill Feed: switching from the Leaderboard back to the Live Feed no longer leaves the view broken, and the mini-map no longer tries to load map tiles that don't exist
+- Appliances: a placement that wasn't Completed before a server restart now shows as "Gone · restarted before Complete" instead of looking active, clearing it no longer flashes an error in the game chat, and the Add window now warns that placements only survive a restart once Completed
+
+---
+
 ## 0.13.16 — June 30, 2026
 
 ### Improvements
