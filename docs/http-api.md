@@ -790,6 +790,85 @@ Spawns a zombie, animal, armed NPC, Brenner, or Razor near a specific player. Au
 
 ---
 
+## POST /destroy-radius
+
+Clears items or zombies within a radius of a map coordinate. Auth required. *(v0.14.0+)*
+
+Designed for automated events — for example an event bot cleaning up an arena between rounds. Requests are paced internally, so firing several in a burst is safe. Requires at least one player to be online.
+
+**Request body**
+
+```json
+{
+  "target": "items",
+  "item": "1H_KitchenKnife",
+  "radius": 500,
+  "x": -253574.0,
+  "y": 443844.0,
+  "z": 91506.7
+}
+```
+
+| Field | Required | Description |
+|---|---|---|
+| `target` | Yes | What to clear: `items` or `zombies` |
+| `item` | When `target` is `items` | Item class name to clear (from `GET /items.json`) |
+| `radius` | Yes | Radius around the coordinate, in Unreal units (positive number) |
+| `x`, `y`, `z` | Yes | Center coordinate of the clear (Unreal units) |
+
+**Response — success**
+
+```json
+{
+  "ok": true,
+  "message": "Command dispatched at the requested location"
+}
+```
+
+**Response — failure** (for example, no player online)
+
+```json
+{
+  "ok": false,
+  "error": "No live controller online to execute the spawn"
+}
+```
+
+---
+
+## POST /spawn-at
+
+Spawns a Razor at a map coordinate. Auth required. *(v0.14.0+)*
+
+The coordinate counterpart of `POST /spawn-entity` (which spawns near a player). Razor is currently the only entity type that can be spawned at an arbitrary coordinate; for other entity types use `POST /spawn-entity`. Requires at least one player to be online, and the coordinate must be a location the game allows Razor spawns at.
+
+**Request body**
+
+```json
+{
+  "type": "razor",
+  "x": -253574.0,
+  "y": 443844.0,
+  "z": 91506.7
+}
+```
+
+| Field | Required | Description |
+|---|---|---|
+| `type` | Yes | Must be `razor` |
+| `x`, `y`, `z` | Yes | Spawn coordinate (Unreal units) |
+
+**Response — success**
+
+```json
+{
+  "ok": true,
+  "message": "Command dispatched at the requested location"
+}
+```
+
+---
+
 ## GET /logs
 
 Returns real-time log lines from SCUM server log files. Auth required.
