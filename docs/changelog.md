@@ -7,6 +7,23 @@ Release notes for ggCON, newest first.
 
 ---
 
+## 0.14.0 — July 13, 2026
+
+### Improvements
+- New API actions for automated events: clear all items or all zombies within a radius of a chosen map coordinate, and spawn a razor at a chosen coordinate. These run through the same load-safe path as coordinate item spawning and are naturally paced so an event bot can fire them in bursts. (Requires a player to be online.)
+- Stash 'n Dash: the Settings tab now explains that auto-start brings the event back after a server restart, and the Stop button asks for confirmation and tells you how to turn it off permanently
+
+### Fixes
+- Player moderation (Silence, Unsilence, Mute, Unmute) now takes effect in-game and reports honestly: the panel/API previously said the action succeeded even when the game rejected it. These actions now run as an online admin (never as the target themselves), and if the game reports a problem — or no other admin is online to perform it — you get a clear error instead of a false success
+- ggHaul: appliances now spawn facing the correct direction — the Kitchen Stove, Lathe Machine, and both Drill Presses previously faced the wrong way when placed (the Fridge was already correct). Already-placed appliances keep their old facing; delete and re-place to fix them
+- Web panel: the Server Notifications editor in Settings now accepts SCUM's standard Notifications.json format — previously, saving a valid notifications file was rejected with a "Must be a JSON array" error
+- Fixed a server freeze that could hit busy servers when a plugin removed an item or appliance (for example Stash 'n Dash collecting a deposit, or deleting a ggHaul appliance) — the server could lock up for many seconds or stay frozen until restarted. Removals now also complete reliably instead of timing out
+- Smoother under load: the panel and plugins no longer briefly stall each other when players join the server, and a teleport issued while the server is very busy now fails cleanly and quickly instead of holding up other panel actions for up to a minute
+- Web panel: a player's Teleport window now shows your saved destinations right away on a freshly opened panel — previously they only appeared after you had visited the Settings tab once
+- ggHaul: removing a placed appliance now reliably takes it out of the world, instead of sometimes leaving it in-game while it disappears from the panel. If no players are online, removal now tells you to try again once someone is connected (rather than losing track of the appliance) — appliances removed this way also stay gone after a server restart
+
+---
+
 ## 0.13.17 — July 2, 2026
 
 ### Improvements
