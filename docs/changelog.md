@@ -7,6 +7,24 @@ Release notes for ggCON, newest first.
 
 ---
 
+## 0.14.1 — July 30, 2026
+
+### New Features
+- **Server Messages** — a new Settings card for automatic chat announcements, a gentler alternative to Server Notifications (which take over the player's screen). **Rotating** cycles through your list of tips on a timer; **Scheduled** sends a message once a day at a set time (e.g. a nightly restart warning at 00:00, an event reminder at 20:30). Both can run at the same time, and both are off until you switch them on.
+- Players can now type `/who` in chat to see who's currently online — handy on PvE servers for spotting players from other squads. Works for everyone, no admin rights needed.
+- The vehicle API now reports when each vehicle was last used, so you can find abandoned vehicles and build clean-up or wipe tooling around real activity instead of guesswork.
+
+### Fixes
+- **Stash 'n Dash: drop cabinets are placed again.** After SCUM's 1.3.2.1 hotfix the event could not place any cabinet, so rounds could not run. It now waits for the game to finish loading the cabinet asset and starts placing on its own. The Stash 'n Dash tab also tells you when placement is paused and why — either it is still waiting for the asset, or it is waiting for a player to be online (a connected player is required to place cabinets)
+- **Player skills are working again.** SCUM's 1.3.2.1 hotfix changed how the game stores character skill data, which left the skills list empty everywhere — on the web panel, in `players.json` and in `players/{steamId}.json` — for every player on every server. Skills now read correctly again, with no configuration needed. Attributes were unaffected throughout
+- Web panel: a player's attributes (STR, CON, DEX, INT) now show in their own section on the player card. Previously they were drawn as part of the skills panel, so if that player's skills were unavailable the attributes disappeared too — even though they were being reported correctly by the API
+- Spawn Plus now tells you whether a new player's first-deploy teleport actually happened. Previously the log only said it was about to try, so a teleport that silently didn't happen looked identical to one that worked. You now get a clear result — including when no destination is set
+- Stash 'n Dash: the Clear Cabinets button now also removes leftover drop cabinets the event lost track of, and the event retries removing leftovers on every rotation — previously a leftover cabinet could stay in the world with no way to delete it from the panel. Saving drop sites now also warns you when a site sits within a few meters of an existing container, which could interfere with the drop cabinet during a round
+- Giving or spawning an item for a player now tells you the truth. Previously the panel and API reported "Spawned" for every attempt — even when the game refused the item (some items, like appliances, can't be spawned), the player was offline, or the spawn failed — so you'd see success while the player got nothing. You now get a clear reason instead, e.g. "'Refrigerator' is blocked by the game and cannot be spawned". Spawning entities reports honestly too.
+- Shop purchases and loot claims of an item your server has blocked from spawning are no longer silently marked as delivered. The item now stays claimable and reports an honest failure, instead of being consumed while nothing actually spawned.
+
+---
+
 ## 0.14.0 — July 13, 2026
 
 ### Improvements
