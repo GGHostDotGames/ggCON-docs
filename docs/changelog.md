@@ -7,6 +7,13 @@ Release notes for ggCON, newest first.
 
 ---
 
+## 0.14.2 — July 30, 2026
+
+### Improvements
+- **`/who` can now be switched off.** A new Settings option — *Allow /who (online player list)* — controls whether players can list who is currently online. It matters most on PvP servers, where being able to check who is on (or that the server is empty) takes away an advantage you may want players to earn. It stays **on** by default, so nothing changes unless you turn it off. When it is off, a player who tries `/who` is told the list is disabled on this server rather than getting no reply at all, and the command no longer appears in `/help`. The setting applies immediately — no restart needed.
+
+---
+
 ## 0.14.1 — July 30, 2026
 
 ### New Features
