@@ -7,6 +7,14 @@ Release notes for ggCON, newest first.
 
 ---
 
+## 0.14.3 — August 25, 2026
+
+### Fixes
+- **Updated for the SCUM 1.3.3.0 game update.** The game update changed internals ggCON relies on, which left the panel's command list empty on every server. This release restores full compatibility, including the two commands the update added.
+- **Icons for the new 1.3.3.0 items.** The items added by the game update — including the Research Facility keycard, sportbike parts and the new food and trophy items — now show their proper thumbnails in the panel and shop.
+
+---
+
 ## 0.14.2 — July 30, 2026
 
 ### Improvements
