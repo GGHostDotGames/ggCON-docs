@@ -7,6 +7,20 @@ Release notes for ggCON, newest first.
 
 ---
 
+## 0.15.2 — October 28, 2026
+
+### Improvements
+- **Re-verified for the SCUM 1.3.5 game update.** Server status reports the current game build as verified again once this version is installed.
+- **Thumbnails for the latest new items.** The new mutant hats, jacket and trousers, the radioactive carp, and the crow and seagull meat now show their pictures in the panel and the shop.
+
+### Fixes
+- **Private messages work again on SCUM 1.3.5.** Since the 1.3.5 update, every message sent to a single player failed with "Chat dispatch failed", including `#MessagePlayer`, replies to players' slash commands, plugin whispers and Discord bot messages. Broadcasts to everyone were not affected. Messages to one player are delivered again, and if a future SCUM update changes private messages again, ggCON now says so plainly instead of failing with a confusing error.
+- **The panel's admin command list is back on SCUM 1.3.5.** After the 1.3.5 update the list of admin commands in the panel and the API came back empty. It is filled in again.
+- **Player skills show again after the latest SCUM updates.** Since the game moved to version 1.3.4, every player's skill list came back empty in the panel and the API, and 1.3.5 moved it again. Skills and their levels are read correctly again on 1.3.5.
+- **Empty servers no longer freeze when a bot keeps asking for the player list.** Sending `#ListPlayers` while nobody was online froze the game for several seconds every time, so a Discord bot polling once a minute caused a freeze every minute and could eventually take the server down. It now answers straight away with "No players online". With players online the reply is unchanged. Other admin commands sent to an empty server also no longer pause the game while ggCON looks for a player to run them.
+
+---
+
 ## 0.15.1 — September 12, 2026
 
 ### New Features
