@@ -7,6 +7,16 @@ Release notes for ggCON, newest first.
 
 ---
 
+## 0.15.3 — November 12, 2026
+
+### Improvements
+- **Thumbnails and names for the Halloween items.** The witch's cauldron, the hanging jack-o'-lantern, corpse soup, the coffin bed and the single and multiple candleholders now show their pictures and names in the panel and the shop.
+
+### Fixes
+- **Updated for the SCUM 1.3.6 game update.** The 1.3.6 update moved parts of the game that ggCON uses to run admin commands. This version finds them again.
+
+---
+
 ## 0.15.2 — October 28, 2026
 
 ### Improvements
